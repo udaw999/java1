@@ -5,6 +5,7 @@ public class ReverseDigits {
         System.out.println(str);
     }
     public static int reverseDigits(int number){
+        // переворачиваем трехзначное число
 //        int c = number / 100;
 //        int b = number / 10 % 10;
 //        int a = number % 10;
