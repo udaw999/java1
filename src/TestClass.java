@@ -76,7 +76,27 @@ public class TestClass {
         return sum;
     }
 
+
+//   public static boolean containsDigitt(int number, int digit){
+//        while (0 < number ){
+//        if ( number % 10 == digit){
+//            return true;
+//        } else {
+//            return false;
+//
+//        }
+//
+//            number =  number / 10;
+//    }
+//
+//
+//    }
+
     public static void main(String[] args){
+
+        System.out.println(containsDigitt(365,5));
+
+
         double d = 9999999999999999999999999999999999999999999999999999.9;
 
         System.out.println((float)d);
