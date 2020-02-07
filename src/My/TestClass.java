@@ -1,3 +1,5 @@
+package My;
+
 public class TestClass {
 
 
@@ -94,10 +96,10 @@ public class TestClass {
 
     public static void main(String[] args){
 
-        System.out.println(containsDigitt(365,5));
+        //System.out.println(containsDigitt(365,5));
 
 
-        double d = 9999999999999999999999999999999999999999999999999999.9;
+        double d = 99999999999999999999.999999999999999999999999999999999;
 
         System.out.println((float)d);
 
