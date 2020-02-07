@@ -11,22 +11,22 @@ public class ComplexNum {
 
 
 
-    public String  add(ComplexNum num){
+    public ComplexNum add(ComplexNum num){
         this.a = a + num.a;
         this.b = b + num.b;
         return a + "+" + b + "i";
     }
-    public String  sub(ComplexNum num){
+    public ComplexNum sub(ComplexNum num){
         this.a = a - num.a;
         this.b = b - num.b;
         return a + "+" + b + "i";
     }
-    public String  mul(ComplexNum num){
+    public ComplexNum mul(ComplexNum num){
         this.a = a * num.a - b * num.b;
         this.b = b * num.a + a * num.b ;
         return a + "+" + b + "i";
     }
-    public String  div(ComplexNum num){
+    public ComplexNum div(ComplexNum num){
         this.a = (a * num.a + b * num.b) / (num.a * num.a + num.b * num.b);
         this.b = ((b * num.a - a * num.b) / (num.a * num.a + num.b * num.b)) ;
         return a + "+" + b + "i";
