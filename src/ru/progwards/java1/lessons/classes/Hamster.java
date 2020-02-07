@@ -15,4 +15,9 @@ public class Hamster extends Animal {
     public FoodKind getFoodKind(){
         return FoodKind.CORN;
     }
+
+    @Override
+    public double getFoodCoeff(){
+        return 0.03;
+    }
 }

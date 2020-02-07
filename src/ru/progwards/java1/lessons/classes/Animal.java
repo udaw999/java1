@@ -20,9 +20,21 @@ public class Animal {
         return FoodKind.UNKNOWN;
     }
 
+    public double getWeight(){
+        return weight;
+    }
+
+    public double getFoodCoeff(){
+        return 0.02;
+    }
+
+    public double calculateFoodWeight(){
+        return weight * getFoodCoeff();
+    }
+
     @Override
     public String toString(){
-        return "I am " + getFoodKind() + ", eat " + getKind() ;
+        return "I am " + getFoodKind() + ", eat " + getKind() + " " + calculateFoodWeight() ;
     }
 
     public static void main(String[] args){
@@ -31,17 +43,17 @@ public class Animal {
         System.out.println(animal.getFoodKind());
         System.out.println(animal.toString());
 
-        Cow cow = new Cow(168);
+        Cow cow = new Cow(68);
         System.out.println(cow.getKind());
         System.out.println(cow.getFoodKind());
         System.out.println(cow.toString());
 
-        Hamster hamster = new Hamster(98);
+        Hamster hamster = new Hamster(68);
         System.out.println(hamster.getKind());
         System.out.println(hamster.getFoodKind());
         System.out.println(hamster.toString());
 
-        Duck duck = new Duck(98);
+        Duck duck = new Duck(68);
         System.out.println(duck.getKind());
         System.out.println(duck.getFoodKind());
         System.out.println(duck.toString());
