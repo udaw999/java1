@@ -2,20 +2,20 @@ package ru.progwards.java1.lessons.compare_if_cycles;
 
 public class CyclesGoldenFibo {
 
-//    public static boolean containsDigitt(int number, int digit){
-//        while (0 < number ){
-//            if ( number % 10 == digit){
-//                return true;
-//            } else {
-//                return false;
-//
-//            }
-//
-//            number =  number / 10;
-//        }
-//
-//
-//    }
+    /*public static boolean containsDigit(int number, int digit){
+        while (0 < number ){
+            if ( number % 10 == digit){
+                return true;
+            } else {
+                return false;
+
+            }
+
+            number =  number / 10;
+        }
+
+
+    }*/
 
     public static int fiboNumber(int n){
         int i = 1;
@@ -45,7 +45,7 @@ public class CyclesGoldenFibo {
     }
 
     public static void main(String[] args){
-       // System.out.println(containsDigit(25,5));
+        //System.out.println(containsDigit(25,5));
 
 
         int i = 1;

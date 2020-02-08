@@ -8,10 +8,26 @@ public class TestClass {
         return num % 1;
 
     }
+
+    // ниже еще один метод . этот тоже правильный
+//    static int addAsStrings(int n1, int n2){
+//        //склеиваем два int
+//        int z = Integer.parseInt(String.valueOf(n1) + String.valueOf(n2));
+//        return  z;
+//    }
+    //склеиваем два int
     static int addAsStrings(int n1, int n2){
-        //склеиваем два int
-        int z = Integer.parseInt(String.valueOf(n1) + String.valueOf(n2));
-        return  z;
+
+        String str1 = Integer. toString(n1);
+
+        String str2 = Integer. toString(n2);
+
+        str1 += str2;
+
+        int n3 = Integer. parseInt(str1);
+
+        return n3;
+
     }
 
     public static void  daysStrings(){
@@ -78,32 +94,52 @@ public class TestClass {
         return sum;
     }
 
+// ошибка у меня тут
+   public static boolean containsDigitt(int number, int digit){
+        int i = 0;
+        while (0 < number ){
+        if ( number % 10 == digit)
+            return true;
 
-//   public static boolean containsDigitt(int number, int digit){
-//        while (0 < number ){
-//        if ( number % 10 == digit){
-//            return true;
-//        } else {
-//            return false;
+        i++;
+
+            number =  number / 10;
+    }
+//       for (int i = 0; 0 < number ; i++){
+//           if ( number % 10 == digit)
+//               return true;
 //
-//        }
-//
-//            number =  number / 10;
-//    }
-//
-//
-//    }
+//           number =  number / 10;
+//       }
+       return false;
+
+
+    }
+//в кансоль тест проверки кинуть без static
+    public static int sumArrayItems(int[] a){
+        int sum = 0;
+
+        for (int i=0 ; i < a.length ; i++){
+            sum = sum + a[i];
+        }
+        return sum;
+    }
 
     public static void main(String[] args){
 
-        //System.out.println(containsDigitt(365,5));
+        int[] a2 = {5,25,9};
+        System.out.println(sumArrayItems(a2));
 
+        System.out.println(containsDigitt(365,3));
+        int a1 = addAsStrings(1,2);
 
+        System.out.println(a1);
+        System.out.println(addAsStrings(237, 5698));
         double d = 99999999999999999999.999999999999999999999999999999999;
 
         System.out.println((float)d);
 
-        System.out.println(addAsStrings(237, 5698));
+
         System.out.println(fractional(1.53));
         daysStrings();
         System.out.println(textGrade(101));
