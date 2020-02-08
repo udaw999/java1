@@ -2,20 +2,26 @@ package ru.progwards.java1.lessons.compare_if_cycles;
 
 public class CyclesGoldenFibo {
 
-    /*public static boolean containsDigit(int number, int digit){
+    public static boolean containsDigitt(int number, int digit){
+        int i = 0;
         while (0 < number ){
-            if ( number % 10 == digit){
+            if ( number % 10 == digit)
                 return true;
-            } else {
-                return false;
 
-            }
+            i++;
 
             number =  number / 10;
         }
+//       for (int i = 0; 0 < number ; i++){
+//           if ( number % 10 == digit)
+//               return true;
+//
+//           number =  number / 10;
+//       }
+        return false;
 
 
-    }*/
+    }
 
     public static int fiboNumber(int n){
         int i = 1;
@@ -26,13 +32,13 @@ public class CyclesGoldenFibo {
 
 
 
-            while (i < n) {
+        while (i < n) {
 
-                fib = fib1 + fib2;
-                fib1 = fib2;
-                fib2 = fib;
-                i++;
-            }
+            fib = fib1 + fib2;
+            fib1 = fib2;
+            fib2 = fib;
+            i++;
+        }
 
         return fib;
     }
@@ -61,17 +67,17 @@ public class CyclesGoldenFibo {
         System.out.println();
 
 //Золотые треугольники
-         int z=1;
-         while (z<=100) {
-             z++;
-             int y=1;
-             while (y<=100) {
-                 y++;
-                 if(isGoldenTriangle(y,y,z))
-                     System.out.println("основание - "+z+"   рёбра - "+y);
+        int z=1;
+        while (z<=100) {
+            z++;
+            int y=1;
+            while (y<=100) {
+                y++;
+                if(isGoldenTriangle(y,y,z))
+                    System.out.println("основание - "+z+"   рёбра - "+y);
 
-             }
-         }
+            }
+        }
     }
 
 }
