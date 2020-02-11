@@ -1,5 +1,7 @@
 package My;
 
+import java.util.Arrays;
+
 public class TestClass {
 
 
@@ -83,15 +85,15 @@ public class TestClass {
     //факториал n это произведение всех чисел от 1 до n
     static long factorial(long n){
         long i = 1;
-        long sum = 1;
+        long sum1 = 1;
 
         while (i < n) {
 
             i++;
-            sum = sum * i;
+            sum1 = sum1 * i;
 
         }
-        return sum;
+        return sum1;
     }
 
 // ошибка у меня тут
@@ -115,7 +117,7 @@ public class TestClass {
 
 
     }
-//в кансоль тест проверки кинуть без static
+//в кансоль тест проверки кинуть без static Т6
     public static int sumArrayItems(int[] a){
         int sum = 0;
 
@@ -124,25 +126,60 @@ public class TestClass {
         }
         return sum;
     }
+    //в кансоль тест проверки кинуть без static
+//определяем большее число в масиве Т6
+    public static int arrayMax(int[] a){
+        if (a.length>0){
+         Arrays.sort(a);
+        return a[a.length-1];
+        } else {
+            return 0;
+        }
+    }
 
     public static void main(String[] args){
 
-        int[] a2 = {5,25,9};
+
+        int[] a2 = {1,37,25,68,2,56};
+        System.out.print("определяем большее число в масиве  ");
+        System.out.println(arrayMax(a2));
+        System.out.println();
+
+
+        System.out.print("Сумма чисел в масиве(сложение) ");
         System.out.println(sumArrayItems(a2));
+        System.out.println();
 
+        System.out.print("Есть ли цифра в числе ");
         System.out.println(containsDigitt(365,3));
-        int a1 = addAsStrings(1,2);
+        System.out.println();
 
+        int a1 = addAsStrings(1,2);
+        System.out.print("Склеиваем 2 числа ");
         System.out.println(a1);
         System.out.println(addAsStrings(237, 5698));
+        System.out.println();
+
+
         double d = 99999999999999999999.999999999999999999999999999999999;
 
         System.out.println((float)d);
 
-
+        System.out.print("Получаем остаток ");
         System.out.println(fractional(1.53));
+        System.out.println();
+
+
+        System.out.print("день,дни,дня ");
         daysStrings();
+        System.out.println();
+
+        System.out.print("ОЦЕНКА");
         System.out.println(textGrade(101));
-        System.out.println(factorial(0));
+        System.out.println();
+
+
+        System.out.print("произведение всех чисел от 1 до n  ---  ");
+        System.out.println(factorial(10));
     }
 }

@@ -16,33 +16,25 @@ public class ComplexNum {
     }
 
 
+
     public  ComplexNum add(ComplexNum num){
-        this.a = a + num.a;
-        this.b = b + num.b;
-        num = new ComplexNum(this.a, this.b);
-        return num;
+
+        return new  ComplexNum(a + num.a,b + num.b);
     }
 
 
     public  ComplexNum   sub(ComplexNum num){
-        this.a = a - num.a;
-        this.b = b - num.b;
-        num = new ComplexNum(this.a, this.b);
-        return num;
+
+        return new ComplexNum(a - num.a, b - num.b);
     }
 
     public  ComplexNum  mul(ComplexNum num){
-        //(a + b) * (num.a + num.b)
-        int a1 = a * num.a - b * num.b;
-        int b1 = b * num.a + a * num.b;
-        num = new ComplexNum(a1, b1);
-        return num;
+
+        return new ComplexNum(a * num.a - b * num.b, b * num.a + a * num.b);
     }
     public  ComplexNum   div(ComplexNum num){
-        int a2 = (a * num.a + b * num.b) / (num.a * num.a + num.b * num.b);
-        int b2 = ((b * num.a - a * num.b) / (num.a * num.a + num.b * num.b)) ;
-        num = new ComplexNum(a2, b2);
-        return num;
+
+        return new ComplexNum((a * num.a + b * num.b) / (num.a * num.a + num.b * num.b), ((b * num.a - a * num.b) / (num.a * num.a + num.b * num.b)));
     }
 
 
