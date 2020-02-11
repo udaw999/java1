@@ -1,5 +1,5 @@
 package ru.progwards.java1.lessons.arrays;
-
+//Решето Эратосфена узнаем простое число n или составное
 import java.util.Arrays;
 
 public class Eratosthenes {
