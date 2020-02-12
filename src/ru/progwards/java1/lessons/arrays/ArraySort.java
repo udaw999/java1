@@ -1,7 +1,6 @@
 package ru.progwards.java1.lessons.arrays;
 //сортировка в массиве
 public class ArraySort {
-    int[] a;
 
     public static void sort(int[] a){
 
