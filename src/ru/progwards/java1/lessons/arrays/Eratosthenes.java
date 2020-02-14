@@ -27,21 +27,23 @@ public class Eratosthenes {
 
         for (int i = 2; i < sieve.length-1; i++) {
             if (sieve[i]){
-                for (int j = 2; i*j < sieve.length - 1; j++){
+                for (int j = 2; i*j < sieve.length; j++){
                     sieve[i*j] = false;
                 }
+
             }
         }
 
     }
     public boolean isSimple(int n){
+
         sift();
         return sieve[n];
     }
 
     public static void main(String[] args){
-        Eratosthenes eratosthenes = new Eratosthenes(31);
-        System.out.println(eratosthenes.isSimple(18));
+        Eratosthenes eratosthenes = new Eratosthenes(300);
+        System.out.println(eratosthenes.isSimple(299));
 
 
 
