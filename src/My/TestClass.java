@@ -136,9 +136,21 @@ public class TestClass {
             return 0;
         }
     }
+    enum Grade{VERYBAD, BAD, SATISFACTORILY, GOOD, EXCELLENT, NOTDEFINED}
+    static Grade intToGrade(int grade){
+        switch (grade){
+            case 1: return Grade.VERYBAD;
+            case 2: return Grade.BAD;
+            case 3: return Grade.SATISFACTORILY;
+            case 4: return Grade.GOOD;
+            case 5: return Grade.EXCELLENT;
+        }
+        return Grade.NOTDEFINED;
+    }
 
     public static void main(String[] args){
 
+        System.out.println(intToGrade(14));
 
         int[] a2 = {1,37,25,68,2,56};
         System.out.print("определяем большее число в масиве  ");

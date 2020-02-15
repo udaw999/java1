@@ -46,7 +46,9 @@ public class Eratosthenes {
         System.out.println(eratosthenes.isSimple(299));
 
 
-
+        byte value = 0;
+        int result = value & 1;
+        System.out.println(result);
     }
 
 }
