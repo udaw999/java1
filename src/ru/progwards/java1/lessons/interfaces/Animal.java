@@ -10,6 +10,7 @@ public class Animal implements FoodCompare {
         this.weight = weight;
     }
 
+
     enum AnimalKind{ANIMAL, COW, HAMSTER, DUCK}
 
     public AnimalKind getKind(){
@@ -69,17 +70,19 @@ public class Animal implements FoodCompare {
     по формуле calculateFoodWeight() * getFood1kgPrice()
      */
     public double getFoodPrice(){
+
         return calculateFoodWeight() * getFood1kgPrice();
     }
     //который возвращает результаты сравнения цены еды для данного животного с ценой еды для другого животного
     @Override
     public int compareFoodPrice(Animal animal){
-        return Double.compare(animal.getFood1kgPrice(), getFood1kgPrice());
+
+        return Double.compare(getFood1kgPrice(), animal.getFood1kgPrice());
     }
 
     public static void main(String[] args){
-        Animal animal = new Animal(30);
-        Cow cow = new Cow(68);
+        Animal animal = new Animal(1D);
+        Cow cow = new Cow(1D);
         Hamster hamster = new Hamster(68);
         Duck duck = new Duck(68);
 
@@ -95,5 +98,13 @@ public class Animal implements FoodCompare {
         System.out.println(duck.getFoodPrice());
         System.out.println("сравнения цены еды для данного животного с ценой еды для другого животного");
         System.out.println(duck.compareFoodPrice(cow));
+        System.out.println();
+        System.out.println("информацию о цене еды для данного животного " + cow.getKind() + " вес " + cow.weight);
+        System.out.println(cow.getFoodPrice());
+        System.out.println("информацию о цене еды для данного животного " + duck.getKind() + " вес " + duck.weight);
+        System.out.println(duck.getFoodPrice());
+        System.out.println("сравнения цены еды для данного животного с ценой еды для другого животного");
+        System.out.println(animal.compareFoodPrice(cow));
+        System.out.println(animal.equals(cow));
     }
 }
