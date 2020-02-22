@@ -14,9 +14,7 @@ public class CalculateFibonacci {
 
 
     }
-    public static CacheInfo getLastFibo(){
-        return lastFibo;
-    }
+
     //числа фибоначи
     public static int fiboNumber(int n){
         int i = 1;
@@ -51,7 +49,12 @@ public class CalculateFibonacci {
         return fib;
     }
 
-
+    public static CacheInfo getLastFibo(){
+        return lastFibo;
+    }
+    public static void clearLastFibo(){
+        lastFibo = null;
+    }
 
     public static void main(String[] args) {
 
@@ -70,7 +73,7 @@ public class CalculateFibonacci {
 
         System.out.print(fiboNumber(n));
         System.out.println();
-        System.out.println(CalculateFibonacci.lastFibo.fibo);
+ //       System.out.println(CalculateFibonacci.lastFibo.fibo);
         //System.out.println(lastFibo);
 
     }
