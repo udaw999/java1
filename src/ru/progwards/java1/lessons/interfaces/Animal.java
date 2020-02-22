@@ -17,7 +17,7 @@ public class Animal implements FoodCompare {
     }
 
     enum FoodKind{UNKNOWN, HAY, CORN}
-
+//определение еды животного
     public FoodKind getFoodKind(){
         return FoodKind.UNKNOWN;
     }
