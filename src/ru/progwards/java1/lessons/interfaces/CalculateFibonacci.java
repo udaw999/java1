@@ -3,7 +3,7 @@ package ru.progwards.java1.lessons.interfaces;
 
 public class CalculateFibonacci {
 
-    private static CacheInfo lastFibo;
+    private static  CacheInfo lastFibo;
 
     public static class CacheInfo {
 
@@ -23,7 +23,7 @@ public class CalculateFibonacci {
         int fib2 = 1;
         int fib = 1;
 
-        System.out.println( "n = " + n);
+        //System.out.println( "n = " + n);
 
         while (i < n) {
 
@@ -32,17 +32,21 @@ public class CalculateFibonacci {
             fib2 = fib;
             i++;
 
-            if(n == fib){
-//                System.out.println("n=n - " + n);
-                return fib;
-                //break;
-            }
- //           else {
+
+        }
+         if(n == fib){
+                System.out.println("fib=n - " + n);
+          return fib;
+
+         }
+        else {
 //                CalculateFibonacci a = new CalculateFibonacci();
 //                CalculateFibonacci .lastFibo.fibo = fib;
-  //              lastFibo.fibo = fib;
-  //          }
-        }
+         //             lastFibo.fibo = fib;
+            // CalculateFibonacci a = new CalculateFibonacci();
+           //         lastFibo.fibo = fib ;
+
+                  }
 //        CalculateFibonacci a = new CalculateFibonacci();
 //        CalculateFibonacci .lastFibo = Integer.toString(fib) ;
 //        lastFibo = fib;
@@ -59,7 +63,7 @@ public class CalculateFibonacci {
     public static void main(String[] args) {
 
         //CalculateFibonacci calculateFibonacci = new CalculateFibonacci();
-        int n = 13;
+        int n = 6;
 
 //        int i = 1;
 //        System.out.print("Числа Фибоначи - ");
@@ -74,7 +78,7 @@ public class CalculateFibonacci {
         System.out.print(fiboNumber(n));
         System.out.println();
  //       System.out.println(CalculateFibonacci.lastFibo.fibo);
-        //System.out.println(lastFibo);
+        System.out.println(lastFibo);
 
     }
 }
