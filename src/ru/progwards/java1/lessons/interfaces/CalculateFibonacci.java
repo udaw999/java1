@@ -46,7 +46,9 @@ public class CalculateFibonacci {
 //                CalculateFibonacci .lastFibo.fibo = fib;
          //             lastFibo.fibo = fib;
             // CalculateFibonacci a = new CalculateFibonacci();
-
+        lastFibo = new CacheInfo();
+        lastFibo.fibo = fib;
+        lastFibo.n = n;
 
                   }
 //        CalculateFibonacci a = new CalculateFibonacci();
@@ -79,8 +81,7 @@ public class CalculateFibonacci {
 
         System.out.print(fiboNumber(n));
         System.out.println();
- //       System.out.println(CalculateFibonacci.lastFibo.fibo);
-        System.out.println(lastFibo);
+        System.out.println(lastFibo.fibo);
 
     }
 }
