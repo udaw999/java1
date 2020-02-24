@@ -28,6 +28,12 @@ public class CalculateFibonacci {
         //System.out.println( "n = " + n);
         lastFibo = new CacheInfo();
         while (i < n) {
+
+            fib = fib1 + fib2;
+            fib1 = fib2;
+            fib2 = fib;
+            i++;
+
             if(lastFibo.n == fib){
                 lastFibo.fibo = lastFibo.n;
 
@@ -39,12 +45,6 @@ public class CalculateFibonacci {
 
 
             }
-            fib = fib1 + fib2;
-            fib1 = fib2;
-            fib2 = fib;
-            i++;
-
-
         }
 
         return fib;
