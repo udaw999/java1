@@ -14,6 +14,8 @@ public class CalculateFibonacci {
 
 
     }
+//    Если не совпадает - рассчитывать и сохранять в статической переменной lastFibo.
+//    не могу это реализовать
 
     //числа фибоначи
     public static int fiboNumber(int n){
@@ -44,7 +46,7 @@ public class CalculateFibonacci {
 //                CalculateFibonacci .lastFibo.fibo = fib;
          //             lastFibo.fibo = fib;
             // CalculateFibonacci a = new CalculateFibonacci();
-           //         lastFibo.fibo = fib ;
+
 
                   }
 //        CalculateFibonacci a = new CalculateFibonacci();

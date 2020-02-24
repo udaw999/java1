@@ -2,7 +2,7 @@ package ru.progwards.java1.lessons.interfaces;
 
 import java.util.Objects;
 
-public class Animal implements FoodCompare {
+public class Animal implements FoodCompare, CompareWeight {
     double weight;
 
     public Animal(double weight){
@@ -57,6 +57,7 @@ public class Animal implements FoodCompare {
     public int hashCode() {
         return Objects.hash(weight);
     }
+
     //метод который возвращает информацию о цене 1 кг еды.
     public double getFood1kgPrice(){
         switch (getFoodKind()){
@@ -75,15 +76,32 @@ public class Animal implements FoodCompare {
     //который возвращает результаты сравнения цены еды для данного животного с ценой еды для другого животного
     @Override
     public int compareFoodPrice(Animal animal){
+
         return Double.compare(getFoodPrice(), animal.getFoodPrice());
     }
+    //Сравнение на основе веса животного
+    @Override
+    public CompareResult compareWeight(CompareWeight smthHasWeigt) {
+        Animal another = (Animal)smthHasWeigt;//создаем переменную со
+        // вторым весом( не понял способа, ТО ЧТО ПОСЛЕ = )
+
+        if (this.getWeight() < another.getWeight()) {
+            return CompareResult.LESS;
+        }
+        if (this.getWeight()> another.getWeight()) {
+            return CompareResult.GREATER;
+        }
+        return CompareResult.EQUAL;
+    }
+
 
     public static void main(String[] args){
-        Animal animal = new Animal(1D);
-        Cow cow = new Cow(1D);
-        Hamster hamster = new Hamster(1D);
+        Animal animal = new Animal(20);
+        Cow cow = new Cow(300);
+        Hamster hamster = new Hamster(40);
         Duck duck = new Duck(68);
 
+        System.out.println(cow.compareWeight(duck));
         System.out.println(duck.equals(cow));
         System.out.println(cow.hashCode());
         System.out.println(duck.hashCode());
