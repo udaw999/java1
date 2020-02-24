@@ -27,6 +27,12 @@ public class CalculateFibonacci {
 
         //System.out.println( "n = " + n);
         lastFibo = new CacheInfo();
+        if(lastFibo.n == fib){
+            lastFibo.fibo = fib;
+            lastFibo.n = n;
+
+        }
+        else {
         while (i < n) {
 
             fib = fib1 + fib2;
@@ -34,19 +40,15 @@ public class CalculateFibonacci {
             fib2 = fib;
             i++;
 
-            if(lastFibo.n == fib){
-                lastFibo.fibo = lastFibo.n;
-
-            }
-            else {
-
-                lastFibo.n = n;
-                lastFibo.fibo = fib;
 
 
-            }
+
         }
+        lastFibo.n = n;
+        lastFibo.fibo = fib;
 
+
+    }
         return fib;
     }
 
@@ -60,7 +62,7 @@ public class CalculateFibonacci {
     public static void main(String[] args) {
 
         //CalculateFibonacci calculateFibonacci = new CalculateFibonacci();
-        int n = 5;
+        int n = 29;
 
 //        int i = 1;
 //        System.out.print("Числа Фибоначи - ");
