@@ -49,12 +49,11 @@ public class Food implements CompareWeight{
 //    }
 
     public static void sort(CompareWeight[] a){
-        System.out.println("массив в сорт");
-        System.out.println(Arrays.toString(a));
+
         for (int i=0; i<a.length ; i++){
 
             for (int j=i+1 ; j<a.length; j++){
-                System.out.println(a[i].compareWeight(a[j]));
+
                 if(a[i].compareWeight(a[j]) == CompareResult.GREATER) {
                     CompareWeight aj = a[j];
                     CompareWeight ai = a[i];
@@ -64,8 +63,7 @@ public class Food implements CompareWeight{
             }
             //for (int value : a) {           System.out.println("Элемент " + value);       }
         }
-        System.out.println("массив после сортировки");
-        System.out.println(Arrays.toString(a));
+
     }
 
     public static void main(String[] args) {
@@ -76,6 +74,7 @@ public class Food implements CompareWeight{
         Food food4 = new Food(10);
         CompareWeight[] a = {food, food1, food2, food3, food4 };
         System.out.println(Arrays.toString(a));
+
         System.out.println(food.getWeight());
 
        // CompareWeight[] a = new CompareWeight[]{a1,a1};

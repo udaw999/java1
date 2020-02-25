@@ -1,5 +1,6 @@
 package ru.progwards.java1.lessons.interfaces;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Animal implements FoodCompare, CompareWeight {
@@ -101,29 +102,33 @@ public class Animal implements FoodCompare, CompareWeight {
         Hamster hamster = new Hamster(40);
         Duck duck = new Duck(68);
 
-        System.out.println(cow.compareWeight(duck));
-        System.out.println(duck.equals(cow));
-        System.out.println(cow.hashCode());
-        System.out.println(duck.hashCode());
-        System.out.println(cow.weight);
-        System.out.println(cow.weight);
-        System.out.println(cow.getFood1kgPrice());
-        System.out.println("информацию о цене еды для данного животного " + animal.getKind() + " вес " + animal.weight +
-                 "  расчет веса питания " + animal.calculateFoodWeight() + " коэффициент " + animal.getFoodCoeff() +
-                " информацию о цене 1 кг еды " + animal.getFood1kgPrice());
-        System.out.println("цена еды " + animal.getFoodPrice());
-        System.out.println("информацию о цене еды для данного животного " + hamster.getKind() + " вес " + hamster.weight +
-                "  расчет веса питания " + hamster.calculateFoodWeight() + " коэффициент " + hamster.getFoodCoeff() +
-                " информацию о цене 1 кг еды " + hamster.getFood1kgPrice());
-        System.out.println("цена еды " + hamster.getFoodPrice());
-        System.out.println("информацию о цене еды для данного животного " + duck.getKind() + " вес " + duck.weight +
-                "  расчет веса питания " + duck.calculateFoodWeight() + " коэффициент " + duck.getFoodCoeff() +
-                " информацию о цене 1 кг еды " + duck.getFood1kgPrice());
-        System.out.println("цена еды " + duck.getFoodPrice());
-        System.out.println("информацию о цене еды для данного животного " + cow.getKind() + " вес " + cow.weight);
-        System.out.println(cow.getFoodPrice());
-        System.out.println("сравнения цены еды для данного животного с ценой еды для другого животного "  );
-        System.out.println(hamster.getFoodPrice() + " сравниваем с " + animal.getFoodPrice());
-        System.out.println(hamster.compareFoodPrice(animal));
+        CompareWeight[] a = {animal, cow, hamster, duck };
+        System.out.println(Arrays.toString(a));
+        Food.sort(a);
+        System.out.println(Arrays.toString(a));
+//        System.out.println(cow.compareWeight(duck));
+//        System.out.println(duck.equals(cow));
+//        System.out.println(cow.hashCode());
+//        System.out.println(duck.hashCode());
+//        System.out.println(cow.weight);
+//        System.out.println(cow.weight);
+//        System.out.println(cow.getFood1kgPrice());
+//        System.out.println("информацию о цене еды для данного животного " + animal.getKind() + " вес " + animal.weight +
+//                 "  расчет веса питания " + animal.calculateFoodWeight() + " коэффициент " + animal.getFoodCoeff() +
+//                " информацию о цене 1 кг еды " + animal.getFood1kgPrice());
+//        System.out.println("цена еды " + animal.getFoodPrice());
+//        System.out.println("информацию о цене еды для данного животного " + hamster.getKind() + " вес " + hamster.weight +
+//                "  расчет веса питания " + hamster.calculateFoodWeight() + " коэффициент " + hamster.getFoodCoeff() +
+//                " информацию о цене 1 кг еды " + hamster.getFood1kgPrice());
+//        System.out.println("цена еды " + hamster.getFoodPrice());
+//        System.out.println("информацию о цене еды для данного животного " + duck.getKind() + " вес " + duck.weight +
+//                "  расчет веса питания " + duck.calculateFoodWeight() + " коэффициент " + duck.getFoodCoeff() +
+//                " информацию о цене 1 кг еды " + duck.getFood1kgPrice());
+//        System.out.println("цена еды " + duck.getFoodPrice());
+//        System.out.println("информацию о цене еды для данного животного " + cow.getKind() + " вес " + cow.weight);
+//        System.out.println(cow.getFoodPrice());
+//        System.out.println("сравнения цены еды для данного животного с ценой еды для другого животного "  );
+//        System.out.println(hamster.getFoodPrice() + " сравниваем с " + animal.getFoodPrice());
+//        System.out.println(hamster.compareFoodPrice(animal));
     }
 }
