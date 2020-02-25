@@ -1,4 +1,7 @@
 package ru.progwards.java1.lessons.arrays;
+
+import java.util.Arrays;
+
 //сортировка в массиве
 public class ArraySort {
 
@@ -20,8 +23,10 @@ public class ArraySort {
 
     public static void main(String[] args) {
         int[] a2 = {25,30,27,2,8,45,36,20};
-        ArraySort arraySort = new ArraySort();
-        arraySort.sort(a2);
+        //ArraySort arraySort = new ArraySort();
+        System.out.println(Arrays.toString(a2));
+        sort(a2);
 
+        System.out.println(Arrays.toString(a2));
     }
 }
