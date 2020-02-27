@@ -102,7 +102,7 @@ public class Animal implements FoodCompare, CompareWeight {
         Hamster hamster = new Hamster(40);
         Duck duck = new Duck(68);
 
-        CompareWeight[] a = {animal, cow, hamster, duck };
+        Animal[] a = {animal, cow, hamster, duck };
         System.out.println(Arrays.toString(a));
         Food.sort(a);
         System.out.println(Arrays.toString(a));
