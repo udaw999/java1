@@ -8,12 +8,12 @@ public class AbsInteger {
         Integer sum = num11 + num22;
 
         System.out.println(num11 + " + " + num22 + " = " + sum);
-        if (sum <= 127){
+        if ( sum > -128 &&  sum <= 127){
 //           String ssum = Integer.toString(sum);
 //           byte bsum = Byte.parseByte(ssum);
 //            System.out.println("byte");
            return new ByteInteger(Byte.parseByte(Integer.toString(sum)));
-        } else if (127 < sum | sum < 32767){
+        } else if ((sum > -32768 && sum < -128) || (127 < sum && sum < 32767)){
           return new ShortInteger(Short.parseShort(Integer.toString(sum)));
         }
         else {
