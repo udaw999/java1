@@ -17,6 +17,7 @@ public class Food implements CompareWeight{
         return weight;
     }
 
+
     @Override
     public CompareResult compareWeight(CompareWeight smthHasWeigt) {
         Food another = (Food) smthHasWeigt;//создаем переменную со

@@ -11,7 +11,7 @@ public class CheckBit {
     }
 
     public static void main(String[] args) {
-        byte value = 0b01110100;
+        byte value = 2;
         System.out.println(checkBit(value,0));
         System.out.println();
         System.out.println(Integer.toBinaryString(-128));

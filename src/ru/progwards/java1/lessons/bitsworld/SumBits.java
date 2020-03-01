@@ -19,7 +19,7 @@ public class SumBits {
     }
 
     public static void main(String[] args) {
-        byte value = -128;
+        byte value = 3;
         System.out.println(sumBits(value));
         System.out.println();
         //sumBits(value);

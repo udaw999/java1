@@ -22,7 +22,7 @@ public class Binary {
     }
 
     public static void main(String[] args) {
-        byte num = 127;
+        byte num = 112;
         Binary binary = new Binary(num);
 
         System.out.println(binary);

@@ -2,44 +2,6 @@ package ru.progwards.java1.lessons.bigints;
 
 public class AbsInteger {
 
-
-    public static class ByteInteger extends AbsInteger{
-        byte n;
-
-        public ByteInteger(byte n){
-            this.n = n;
-        }
-        @Override
-        public String toString() {
-            return Integer.toString(n);
-        }
-    }
-
-    public static class ShortInteger extends AbsInteger{
-        short n;
-
-        public ShortInteger(short n){
-            this.n = n;
-        }
-        @Override
-        public String toString() {
-            return Integer.toString(n);
-        }
-    }
-
-    public static class IntInteger extends AbsInteger{
-        int n;
-
-        public IntInteger(int n){
-            this.n = n;
-        }
-
-        @Override
-        public String toString() {
-            return Integer.toString(n);
-        }
-    }
-
     public static AbsInteger add(AbsInteger num1, AbsInteger num2){
         Integer num11 = Integer.parseInt(num1.toString());
         Integer num22 = Integer.parseInt(num2.toString());
