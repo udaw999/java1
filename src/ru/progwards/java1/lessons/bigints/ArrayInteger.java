@@ -84,11 +84,11 @@ public class ArrayInteger {
         // byte[] digits = {0,0,0,0,0,0};
         int z = 6;
         ArrayInteger arrayInteger = new ArrayInteger(10);
-        BigInteger value = BigInteger.valueOf(1235661444452l);
+        BigInteger value = BigInteger.valueOf(5555555565l);
         arrayInteger.fromInt(value);
 
         ArrayInteger arrayInteger2 = new ArrayInteger(8);
-        BigInteger value2 = BigInteger.valueOf(56789557);
+        BigInteger value2 = BigInteger.valueOf(567895555);
         arrayInteger2.fromInt(value2);
 
 

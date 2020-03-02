@@ -62,7 +62,7 @@ public class CyclesGoldenFibo {
 
         int i = 1;
         System.out.print("Числа Фибоначи - ");
-        while (i < 16) {
+        while (i < 15) {
 
             System.out.print(fiboNumber(i));
             System.out.print(", ");

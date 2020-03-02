@@ -31,7 +31,7 @@ public class BigAlgebra {
         int i = 1;
 
         BigInteger fib1 = BigInteger.valueOf(0);
-        BigInteger fib2 = BigInteger.valueOf(5);
+        BigInteger fib2 = BigInteger.valueOf(1);
         BigInteger fib = BigInteger.valueOf(1);
 
 
@@ -54,9 +54,9 @@ public class BigAlgebra {
         System.out.print("возведение в степень числа - ");
         System.out.println(fastPow(BigDecimal.valueOf(4),7));
 
-        int i = 1;
+        int i = 0;
         System.out.print("Числа Фибоначи - ");
-        while (i < 16) {
+        while (i < 14) {
 
             System.out.print(fibonacci(i));
             System.out.print(", ");
