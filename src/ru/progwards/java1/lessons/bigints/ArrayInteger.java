@@ -24,7 +24,7 @@ public class ArrayInteger {
         for (int i = 0; value.compareTo(BigInteger.ZERO) != 0; i++) {
             if (i>n-1){
                 //проверка При переполнении массива вернуть false, при этом само число сбросить в 0
-                Arrays.fill(digits,(byte)0);
+                //Arrays.fill(digits,(byte)0);
                 bool = false;
                 break;
             }
@@ -37,7 +37,8 @@ public class ArrayInteger {
             value = value.divide(BigInteger.TEN);
 
         }
-
+        for (byte values : digits) {           System.out.print("," + values);       }
+        System.out.println();
     }
 
     public BigInteger toInt() {
@@ -71,15 +72,19 @@ public class ArrayInteger {
         long sum = Integer.parseInt(num1) + Integer.parseInt(num2);
         //отправляем число в массив
         fromInt(BigInteger.valueOf(sum));
-
+        if (bool==false){
+            Arrays.fill(digits,(byte)0);
+        }
+//        System.out.println("add");
+//        for (byte values : digits) {           System.out.print("," + values);       }
         return bool;
     }
 
     public static void main(String[] args) {
         // byte[] digits = {0,0,0,0,0,0};
         int z = 6;
-        ArrayInteger arrayInteger = new ArrayInteger(8);
-        BigInteger value = BigInteger.valueOf(123);
+        ArrayInteger arrayInteger = new ArrayInteger(10);
+        BigInteger value = BigInteger.valueOf(1235661444452l);
         arrayInteger.fromInt(value);
 
         ArrayInteger arrayInteger2 = new ArrayInteger(8);
