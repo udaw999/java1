@@ -31,7 +31,7 @@ public class BigAlgebra {
         int i = 1;
 
         BigInteger fib1 = BigInteger.valueOf(0);
-        BigInteger fib2 = BigInteger.valueOf(1);
+        BigInteger fib2 = BigInteger.valueOf(5);
         BigInteger fib = BigInteger.valueOf(1);
 
 

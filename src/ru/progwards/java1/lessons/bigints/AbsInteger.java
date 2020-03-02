@@ -1,7 +1,9 @@
 package ru.progwards.java1.lessons.bigints;
-
+//H9 Домашнее задание 2
 public class AbsInteger {
-
+//задача сложить разные типы и привести сумму к определенному типупу (Byte, Short, Integer )
+    //1 привожу данные кодному типу Integer потом складываю.
+    //2 проверяю в каком интервале находится число суммы и привожу к соответствующему типу
     public static AbsInteger add(AbsInteger num1, AbsInteger num2){
         Integer num11 = Integer.parseInt(num1.toString());
         Integer num22 = Integer.parseInt(num2.toString());
