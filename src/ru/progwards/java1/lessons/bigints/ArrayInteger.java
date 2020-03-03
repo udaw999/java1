@@ -62,7 +62,7 @@ public class ArrayInteger {
         String str = "";
         //собираем число в строку из массива
         for (int i = 0; i < n; i++) {
-            str = digits[i] + str;
+            str = str + digits[i];
         }
 
         return BigInteger.valueOf(Integer.parseInt(str));
@@ -93,32 +93,35 @@ public class ArrayInteger {
         System.out.println("sum - " + sum);
         fromInt(BigInteger.valueOf(sum));
 
+
         if (bool==false){
             Arrays.fill(digits,(byte)0);
         }
-//        System.out.println("add");
-//        for (byte values : digits) {           System.out.print("," + values);       }
+        System.out.println("add");
+        for (byte values : digits) {           System.out.print("," + values);       }
         return bool;
     }
 
     public static void main(String[] args) {
         // byte[] digits = {0,0,0,0,0,0};
         int z = 6;
-        ArrayInteger arrayInteger = new ArrayInteger(12);
-        BigInteger value = BigInteger.valueOf(934565555555596289L);
+        ArrayInteger arrayInteger = new ArrayInteger(7);
+        BigInteger value = BigInteger.valueOf(1202189);
         arrayInteger.fromInt(value);
 
-        ArrayInteger arrayInteger2 = new ArrayInteger(8);
-        BigInteger value2 = BigInteger.valueOf(56789);
+        ArrayInteger arrayInteger2 = new ArrayInteger(5);
+        BigInteger value2 = BigInteger.valueOf(36099);
         arrayInteger2.fromInt(value2);
 
 
         System.out.println(arrayInteger.add(arrayInteger2));
-        BigInteger n1 = BigInteger.valueOf(934565555555l);
-        BigInteger n2 = BigInteger.valueOf(56789);
-        System.out.println(n1 + " + " + n2 + " = " + n1.add(n2));
+        System.out.println(arrayInteger.toInt());
 
-        System.out.println(value.add(value2));
+//        BigInteger n1 = BigInteger.valueOf(934565555555l);
+//        BigInteger n2 = BigInteger.valueOf(56789);
+//        System.out.println(n1 + " + " + n2 + " = " + n1.add(n2));
+
+       // System.out.println(value.add(value2));
 
     }
 
