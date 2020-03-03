@@ -18,9 +18,25 @@ public class ArrayInteger {
 
     //(уложить BigInteger во внутренний массив)
     //Например, число 159 должно занять 3 ячейки массива digits[0] = 9; digits[1] = 5; digits[2] = 1;
+    //Возможно ошибка в задании или я не знаю решения . но в массиве надо чтоб цифри шли в том же порядке
+    //для этого пришлось сперва перевернуть число
     public void fromInt(BigInteger value) {
         digits = new byte[n];
+        String strValue = "";//перевернутое число в строке
 
+        //переворачиваю число
+        for (int j=0; value.compareTo(BigInteger.ZERO) != 0; j++){
+
+            //получаем остаток деления на 10 и приводим к строке
+            String strNum = "" + value.mod(BigInteger.TEN);
+            //собираем в строку перевернутое число
+            strValue = strValue + strNum;
+
+            value = value.divide(BigInteger.TEN);
+        }
+        //возвращаем число-сстроку- перевернутую в прежнюю переменную в BigInteger
+        value = BigInteger.valueOf(Long.parseLong(strValue));
+        //далее заполняем массив
         for (int i = 0; value.compareTo(BigInteger.ZERO) != 0; i++) {
             if (i>n-1){
                 //проверка При переполнении массива вернуть false, при этом само число сбросить в 0
@@ -37,8 +53,8 @@ public class ArrayInteger {
             value = value.divide(BigInteger.TEN);
 
         }
-        for (byte values : digits) {           System.out.print("," + values);       }
-        System.out.println();
+//        for (byte values : digits) {           System.out.print("," + values);       }
+//        System.out.println();
     }
 
     public BigInteger toInt() {
@@ -62,16 +78,21 @@ public class ArrayInteger {
 
         for (int i=0; i < digits.length; i++){
 
-            num1 = digits[i] + num1;
+            num1 =  num1 + digits[i];
         }
         for (int i=0; i < arrayInteger1.digits.length; i++){
 
-            num2 = arrayInteger1.digits[i] + num2;
+            num2 = num2 + arrayInteger1.digits[i];
         }
         //складываем числа переведя из строки в Integer
-        long sum = Integer.parseInt(num1) + Integer.parseInt(num2);
+        System.out.println("num1 - " + Long.parseLong(num1));
+        System.out.println("num2 - " + Long.parseLong(num2));
+
+        long sum = Long.parseLong(num1) + Long.parseLong(num2);
         //отправляем число в массив
+        System.out.println("sum - " + sum);
         fromInt(BigInteger.valueOf(sum));
+
         if (bool==false){
             Arrays.fill(digits,(byte)0);
         }
@@ -83,17 +104,22 @@ public class ArrayInteger {
     public static void main(String[] args) {
         // byte[] digits = {0,0,0,0,0,0};
         int z = 6;
-        ArrayInteger arrayInteger = new ArrayInteger(10);
-        BigInteger value = BigInteger.valueOf(5555555565l);
+        ArrayInteger arrayInteger = new ArrayInteger(12);
+        BigInteger value = BigInteger.valueOf(934565555555596289L);
         arrayInteger.fromInt(value);
 
         ArrayInteger arrayInteger2 = new ArrayInteger(8);
-        BigInteger value2 = BigInteger.valueOf(567895555);
+        BigInteger value2 = BigInteger.valueOf(56789);
         arrayInteger2.fromInt(value2);
 
 
         System.out.println(arrayInteger.add(arrayInteger2));
+        BigInteger n1 = BigInteger.valueOf(934565555555l);
+        BigInteger n2 = BigInteger.valueOf(56789);
+        System.out.println(n1 + " + " + n2 + " = " + n1.add(n2));
+
         System.out.println(value.add(value2));
+
     }
 
 }
