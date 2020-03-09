@@ -5,11 +5,14 @@ public class AbsInteger {
     //1 привожу данные кодному типу Integer потом складываю.
     //2 проверяю в каком интервале находится число суммы и привожу к соответствующему типу
     public static AbsInteger add(AbsInteger num1, AbsInteger num2){
-        Integer num11 = Integer.parseInt(num1.toString());
-        Integer num22 = Integer.parseInt(num2.toString());
-        Integer sum = num11 + num22;
+        System.out.println("num1 - " + num1);
+//        Integer num11 = Integer.parseInt(num1.toString());
+//        Integer num22 = Integer.parseInt(num2.toString());
+//        Integer sum = num11 + num22;
+        Integer   sum = num1.getN() + num2.getN();
 
-        System.out.println(num11 + " + " + num22 + " = " + sum);
+
+        System.out.println(num1 + " + " + num2 + " = " + sum);
         if ( sum > -128 &&  sum <= 127){
 //           String ssum = Integer.toString(sum);
 //           byte bsum = Byte.parseByte(ssum);
@@ -22,8 +25,13 @@ public class AbsInteger {
             return new IntInteger(sum);
         }
 
-    }
 
+    }
+    //создаем метод чтоб преобразовать переменные в классах наследниках в инт
+    //“get” — “получать” (т.е. “метод для получения значения поля”)
+    public  int getN() {
+        return 0;
+    }
 
     public static void main(String[] args) {
         byte n  = 127;

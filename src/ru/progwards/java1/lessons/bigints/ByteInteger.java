@@ -6,8 +6,15 @@ public  class ByteInteger extends AbsInteger{
     public ByteInteger(byte n){
         this.n = n;
     }
+
+
     @Override
     public String toString() {
         return Integer.toString(n);
     }
+    @Override
+    public  int getN() {
+        return n;
+    }
+
 }

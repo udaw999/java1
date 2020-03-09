@@ -11,4 +11,7 @@ public class IntInteger extends AbsInteger{
     public String toString() {
         return Integer.toString(n);
     }
+    public  int getN() {
+        return n;
+    }
 }

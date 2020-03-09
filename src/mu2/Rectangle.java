@@ -21,9 +21,9 @@ public class Rectangle {
 
 
     public static void main(String[] args) {
-//       Rectangle r1 = new Rectangle( 2, 3);
-//        Rectangle r2 = new Rectangle( 3, 2);
-//        System.out.println(rectCompare(r1,r2));
+       Rectangle r1 = new Rectangle( BigDecimal.valueOf(2), BigDecimal.valueOf(3));
+        Rectangle r2 = new Rectangle( BigDecimal.valueOf(3), BigDecimal.valueOf(2));
+        System.out.println(rectCompare(r1,r2));
 
     }
 }

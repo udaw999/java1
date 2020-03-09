@@ -10,4 +10,10 @@ public class ShortInteger extends AbsInteger{
     public String toString() {
         return Integer.toString(n);
     }
+
+     //“get” — “получать” (т.е. “метод для получения значения поля”)
+
+    public  int getN() {
+        return n;
+    }
 }
