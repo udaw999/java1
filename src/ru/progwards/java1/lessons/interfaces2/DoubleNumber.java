@@ -1,4 +1,6 @@
-package ru.progwards.java1.lessons.abstractnum;
+package ru.progwards.java1.lessons.interfaces2;
+
+
 
 public class DoubleNumber extends Number {
     double num;
@@ -31,5 +33,9 @@ public class DoubleNumber extends Number {
         return String.valueOf(num);
     }
 
-
+    @Override
+    public int compareTo(Number p){
+        Double numP = Double.parseDouble(p.toString());
+        return Double.compare(this.num, numP);
+    }
 }

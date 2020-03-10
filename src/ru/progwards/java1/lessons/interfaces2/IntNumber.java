@@ -1,6 +1,8 @@
-package ru.progwards.java1.lessons.abstractnum;
+package ru.progwards.java1.lessons.interfaces2;
 
-public class IntNumber extends Number {
+
+
+public class IntNumber  extends Number {
     int num;
 
     public IntNumber(int num){
@@ -34,6 +36,9 @@ public class IntNumber extends Number {
         return String.valueOf(num);
     }
 
-
-
+    @Override
+    public int compareTo(Number p){
+        Integer numP = Integer.parseInt(p.toString());
+        return Integer.compare(this.num, numP);
+    }
 }
