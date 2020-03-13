@@ -6,7 +6,7 @@ public class Counter {
         System.out.println(value);
         int valueByte = Integer.parseInt(value.toDecString());
         System.out.println(valueByte);
-        valueByte++;
+        ++valueByte;
         value.toDecString();
 
         ByteRegister b = new ByteRegister( (byte) valueByte);
