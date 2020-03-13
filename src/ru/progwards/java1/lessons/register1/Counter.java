@@ -8,10 +8,13 @@ public class Counter {
         System.out.println(valueByte);
         valueByte++;
         value.toDecString();
-        new ByteRegister( (byte) valueByte);
+
+        ByteRegister b = new ByteRegister( (byte) valueByte);
+        b.toDecString();
+
         System.out.println(new ByteRegister( (byte) valueByte).toDecString());
 
-        System.out.println(valueByte);
+        System.out.println(b.toDecString());
 
     }
     public static void dec(ByteRegister value){
@@ -21,7 +24,9 @@ public class Counter {
     }
 
     public static void main(String[] args) {
+        ByteRegister b = new ByteRegister((byte) 100);
 
-        inc(new ByteRegister((byte) 100));
+        inc(b);
+        System.out.println("вызов внизу " + b.toDecString());
     }
 }
