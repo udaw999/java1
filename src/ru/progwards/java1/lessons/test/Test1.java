@@ -1,6 +1,10 @@
 package ru.progwards.java1.lessons.test;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
+
 //урок 10
 public class Test1 {
     Integer n = 0;
@@ -23,6 +27,31 @@ public class Test1 {
 
 
     }
+/*Реализовать метод с сигнатурой private int lineCount(String filename) который возвращает
+количество строк в файле filename. В случае ошибки пробросить исключение
+IOException со строкой сообщения "файл не найден" */
+    private int lineCount(String filename) throws IOException{
+        try {
+
+
+            FileReader reader = new FileReader(filename);
+            Scanner scanner = new Scanner(reader);
+
+            int i = 0;
+
+                while (scanner.hasNextLine()){
+                    String strFail = scanner.nextLine();
+                    i++;
+                }
+                reader.close();
+                return i;
+        } catch (IOException e){
+
+            throw new IOException("файл не найден");
+        }
+    }
+
+
 
     public static void main(String[] args) {
 
