@@ -12,7 +12,7 @@ import static java.lang.System.*;
  оригинального файла соответствует символ code[(int)symbol] выходного файла. В случае ошибок, в файл
  с именем logName вывести название ошибки через метод класса Exception - getMessage()*/
 public class Coder {
-    public static void codeFile(String inFileName, String outFileName, char[] code, String logName) throws IOException {
+    public static void codeFile(String inFileName, String outFileName, char[] code, String logName) {
 
         try {
 
@@ -57,11 +57,20 @@ public class Coder {
         catch (Exception e){ //если ошибка то записываем ошибку в файл
             String strError = e.getMessage();//текст ошибки
 
-            FileWriter logFile = new FileWriter(logName, true);//записать лог в файл
+            FileWriter logFile = null;//записать лог в файл
             try {
+                logFile = new FileWriter(logName, true);
                 logFile.write(strError + "\n"); //сам лог строка
-            } finally {
-                logFile.close();//закрыть файл после записи
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+
+             finally {
+                try {
+                    logFile.close();//закрыть файл после записи
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
                 return;
             }
         }
