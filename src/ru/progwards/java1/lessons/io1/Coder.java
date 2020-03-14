@@ -19,45 +19,26 @@ public class Coder {
             //читаем файл
             FileReader reader = new FileReader(inFileName);
             try {
-/*                Scanner scanner = new Scanner(reader);//читаем сканером
-                while (scanner.hasNextLine()) {//если есть строка то ее выводим
-                    String strFromFile = scanner.nextLine();
-                    System.out.println(strFromFile);
-                    //перекодируем файл
-                    if(strFromFile.length() != 0){//если строка не пустая то делаем перекодировку
-                        for (int i=0; i<strFromFile.length();i++){//перебираем каждый символ в строке
-                            strFromFile = strFromFile.replace(strFromFile.charAt(i), code[i]);
-                            //берем символ по номеру цыкла и меняем на символ из масива кодера по номеру цыкла
-                            out.println(strFromFile);
-                        }
-                        out.println(strFromFile);
-                    }
-*/
+
 
                 int ch;
-                int i = 0;
-                int symbolCode;
+
+                int symbolCode; //символ для записи в файл
                 while ((ch = reader.read()) != -1) {//читаем файл посимвольно
 
-                    System.out.print((char)ch);
+                    symbolCode = code[(int) (char)ch];//берем из масива кода соответствующий code[(int)symbol]
 
-
-
-                    symbolCode = code[(int) (char)ch];//берем из масива кода соответствующий
-                                        // символ числу цыклов(номеру буквы в файле)
-
-                    i++;
                     //запись перекодированного в файл
                     FileWriter fileWriter = new FileWriter(outFileName,true);
                     try {
-                        //fileWriter.write(strFromFile + "\n");
-                        fileWriter.write(symbolCode);//записываем посимвольно цифру из кода
+
+                        fileWriter.write(symbolCode);//записываем посимвольно перекодированый символ
 
                     } finally {
-                        fileWriter.close();
+                        fileWriter.close();//закрываем файл
                     }
 
-                }//конец цыкла
+                }//конец цыкла перекодировки и записи в файл
             } finally {
                 reader.close();//ЗАКРЫВАЕМ файл inFileName
             }
