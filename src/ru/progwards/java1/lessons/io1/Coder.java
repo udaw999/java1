@@ -19,7 +19,7 @@ public class Coder {
             //читаем файл
             FileReader reader = new FileReader(inFileName);
             try {
-                Scanner scanner = new Scanner(reader);//читаем сканером
+/*                Scanner scanner = new Scanner(reader);//читаем сканером
                 while (scanner.hasNextLine()) {//если есть строка то ее выводим
                     String strFromFile = scanner.nextLine();
                     System.out.println(strFromFile);
@@ -32,26 +32,33 @@ public class Coder {
                         }
                         out.println(strFromFile);
                     }
+*/
 
+                int ch;
+                int i = 0;
+                int symbolCode;
+                while ((ch = reader.read()) != -1) {//читаем файл посимвольно
 
+                    System.out.print((char)ch);
 
+                    symbolCode = code[i];//берем из масива кода соответствующий
+                                        // символ числу цыклов(номеру буквы в файле)
+
+                    i++;
                     //запись перекодированного в файл
                     FileWriter fileWriter = new FileWriter(outFileName,true);
                     try {
-                        fileWriter.write(strFromFile + "\n");
+                        //fileWriter.write(strFromFile + "\n");
+                        fileWriter.write(symbolCode);//записываем посимвольно цифру из кода
 
                     } finally {
                         fileWriter.close();
                     }
 
-                }
+                }//конец цыкла
             } finally {
                 reader.close();//ЗАКРЫВАЕМ файл inFileName
             }
-
-
-
-
 
         }
         catch (Exception e){ //если ошибка то записываем ошибку в файл
@@ -77,7 +84,9 @@ public class Coder {
     }
 
     public static void main(String[] args) throws IOException {
-        char[] code ={5,8,95,36,45,5,45,8,55,2,66,95,9,5,5,55,8,22,55,52,88,85,5,5,5,55,8,95,36,45,5,45,8,55,2,66,95,9,5,5,55,8,22,55,52,88,85,5,5,5,55};
+        char[] code ={5,8,95,36,45,5,45,8,55,2,66,95,9,5,5,55,8,22,55,52,88,85,5,5,5,55,8,95,36,45,5,45,
+                8,55,2,66,95,9,5,5,55,8,22,55,52,88,85,5,5,5,55,5,8,95,36,45,5,45,8,55,2,66,95,
+                9,5,5,55,8,22,55,52,88,85,5,5,5,55,8,95,36,45,5,45,};
 
         codeFile("file1.txt","outFileName.txt",code,"logName.txt");
     }
