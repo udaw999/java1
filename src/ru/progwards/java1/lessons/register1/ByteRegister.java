@@ -5,7 +5,7 @@ public class ByteRegister {
     public ByteRegister(){
 
     }
-    public ByteRegister(byte value){
+    public  ByteRegister(byte value){
 
         for (int i = 0; i < 8; i++) {
 
@@ -44,6 +44,11 @@ public class ByteRegister {
 
         System.out.println(b.toString());
         System.out.println(b.toDecString());
+        System.out.println("Counter.inc- ");
+        Counter.inc(b);
+        System.out.println("b.toDecString- ");
+        //System.out.println(toDecString());
+
     }
 
 }

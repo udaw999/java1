@@ -8,13 +8,10 @@ public class Counter {
         System.out.println(valueByte);
         ++valueByte;
         value.toDecString();
+        new ByteRegister((byte)11114);
+        System.out.println("do valueByte" + valueByte);
 
-        ByteRegister b = new ByteRegister( (byte) valueByte);
-        b.toDecString();
-
-        System.out.println(new ByteRegister( (byte) valueByte).toDecString());
-
-        System.out.println(b.toDecString());
+        System.out.println("pos valueByte" + valueByte);
 
     }
     public static void dec(ByteRegister value){
