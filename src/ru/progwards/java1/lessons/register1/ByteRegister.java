@@ -47,7 +47,7 @@ public class ByteRegister {
         System.out.println("Counter.inc- ");
         Counter.inc(b);
         System.out.println("b.toDecString- ");
-        //System.out.println(toDecString());
+
 
     }
 
