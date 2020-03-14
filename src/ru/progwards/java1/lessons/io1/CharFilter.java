@@ -12,12 +12,15 @@ public class CharFilter {
             FileReader reader = new FileReader(inFileName);
             try {
                 int ch;// символ из файла
-
+                String filtrSim = "—";//неучтенный символ в фильтре
+                char filtrSimChar = filtrSim.charAt(0);//неучтенный символ в фильтре(char)
                 int symbolCode; //символ для записи в файл
                 while ((ch = reader.read()) != -1) {//читаем файл посимвольно
 
 
                     symbolCode = (char)ch; //символ для записи
+
+
                     for (int i=0; i<filter.length();i++){//проверяем на совпадение с символами фильтра
                         char c = filter.charAt(i);//извлекаем символов по индексу из строки filter
                        // System.out.println((char)ch);
@@ -26,7 +29,9 @@ public class CharFilter {
                             symbolCode = 0;//если совпали то символ 0
                         }
                     }
-
+                    if(symbolCode == filtrSimChar){
+                        symbolCode = 0;//если совпали то символ 0(неучтенный символ в)
+                    }
                     //запись в файл
                     FileWriter fileWriter = new FileWriter(outFileName,true);
                     try {
