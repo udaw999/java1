@@ -35,7 +35,7 @@ public class ByteRegister {
         return String.valueOf(valueDes);
     }
     public static void main(String[] args) {
-        byte value = 122;
+        byte value = 0;
         ByteRegister b = new ByteRegister(value);
         System.out.println(b);
 
