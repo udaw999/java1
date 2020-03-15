@@ -4,39 +4,37 @@ import java.io.IOException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 public class CharFilter {
     public static void filterFile(String inFileName, String outFileName, String filter){
         try {
             //прочитать файл inFileName
             //читаем файл
             FileReader reader = new FileReader(inFileName);
+            Scanner scanner = new Scanner(reader);
             try {
                 int ch;// символ из файла
                 String filtrSim = "—";//неучтенный символ в фильтре
                 char filtrSimChar = filtrSim.charAt(0);//неучтенный символ в фильтре(char)
                 int symbolCode; //символ для записи в файл
-                while ((ch = reader.read()) != -1) {//читаем файл посимвольно
+                while (scanner.hasNextLine()) {//читаем файл построчно
+                    String strInFileName = scanner.nextLine();//строка
 
 
-                    symbolCode = (char)ch; //символ для записи
 
-
+                    //делаем замену символов в строке, содержащиеся в String filter
                     for (int i=0; i<filter.length();i++){//проверяем на совпадение с символами фильтра
                         char c = filter.charAt(i);//извлекаем символов по индексу из строки filter
-                       // System.out.println((char)ch);
-                        if ((char)ch == c){
 
-                            symbolCode = 0;//если совпали то символ 0
-                        }
+                      strInFileName = strInFileName.replace(""+(char) c,"");//замена символа в строке
                     }
-                    if(symbolCode == filtrSimChar){
-                        symbolCode = 0;//если совпали то символ 0(неучтенный символ в)
-                    }
+
+                    // результат записать в выходной файл
                     //запись в файл
                     FileWriter fileWriter = new FileWriter(outFileName,true);
                     try {
 
-                        fileWriter.write(symbolCode);//записываем посимвольно
+                        fileWriter.write(strInFileName);//записываем посимвольно
 
                     } finally {
                         fileWriter.close();//закрываем файл
@@ -44,8 +42,8 @@ public class CharFilter {
 
                 }//конец цыкла перекодировки и записи в файл
 
-                // удалить символы, содержащиеся в String filter
-                // результат записать в выходной файл
+
+
             } finally {
                 reader.close();//ЗАКРЫВАЕМ файл inFileName
             }
