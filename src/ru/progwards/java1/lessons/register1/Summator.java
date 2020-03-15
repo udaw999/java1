@@ -11,10 +11,12 @@ public class Summator {
 
             numSum = numDop + value1.value[value1.value.length-i-1] + value2.value[value2.value.length-i-1];
             value1.value[value1.value.length - i - 1] = (byte) numSum;
-            if(numSum>1) {
+            if(numSum == 2) {
                 value1.value[value1.value.length - i - 1] = 0;
                 numDop = 1;
-
+            } else  if (numSum == 3){
+                value1.value[value1.value.length - i - 1] = 1;
+                numDop = 1;
             } else {
                 numDop = 0;
             }
@@ -29,8 +31,8 @@ public class Summator {
 
     public static void main(String[] args) {
 
-        ByteRegister val1 = new ByteRegister((byte)200);
-        ByteRegister val2 = new ByteRegister((byte)100);
+        ByteRegister val1 = new ByteRegister((byte)6);
+        ByteRegister val2 = new ByteRegister((byte)7);
 
         System.out.println(add(val1,val2));
         System.out.println(val1.toDecString());
