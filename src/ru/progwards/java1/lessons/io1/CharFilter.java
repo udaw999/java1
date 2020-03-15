@@ -1,5 +1,5 @@
 package ru.progwards.java1.lessons.io1;
-
+//H10 Домашнее задание 3
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -33,13 +33,13 @@ public class CharFilter {
                     FileWriter fileWriter = new FileWriter(outFileName, true);
                     try {
 
-                        fileWriter.write(strInFileName);//записываем посимвольно
+                        fileWriter.write(strInFileName);//записываем построчно
 
                     } finally {
                         fileWriter.close();//закрываем файл
                     }
 
-                }//конец цыкла перекодировки и записи в файл
+                }//конец цыкла замены и записи в файл
 
             } catch (Exception ei) {
                 throw new IOException();

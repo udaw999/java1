@@ -2,22 +2,32 @@ package ru.progwards.java1.lessons.register1;
 
 public class Counter {
     public static void inc(ByteRegister value){
-        System.out.println(value.toDecString());
-        System.out.println(value);
-        int valueByte = Integer.parseInt(value.toDecString());
-        System.out.println(valueByte);
-        ++valueByte;
-        value.toDecString();
-        System.out.println("do value.toDecString()" + value.toDecString());
-        value = new ByteRegister((byte)valueByte);
+
+        for (int i = 0; i < 8; i++) {
+
+            if(value.value[value.value.length-i-1] == 0){
+                value.value[value.value.length-i-1] = 1;
+                break;
+            } else {
+                value.value[value.value.length-i-1] = 0;
+            }
 
 
-
-        System.out.println("pos value.toDecString()" + value.toDecString());
+        }
+        //for (int values : value.value) {           System.out.print("," + values);       }
     }
     public static void dec(ByteRegister value){
-        int valueByte = Integer.parseInt(value.toString());
-        valueByte--;
+        for (int i = 0; i < 8; i++) {
+
+            if(value.value[value.value.length-i-1] == 1){
+                value.value[value.value.length-i-1] = 0;
+                break;
+            } else {
+                value.value[value.value.length-i-1] = 1;
+            }
+
+
+        }
 
     }
 

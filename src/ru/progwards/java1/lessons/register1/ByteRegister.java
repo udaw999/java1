@@ -35,7 +35,7 @@ public class ByteRegister {
         return String.valueOf(valueDes);
     }
     public static void main(String[] args) {
-        byte value = 0;
+        byte value = 10;
         ByteRegister b = new ByteRegister(value);
         System.out.println(b);
 
@@ -46,8 +46,11 @@ public class ByteRegister {
         System.out.println(b.toDecString());
         System.out.println("Counter.inc- ");
         Counter.inc(b);
-        System.out.println("b.toDecString- ");
-
+        System.out.println("+1 ");
+        System.out.println(b.toDecString());
+        Counter.dec(b);
+        System.out.println("-1 ");
+        System.out.println(b.toDecString());
 
     }
 
