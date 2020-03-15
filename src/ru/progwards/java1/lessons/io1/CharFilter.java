@@ -21,17 +21,16 @@ public class CharFilter {
                     String strInFileName = scanner.nextLine();//строка
 
 
-
                     //делаем замену символов в строке, содержащиеся в String filter
-                    for (int i=0; i<filter.length();i++){//проверяем на совпадение с символами фильтра
+                    for (int i = 0; i < filter.length(); i++) {//проверяем на совпадение с символами фильтра
                         char c = filter.charAt(i);//извлекаем символов по индексу из строки filter
 
-                      strInFileName = strInFileName.replace(""+(char) c,"");//замена символа в строке
+                        strInFileName = strInFileName.replace("" + (char) c, "");//замена символа в строке
                     }
 
                     // результат записать в выходной файл
                     //запись в файл
-                    FileWriter fileWriter = new FileWriter(outFileName,true);
+                    FileWriter fileWriter = new FileWriter(outFileName, true);
                     try {
 
                         fileWriter.write(strInFileName);//записываем посимвольно
@@ -42,8 +41,8 @@ public class CharFilter {
 
                 }//конец цыкла перекодировки и записи в файл
 
-
-
+            } catch (Exception ei) {
+                throw new IOException();
             } finally {
                 reader.close();//ЗАКРЫВАЕМ файл inFileName
             }
