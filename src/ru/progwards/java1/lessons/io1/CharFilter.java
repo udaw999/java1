@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 public class CharFilter {
-    public static void filterFile(String inFileName, String outFileName, String filter){
+    public static void filterFile(String inFileName, String outFileName, String filter) throws Exception {
         try {
             //прочитать файл inFileName
             //читаем файл
@@ -49,18 +49,17 @@ public class CharFilter {
 
 
         } catch (Exception e){
-            try {
-                throw new IOException();//В случае возникновения ошибки, пробросить стандартное исключение выше
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
+
+                throw new Exception();//В случае возникновения ошибки, пробросить стандартное исключение выше
+
         }
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         String obscene = " -,.()";
 
-        filterFile("file1.txt","outFileName.txt",obscene);
+        //filterFile("file1.txt","outFileName.txt",obscene);
+        filterFile(null,null,null);
     }
 }
