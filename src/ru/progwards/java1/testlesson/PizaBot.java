@@ -2,11 +2,19 @@ package ru.progwards.java1.testlesson;
 
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.Constants;
+
+import java.util.List;
 import java.util.Scanner;
+
+import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 public class PizaBot extends ProgwardsTelegramBot{
 
     private final String menu = "У нас ты можешь попробовать: автопробег, прыжок с парашутом, подводное погружение";
+
+
+
+
 
     @Override
     public String processMessage(String text) {
@@ -56,20 +64,20 @@ public class PizaBot extends ProgwardsTelegramBot{
         bot.addTags("Автопробег в горах", "авто, пробег, гор");
         bot.addTags("Автопробег в по берегу моря", "авто, пробег, мор, берег");
 
-        bot.start();
-       // bot.test();
+        //bot.start();
+        bot.test();
     }
 
-//    void test() {
-//    	Scanner in = new Scanner(System.in);
-//    	String input;
-//    	TUser user = new TUser();
-//    	do {
-//    		input = in.nextLine();
-//
-//    		System.out.println(processMessage(user, input));
-//    	} while (!input.equals("стоп"));
-//    }
+    void test() {
+    	Scanner in = new Scanner(System.in);
+    	String input;
+    	//TUser user = new TUser();
+    	do {
+    		input = in.nextLine();
+
+    		System.out.println(processMessage( input));
+    	} while (!input.equals("стоп"));
+    }
 
 
 

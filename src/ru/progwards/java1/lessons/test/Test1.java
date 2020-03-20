@@ -80,5 +80,12 @@ IOException со строкой сообщения "файл не найден" 
 //        catch (NullPointerException e) {
 //
 //        }
+        String str = null;
+        try {
+            System.out.println(str.toString());
+        }
+        catch (Exception e) {
+            System.out.println("catch");
+        }
     }
 }
