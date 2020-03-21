@@ -8,7 +8,22 @@ import java.util.Scanner;
 
 public class Censor {
 
-    public static void censorFile(String inoutFileName, String[] obscene){
+
+    static class CensorException extends Exception{
+        String message;
+
+        public CensorException(String message) {
+            this.message = message;
+        }
+
+        @Override
+        public String toString(){
+
+            return  message ;
+        }
+    }
+
+    public static void censorFile(String inoutFileName, String[] obscene) throws CensorException {
 
         try (RandomAccessFile files = new RandomAccessFile(inoutFileName, "rw")){
                 String str = files.readLine(); //читаем строку файла
@@ -28,18 +43,16 @@ public class Censor {
             files.writeBytes(str);//записываем строку вместо той что была в файле
 
             files.close();//закрываем файл
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new CensorException( inoutFileName +":"+ e.getMessage());
         }
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CensorException {
         String[] obscene = {"Java", "Oracle", "Sun", "Microsystems"};
-        censorFile("file1.txt",obscene);
-
+        //censorFile("file1.txt",obscene);
+        censorFile("file1.txt",null);
     }
 
 }
