@@ -1,4 +1,4 @@
-package ru.progwards.java1.lessons;
+package ru.progwards.java1.lessons.test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

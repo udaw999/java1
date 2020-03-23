@@ -5,10 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Scanner;
-
+//H11 Домашнее задание  --3
 public class Censor {
 
-
+//свой класс метод исключения
     static class CensorException extends Exception{
         String message;
 
@@ -44,6 +44,10 @@ public class Censor {
 
             files.close();//закрываем файл
         } catch (Exception e) {
+            /* В случае возникновения ошибки, выбросить свое собственное исключение CensorException в
+            котором сохранить - строку, полученную у оригинального exception через метод getMessage() и имя файла,
+            в котором возникла ошибка. В классе перекрыть метод toString(), вернув <имя файла>:<строка ошибки>.
+             Класс CensorException разместить в классе Censor*/
             throw new CensorException( inoutFileName +":"+ e.getMessage());
         }
 
