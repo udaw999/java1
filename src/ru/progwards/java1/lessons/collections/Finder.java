@@ -44,7 +44,7 @@ public class Finder {
     public static boolean findSequence(Collection<Integer> numbers){
         List<Integer> linkedList = (List<Integer>) numbers; //существующая коллекция
         boolean find = false;
-        for (int i=0; i<linkedList.size(); i++){
+        for (int i=1; i<linkedList.size(); i++){
             for (int j=0;j<linkedList.size();j++){
                 if (i == linkedList.get(j)){
                     find = true;
