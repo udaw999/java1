@@ -14,6 +14,7 @@ public class Finder {
         }
         //определяем минимальное значение в колекции сум
         Integer min = Collections.min(sumList);
+
        // System.out.println("min - " + min);
         List<Integer> indexMinList = new ArrayList();//коллекция индексов чисел сумма которых минимальная
         for(int j=0; j<numbers.size()-1;j++){//наполняем колекцию sumList сложенными соседними числами
@@ -60,12 +61,58 @@ public class Finder {
         return find;
     }
     public static String findSimilar(Collection<String> names){
+        List<String> nameListStr = new LinkedList();
+        nameListStr.add("name");
+        nameListStr.add("1");
 
-        return "null";
+        List<String> strList = (List<String>) names; //существующая коллекция
+        for (int i=0; i<strList.size(); i++){
+            String name = strList.get(i);
+            int coutName = 0;
+            for (int j=i; j<strList.size(); j++){
+                if(strList.get(i).equals(strList.get(j)) == true){
+                    coutName += 1;
+                } else {
+                    break;
+                }
+            }
+
+            if(coutName > Integer.parseInt(nameListStr.get(1))){
+                nameListStr.set(0,name);
+                nameListStr.set(1,String.valueOf(coutName));
+            }
+
+        }
+        return nameListStr.get(0) + ":" + nameListStr.get(1);
     }
     public static void main(String[] args) {
+        List<String> arrayListStr = new LinkedList();
+
+        arrayListStr.add("КОЛЯ");
+        arrayListStr.add("КОЛЯ");
+        arrayListStr.add("КОЛЯ");
+        arrayListStr.add("КОЛЯ");
+        arrayListStr.add("КОЛЯ");
+        arrayListStr.add("ВАСЯ");
+        arrayListStr.add("КОЛЯ");
+        arrayListStr.add("ДЕН");
+        arrayListStr.add("ВАСЯ");
+        arrayListStr.add("ДЕН");
+        arrayListStr.add("КОЛЯ");
+        arrayListStr.add("ДЕН");
+        arrayListStr.add("ДЕН");
+        arrayListStr.add("ДЕН");
+        arrayListStr.add("ДЕН");
+        arrayListStr.add("ДЕН");
+        arrayListStr.add("ВАСЯ");
+
+
+        arrayListStr.add("ВАСЯ");
+        arrayListStr.add("КОЛЯ");
+        arrayListStr.add("ДЕН");
+
         List<Integer> arrayList2 = new LinkedList();
-        arrayList2.add(0);
+
         arrayList2.add(1);
         arrayList2.add(2);
         arrayList2.add(3);
@@ -101,5 +148,8 @@ public class Finder {
         System.out.println(findLocalMax(arrayList));
 
         System.out.println(findSequence(arrayList2));
+        System.out.println(arrayListStr);
+
+        System.out.println(findSimilar(arrayListStr));
     }
 }
