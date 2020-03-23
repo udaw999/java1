@@ -29,7 +29,7 @@ public class Creator {
     public static Collection<Integer> fill3(int n){
         List<Integer> arrayList = new ArrayList();
 
-        int z = 0;
+
         for (int i=0; i<n; i++){
 
             List<Integer> arrayList3 = new ArrayList();
