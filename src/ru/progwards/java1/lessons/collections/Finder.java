@@ -28,6 +28,18 @@ public class Finder {
         return indexMinList;
     }
 
+    public static Collection<Integer> findLocalMax(Collection<Integer> numbers){
+        List<Integer> linkedList = (List<Integer>) numbers; //существующая коллекция
+        return numbers;
+    }
+    public static boolean findSequence(Collection<Integer> numbers){
+        List<Integer> linkedList = (List<Integer>) numbers; //существующая коллекция
+        return true;
+    }
+    public static String findSimilar(Collection<String> names){
+
+        return "null";
+    }
     public static void main(String[] args) {
 
         List<Integer> arrayList = new LinkedList();
