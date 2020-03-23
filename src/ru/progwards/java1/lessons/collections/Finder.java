@@ -29,18 +29,49 @@ public class Finder {
     }
 
     public static Collection<Integer> findLocalMax(Collection<Integer> numbers){
+        List<Integer> indexList = new ArrayList();//коллекция max num чисел
+
         List<Integer> linkedList = (List<Integer>) numbers; //существующая коллекция
-        return numbers;
+        for (int i=1; i<linkedList.size()-1; i++){
+            if(linkedList.get(i) > linkedList.get(i-1) & linkedList.get(i) > linkedList.get(i+1)){
+
+                indexList.add(linkedList.get(i));//добавляем в колекцию максимальные числа
+            }
+        }
+
+        return indexList;
     }
     public static boolean findSequence(Collection<Integer> numbers){
         List<Integer> linkedList = (List<Integer>) numbers; //существующая коллекция
-        return true;
+        boolean find = false;
+        for (int i=0; i<linkedList.size(); i++){
+            for (int j=0;j<linkedList.size();j++){
+                if (i == linkedList.get(j)){
+                    find = true;
+                    break;
+                } else {
+                    find = false;
+                }
+            }
+                if (find==false){
+                    break;
+                }
+        }
+        return find;
     }
     public static String findSimilar(Collection<String> names){
 
         return "null";
     }
     public static void main(String[] args) {
+        List<Integer> arrayList2 = new LinkedList();
+        arrayList2.add(0);
+        arrayList2.add(1);
+        arrayList2.add(2);
+        arrayList2.add(3);
+        arrayList2.add(4);
+        arrayList2.add(5);
+        arrayList2.add(6);
 
         List<Integer> arrayList = new LinkedList();
         arrayList.add(5);
@@ -65,26 +96,10 @@ public class Finder {
         arrayList.add(7);
         System.out.println(arrayList);
         System.out.println("resul");
-        System.out.println(findMinSumPair(arrayList));
+      //  System.out.println(findMinSumPair(arrayList));
         //System.out.println("min- "+Collections.min(arrayList));
+        System.out.println(findLocalMax(arrayList));
 
-  /*      List<Integer> linkedList = new LinkedList();
-        for (int i = 0; i < 20; i++)
-            linkedList.add(i + 1);
-        System.out.println("Список до изменения:");
-        for (Integer intObj : linkedList)
-            System.out.println("Значение элемента = " + intObj);
-        for (ListIterator<Integer> listIterator = linkedList.listIterator(); listIterator.hasNext(); ) {
-            Integer intObj = listIterator.next();
-            Integer pre = listIterator.previous();
-            listIterator.set(intObj * intObj);
-        }
-        System.out.println("\nСписок после изменения:");
-        for (Integer intObj : linkedList){
-            System.out.println("Значение элемента = " + intObj);
-
-        }
-        */
-
+        System.out.println(findSequence(arrayList2));
     }
 }
