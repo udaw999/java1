@@ -109,7 +109,9 @@ public class test12 {
         }
 
         Iterator<Integer> iterator = linkedList.iterator();//создаем интератор
-
+        System.out.println();
+        System.out.println("hasNext()- " + iterator.hasNext());
+        System.out.println("next()- " + iterator.next());
         iterator3((ListIterator<Integer>) iterator);
 
         for (Integer i : linkedList) {

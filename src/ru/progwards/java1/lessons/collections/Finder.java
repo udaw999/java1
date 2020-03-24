@@ -67,19 +67,20 @@ public class Finder {
 
         List<String> strList = (List<String>) names; //существующая коллекция
         for (int i=0; i<strList.size(); i++){
-            String name = strList.get(i);
-            int coutName = 0;
+            String name = strList.get(i); //слово
+            int coutName = 0; //считает количество рядом стоящих слов
             for (int j=i; j<strList.size(); j++){
                 if(strList.get(i).equals(strList.get(j)) == true){
-                    coutName += 1;
+                    coutName += 1;//если следующее слово одинаково то увеличиваем счет на 1
                 } else {
                     break;
                 }
             }
 
-            if(coutName > Integer.parseInt(nameListStr.get(1))){
-                nameListStr.set(0,name);
-                nameListStr.set(1,String.valueOf(coutName));
+            if(coutName > Integer.parseInt(nameListStr.get(1))){//если счет слов больше чем цифра в колекции
+                //то мы перезаписываем счет и слово
+                nameListStr.set(0,name);//слово
+                nameListStr.set(1,String.valueOf(coutName));//счет првращаем в строку
             }
 
         }
