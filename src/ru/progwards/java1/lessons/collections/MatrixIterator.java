@@ -17,7 +17,7 @@ public class MatrixIterator<T> implements Iterator<T> {
     public boolean hasNext() {
         // TODO Auto-generated method stub
         return index < array.length && indexD < array[index].length;
-        //если длина массива и длина внутренних больше 0 и  то urue;
+        //если длина массива и длина внутренних больше 0 и  то true;
     }
 
     @Override
