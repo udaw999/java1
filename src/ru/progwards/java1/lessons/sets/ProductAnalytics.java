@@ -44,37 +44,67 @@ public class ProductAnalytics {
         products.removeAll(existAtListInOne());//удаляем пересечение множеств(все товары которые есть в магазинах)
         return products;
     }
+
     //товары из products, которые есть только в одном магазине
     public Set<Product> existOnlyInOne(){
-        HashSet products = new HashSet(existAtListInOne());//товары из products, которые имеются хотя бы в одном магазине
-        products.removeAll(existInAll());//удаляем все товар который встречается во всех магазинах
+        HashSet productsAll = new HashSet(existAtListInOne());//встречается хотябы в одном из магазинов
+        HashSet productsEnd = new HashSet();//колекция первого магазина чтоб сравнить в конце с последним
+        HashSet products = new HashSet();//промежуточная для сравнения одного магазина с другим(товара)
+        //products.removeAll(existInAll());//удаляем все товар который встречается во всех магазинах
 
-        return products;
+
+        int i = 0;
+        for (ListIterator<Shop> listIteratorShops = shops.listIterator(); listIteratorShops.hasNext(); ) {
+            Shop shopsProducts = listIteratorShops.next();//все товары из одного магазина
+
+           if(i==0){
+               products.addAll((Collection) shopsProducts.getProducts());//добавили сперва кол. магаз 1
+               productsEnd.addAll((Collection) shopsProducts.getProducts());//добавили сперва кол. магаз 1
+           } else {
+               products.retainAll((Collection) shopsProducts.getProducts());//на втором круге сравнили кол 1 с кол 2
+               //и получили ттовары которые одинаковы в обеих магазинах
+               productsAll.removeAll(products);//Чудалить одинаковые товары в productsAll колекцию
+
+               products.clear();//очищаем колекцию products
+               products.addAll((Collection) shopsProducts.getProducts());//добавили эту колекцию в чистый products
+
+           }
+            i++;
+
+        }
+        products.retainAll(productsEnd);//сравниваем первую с последней
+        productsAll.removeAll(products);//удалить одинаковые товары в productsAll колекцию
+        return productsAll;
     }
 
     public static void main(String[] args) {
-        Product product = new Product("muka");
-        Product product1 = new Product("xleb");
-        Product product2 = new Product("bulka");
-        Product product3 = new Product("pranik");
+        Product product = new Product("art-0");
+        Product product1 = new Product("art-1");
+        Product product2 = new Product("art-2");
+        Product product3 = new Product("art-3");
 
-        Product product4 = new Product("ruchra");
-        Product product5 = new Product("kniga");
-        Product product6 = new Product("tetratka");
-        Product product7 = new Product("lineika");
+        Product product4 = new Product("art-4");
+        Product product5 = new Product("art-5");
+        Product product6 = new Product("art-6");
+        Product product7 = new Product("art-7");
 
-        Product product8 = new Product("voda");
-        Product product9 = new Product("sok");
-        Product product10 = new Product("vodka");
-        Product product11 = new Product("pivo");
+        Product product8 = new Product("art-8");
+        Product product9 = new Product("art-9");
+        Product product10 = new Product("art-10");
+        Product product11 = new Product("art-11");
 
-        Shop shop = new Shop(new LinkedList<>(List.of(product,product1,product2,product3,product5)));
-        Shop shop2 = new Shop(new LinkedList<>(List.of(product4,product5,product6,product7,product,product2)));
+//        Магазин 1, товары: art-3,art-6,art-7,art-8,art-10
+//        Магазин 2, товары: art-1,art-2,art-7,art-8
+//        Магазин 3, товары: art-1,art-3,art-6,art-8,art-10
+
+        Shop shop = new Shop(new LinkedList<>(List.of(product3,product6,product7,product8,product10)));
+        Shop shop2 = new Shop(new LinkedList<>(List.of(product1,product2,product7,product8)));
+        Shop shop3 = new Shop(new LinkedList<>(List.of(product1,product3,product6,product8,product10)));
 
         ProductAnalytics productAnalytics = new ProductAnalytics(
                 new LinkedList<Product>(List.of(product,product1,product2,product3,product4,product5,product6,product7,
                         product8,product9,product10,product11)),
-                new LinkedList<Shop>(List.of(shop,shop2))
+                new LinkedList<Shop>(List.of(shop,shop2,shop3))
         );
 
         //System.out.println(shop);
