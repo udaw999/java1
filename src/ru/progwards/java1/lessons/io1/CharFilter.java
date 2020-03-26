@@ -59,7 +59,7 @@ public class CharFilter {
     public static void main(String[] args) throws Exception {
         String obscene = " -,.()";
 
-        //filterFile("file1.txt","outFileName.txt",obscene);
-        filterFile(null,null,null);
+        filterFile("file1.txt","outFileName.txt",obscene);
+        //filterFile(null,null,null);
     }
 }
