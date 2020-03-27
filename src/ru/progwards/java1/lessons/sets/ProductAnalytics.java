@@ -56,7 +56,7 @@ public class ProductAnalytics {
         int i = 0;
         for (ListIterator<Shop> listIteratorShops = shops.listIterator(); listIteratorShops.hasNext(); ) {
             Shop shopsProducts = listIteratorShops.next();//все товары из одного магазина
-
+//SetOperations.symDifference()
            if(i==0){
                products.addAll((Collection) shopsProducts.getProducts());//добавили сперва кол. магаз 1
                productsEnd.addAll((Collection) shopsProducts.getProducts());//добавили сперва кол. магаз 1
@@ -120,5 +120,6 @@ public class ProductAnalytics {
         System.out.println(productAnalytics.notExistInShops());
         System.out.println("которые есть только в одном магазине");
         System.out.println(productAnalytics.existOnlyInOne());
+
     }
 }
