@@ -1,12 +1,9 @@
-package ru.progwards.java1.SeaBattle.urda1975;
+package ru.progwards.java1.SeaBattle.urda1975.copy;
 
 import ru.progwards.java1.SeaBattle.SeaBattle;
 import ru.progwards.java1.SeaBattle.SeaBattle.FireResult;
 
 import java.util.Arrays;
-
-import static ru.progwards.java1.SeaBattle.SeaBattle.*;
-import static ru.progwards.java1.SeaBattle.urda1975.SeaBattleAlg.DirectionHits.*;
 
 public class SeaBattleAlg {
 
@@ -41,8 +38,6 @@ public class SeaBattleAlg {
     int hits = 0;//счетчик попаданий
     int hits1 = 0;//счетчик попаданий(test delet
     int hits2 = 0;//счетчик попаданий(test delet
-
-
     void init(SeaBattle seaBattle){
         this.seaBattle = seaBattle;
         field = new char[seaBattle.getSizeX()][seaBattle.getSizeY()];
@@ -55,11 +50,8 @@ public class SeaBattleAlg {
     }
 //ячейки поля
     void print (){
-        //System.out.println(" _0_1_2_3_4_5_6_7_8_9");
-
         for (int x=0; x < seaBattle.getSizeY(); x++){
-            String str = x + "|";
-
+            String str = "|";
             for (int y=0; y < seaBattle.getSizeX(); y++){
                 str += field[x][y] + "|";
             }
@@ -85,7 +77,7 @@ public class SeaBattleAlg {
     //метка убил или мимо при поиске (test переопределить на основной потом
     void markFireTest(int x, int y, FireResult result){
         if (result != FireResult.MISS){
-            field[x][y] = 'X';
+            field[x][y] = 'Z';
             hitsPlusPlus();//счетчик попаданий
 
             hits2++;
@@ -93,144 +85,96 @@ public class SeaBattleAlg {
             field[x][y] = '-';
         }
     }
-
-    //пометить корабли по кругу
-    void markHit(int x, int y) {
-        markDot(x-1, y-1);
-        markDot(x-1, y);
-        markDot(x-1, y+1);
-        markDot(x+1, y-1);
-        markDot(x+1, y);
-        markDot(x+1, y+1);
-        markDot(x, y-1);
-        markDot(x, y+1);
-    }
-    //метим ячейки не имеющие смысл для стрельбы
-    void markDot(int x, int y) {
-        if (x<0 || y<0 || x>9 || y>9){
-            return;
-        }
-        if (field[x][y] == ' '){
-            field[x][y] = '.';
-        }
-    }
-
-    void markDestroyed(){
-        for (int y = 0; y < seaBattle.getSizeX(); y++){
-            for (int x = 0; x < seaBattle.getSizeY(); x++){
-                if (field[x][y] == 'X'){
-                    markHit(x,y);
-                    //field[x][y] = '.';
-                }
-
-            }
-        }
-    }
-
-    Enum direction = RIGHT;
-    enum DirectionHits {RIGHT,LEFT,TOP, DirectionHits, ShipInfo, BOTTOM}
     //усли не промахнулись то
     void noMiss(int x, int y, FireResult result) {
         if (result == FireResult.DESTROYED){
 
         } else {
 
-            hits(x, y, result, direction);
-
+            hits(x, y, result);
         }
 
     }
-
     //FireResult.MISS -- мимо
     //FireResult.HIT -- попал - ранен
     //FireResult.DESTROYED -- убит
     //если ранил то добиваем
+    boolean leftStartAtac = false;
+    void hits(int x, int y, FireResult result ) {
 
 
-    void hits(int x, int y, FireResult result, Enum direction) {
-
-        int xX = x;//оригинал координат
-        int yY = y;//оригинал координат
-
-        int edge = 0;//x / y -координата границы поля
-        int edgeZ = 0;//0 / 9 -координата границы поля
+        rightAtac(x ,y , result);
 
 
 
-        if (direction == RIGHT){ edge = y; edgeZ = 9; }
-        if (direction == LEFT){ edge = y; edgeZ = 0; }
-        if (direction == TOP){ edge = x; edgeZ = 0; }
-        if (direction == BOTTOM){ edge = x; edgeZ = 9; }
+            //System.out.println("справа" + field[x][y]);
 
 
-        if (direction == RIGHT){x = x; y = y + 1;}
-        if (direction == LEFT){x = x; y = y - 1;}
-        if (direction == TOP){x = x - 1; y = y;}
-        if (direction == BOTTOM){x = x + 1; y = y;}
+    }
+    void leftAtac(int x, int y, FireResult result) {
 
+    }
+    void rightAtac(int x, int y, FireResult result) {
         //стреляю сперва в право
-        if (edge != edgeZ && field[x][y] == ' ') {//стреляю по второй палубе
+        if (y != 9 && field[x][y] == ' ') {//стреляю по второй палубе
+            x = x;
+            y = y + 1;
 
-            result = seaBattle.fire(x, y);
+            FireResult tvoPalubResult = seaBattle.fire(x, y);
             //если попал но не убит
-            markFireTest(x, y, result);//визуализация-- заполняет массив результатами стрельбы
-            if (result == FireResult.HIT) {//на 3 палубу если н попал но не убил
+            markFireTest(x, y, tvoPalubResult);//визуализация-- заполняет массив результатами стрельбы
+            if (tvoPalubResult == FireResult.HIT) {
 
-                if (direction == RIGHT){x = x; y = y + 1;}
-                if (direction == LEFT){x = x; y = y - 1;}
-                if (direction == TOP){x = x - 1; y = y;}
-                if (direction == BOTTOM){x = x + 1; y = y;}
-                if (edge != edgeZ && field[x][y] == ' ') {//стреляю по третьей палубе
+                if (y != 9 && field[x][y + 1] == ' ') {//убиваем третий справа
+                    x = x;
+                    y = y + 1;
+                    FireResult rightResult3 = seaBattle.fire(x, y);
+                    markFireTest(x, y, rightResult3);//визуализация-- заполняет массив результатами стрельбы
+
+                    if (rightResult3 == FireResult.HIT) {
+                        if (y != 9 && field[x][y + 2] == ' ') {//убиваем четвертый справа
+                            x = x;
+                            y = y + 1;
+                            FireResult rightResult4 = seaBattle.fire(x, y);
+                            markFireTest(x, y, rightResult4);//визуализация-- заполняет массив результатами стрельбы
+
+                        }
+                        if (tvoPalubResult == FireResult.DESTROYED) {//если ПОПАЛ И УБИТ
 
 
-                    result = seaBattle.fire(x, y);
-                    markFireTest(x, y, result);//визуализация-- заполняет массив результатами стрельбы
-
-                    if (result == FireResult.HIT) {//на 4 палубу если н попал но не убил
-
-                        if (direction == RIGHT){x = x; y = y + 1;}
-                        if (direction == LEFT){x = x; y = y - 1;}
-                        if (direction == TOP){x = x - 1; y = y;}
-                        if (direction == BOTTOM){x = x + 1; y = y;}
-                        if (edge != edgeZ && field[x][y] == ' ') {//стреляю по четвертой палубе
-
-                            result = seaBattle.fire(x, y);
-                            markFireTest(x, y, result);//визуализация-- заполняет массив результатами стрельбы
-
-                            if (result == FireResult.DESTROYED) {//если ПОПАЛ И УБИТ
-                                //обработать обводку убитого
-                            }
-                        }//палуба 4
-                    }//на 4 палубу если н попал но не убил
-                    if (result == FireResult.DESTROYED) {//если ПОПАЛ И УБИТ
-                        //обработать обводку убитого
+                        }
+                        hitsPlusPlus();//счетчик успешных выстрелов -- 1
                     }
-                }//стреляю по третьей палубе
-            }//на 3 палубу если н попал но не убил
+                    if (tvoPalubResult == FireResult.DESTROYED) {//если ПОПАЛ И УБИТ
 
-            if (result == FireResult.DESTROYED) {//если ПОПАЛ И УБИТ
-                //обработать обводку убитого
+
+                    }
+                    if (tvoPalubResult == FireResult.MISS) {//если промахнулся и не убит
+
+                        //назначаем новые значения х и у, выходим и начинам левый проход
+                        leftStartAtac = true; //команда на левый старт
+
+                    }
+                }
+                if (tvoPalubResult == FireResult.DESTROYED) {//если ПОПАЛ И УБИТ
+                    System.out.println("DESTROYED если ПОПАЛ И УБИТ x- " + x + ", y- " + y);
+
+                }
+
+                if (tvoPalubResult == FireResult.MISS) {//если промахнулся и не убит
+                    System.out.println("MISSпромахнулся x- " + x + ", y- " + y);
+                    //назначаем новые значения х и у, выходим и начинам левый проход
+                    leftStartAtac = true; //команда на левый старт
+
+                }
+
+
+                //markFireTest(x, y, result);//визуализация-- заполняет массив результатами стрельбы
+                //hits(x, y, fireResult);//если ранен
 
             }
-
-            if (result == FireResult.MISS) {//если промахнулся и не убит
-
-                //выходим и начинам левый проход
-                //команда на левый старт
-                //System.out.println(direction + " x - " + x + " y - " + y + " xX - " + xX + " yY - " + yY);
-                if (direction == RIGHT ){direction = LEFT; hits(xX, yY, result, direction);}
-                if (direction == LEFT){direction = TOP; hits(xX, yY, result, direction);}
-                if (direction == TOP){direction = BOTTOM; hits(xX, yY, result, direction);}
-
-
-            }
-
         }
-
-
-}
-
-    //алгоритм вывода
+    }
     public void battleAlgorithm(SeaBattle seaBattle) {
         // пример алгоритма:
         // стрельба по всем квадратам поля полным перебором
@@ -272,29 +216,27 @@ public class SeaBattleAlg {
                     }
 
                     markFire(x, y, fireResult);//визуализация-- заполняет мое поле результатами стрельбы
-                    markDestroyed();
-                    System.out.println("tutttt");
                  }
 
                 x = x + 4;//для перебора
             }
 
 
-            if(y == 9 && z == 1 ) {
-                y = 0;
-                n = 2;
-                z++;
-            } else  if (y == 9 && z == 2 ){
-                y = 0;
-                n = 3;
-                z++;
-            } else  if (y == 9 && z == 3 ){
-                y = 0;
-                n = 1;
-                z++;
-            } else  {
+//            if(y == 9 && z == 1 ) {
+//                y = 0;
+//                n = 2;
+//                z++;
+//            } else  if (y == 9 && z == 2 ){
+//                y = 0;
+//                n = 3;
+//                z++;
+//            } else  if (y == 9 && z == 3 ){
+//                y = 0;
+//                n = 1;
+//                z++;
+//            } else  {
                 y++;
-            }
+//            }
 
 
         }
