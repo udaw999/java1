@@ -41,7 +41,35 @@ public class SeaBattleAlg {
     int hits = 0;//счетчик попаданий
     int hits1 = 0;//счетчик попаданий(test delet
     int hits2 = 0;//счетчик попаданий(test delet
+
+
     public static int nz = 0;
+
+    int mimo = 0; //*
+    int popal = 0; //X
+    int nascel = 0; //Z
+    public static int sravn = 0; // считаю сколько не соответствий Х И Z
+    int minus = 0; //-
+
+    void statistic() {//
+
+        for (int y = 0; y < seaBattle.getSizeX(); y++){
+            for (int x = 0; x < seaBattle.getSizeY(); x++){
+                if (field[x][y] == 'Z'){
+                    nascel++;
+                }
+                if (field[x][y] == 'X'){
+                    popal++;
+                }
+                if (field[x][y] == '*'){
+                    mimo++;
+                }
+                if (field[x][y] == '-'){
+                    minus++;
+                }
+            }
+        }
+    }
 
     void init(SeaBattle seaBattle){
         this.seaBattle = seaBattle;
@@ -118,7 +146,7 @@ public class SeaBattleAlg {
     void markDestroyed(){
         for (int y = 0; y < seaBattle.getSizeX(); y++){
             for (int x = 0; x < seaBattle.getSizeY(); x++){
-                if (field[x][y] == 'Z'){
+                if (field[x][y] == 'X' || field[x][y] == 'Z'){
                     markHit(x,y);
                     //field[x][y] = '.';
                 }
@@ -162,6 +190,16 @@ public class SeaBattleAlg {
         int edge = 0;//x / y -координата границы поля
         int edgeZ = 0;//0 / 9 -координата границы поля
 
+        if (direction == RIGHT && yY == 9 ){
+           hits(xX, yY, result, LEFT);
+        }
+        if (direction == LEFT && yY == 0 ){
+            hits(xX, yY, result, TOP);
+        }
+        if (direction == TOP && xX == 0 ){
+            hits(xX, yY, result, BOTTOM);
+        }
+
         if (direction == RIGHT){x = x; y = y + 1;}
         if (direction == LEFT){x = x; y = y - 1;}
         if (direction == TOP){x = x - 1; y = y;}
@@ -179,11 +217,7 @@ public class SeaBattleAlg {
             result = seaBattle.fire(x, y);
             //если попал но не убит
             markFireTest(x, y, result);//визуализация-- заполняет массив результатами стрельбы
-//        if (x>0 || y>0 || x<9 || y<9){
-//            if (field[x][y] == ' '){
-//                result = seaBattle.fire(x, y);
-//                markFireTest(x, y, result);//визуализация-- заполняет массив результатами стрельбы
-//        }
+
             if (result == FireResult.HIT) {//на 3 палубу если н попал но не убил
 
                 if (direction == RIGHT){x = x; y = y + 1;}
@@ -200,13 +234,8 @@ public class SeaBattleAlg {
 
                 if (edge <= edgeZ && field[x][y] == ' ') {//стреляю по третьей палубе
 
-//                if (x>0 || y>0 || x<9 || y<9){
-//                    if (field[x][y] == ' '){}
                         result = seaBattle.fire(x, y);
                         markFireTest(x, y, result);//визуализация-- заполняет массив результатами стрельбы
-
-
-
 
                    /**/ if (result == FireResult.HIT) {//на 4 палубу если н попал но не убил
 
@@ -227,30 +256,31 @@ public class SeaBattleAlg {
 
                             result = seaBattle.fire(x, y);
                             markFireTest(x, y, result);//визуализация-- заполняет массив результатами стрельбы
-//                        if (x>0 || y>0 || x<9 || y<9){
-//                            if (field[x][y] == ' '){
-//                                result = seaBattle.fire(x, y);
-//                                markFireTest(x, y, result);//визуализация-- заполняет массив результатами стрельбы
-//                            }
 
                         }//палуба 4
+
                     }//на 4 палубу если н попал но не убил  */
 
                 }//стреляю по третьей палубе
+
             }//на 3 палубу если н попал но не убил
+        }
+        if ((edge <= edgeZ && result == FireResult.HIT && field[x][y] != ' ') || (edge > edgeZ && result == FireResult.HIT)) {
+            //если не промахнулся но занято или уже граница поля
 
+            if (direction == RIGHT){ hits(xX, yY, result, LEFT);}
+            if (direction == LEFT){ hits(xX, yY, result, TOP);}
+            if (direction == TOP){ hits(xX, yY, result, BOTTOM);}
+        }
+        if (result == FireResult.MISS) {//если промахнулся и не убит
 
-            if (result == FireResult.MISS) {//если промахнулся и не убит
+            //выходим и начинам левый проход
+            //команда на левый старт
+            //System.out.println(direction + " x - " + x + " y - " + y + " xX - " + xX + " yY - " + yY);
+            if (direction == RIGHT){direction = LEFT; hits(xX, yY, result, direction);}
+            if (direction == LEFT){direction = TOP; hits(xX, yY, result, direction);}
+            if (direction == TOP){direction = BOTTOM; hits(xX, yY, result, direction);}
 
-                //выходим и начинам левый проход
-                //команда на левый старт
-                //System.out.println(direction + " x - " + x + " y - " + y + " xX - " + xX + " yY - " + yY);
-                if (direction == RIGHT){direction = LEFT; hits(xX, yY, result, direction);}
-                if (direction == LEFT){direction = TOP; hits(xX, yY, result, direction);}
-                if (direction == TOP){direction = BOTTOM; hits(xX, yY, result, direction);}
-
-
-            }
 
         }
 
@@ -258,7 +288,7 @@ public class SeaBattleAlg {
             //обработать обводку убитого
             markDestroyed();//точки которые нет смысла стрелять
             nz++;
-            System.out.println("DESTROYED- " + nz + " x- " + x + " y- " + y);
+            //System.out.println("DESTROYED- " + nz + " x- " + x + " y- " + y);
         }
 }
 
@@ -333,14 +363,29 @@ public class SeaBattleAlg {
 
         }
         print ();//поле наглядно
-        System.out.println("hits- попал сразу - " + hits1);
-        System.out.println("hits2- попал при дальнейшем поиске - " + hits2);
+        statistic();
+//        System.out.println("hits- попал сразу - " + hits1);
+//        System.out.println("hits2- попал при дальнейшем поиске - " + hits2);
+        System.out.println("попаданий - " + hits);
+        System.out.println("X - " + popal);
+        System.out.println("Z - " + nascel);
+        System.out.println("* - " + mimo);
+        System.out.println("- - " + minus);
+        System.out.println("ИТОГО ВЫСТРЕЛОВ - " + (popal + mimo + minus + nascel));
+//        int mimo = 0; //*
+//        int popal = 0; //X
+//        int nascel = 0; //Z
+//        int minus = 0; //-
+//
+
 
         if(hits > 20){
           nz++;
         }
 
-
+        if (nascel == popal){
+            sravn++;
+        }
 
 
     }
@@ -367,12 +412,13 @@ public class SeaBattleAlg {
             if (seaBattle.getResult() == 0){
                 nzz++;
             }
-
+            System.out.println("результат - " + seaBattle.getResult());
         }
 
 
         System.out.println(res/1000);
         System.out.println("меньше 20 - " + nzz);
+        System.out.println("сколько равных x = z - " + sravn);
 
     }
 
