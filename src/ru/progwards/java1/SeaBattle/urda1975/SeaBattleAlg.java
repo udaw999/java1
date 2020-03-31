@@ -41,7 +41,7 @@ public class SeaBattleAlg {
     int hits = 0;//счетчик попаданий
     int hits1 = 0;//счетчик попаданий(test delet
     int hits2 = 0;//счетчик попаданий(test delet
-
+    public static int nz = 0;
 
     void init(SeaBattle seaBattle){
         this.seaBattle = seaBattle;
@@ -55,7 +55,7 @@ public class SeaBattleAlg {
     }
 //ячейки поля
     void print (){
-        //System.out.println(" _0_1_2_3_4_5_6_7_8_9");
+        System.out.println(" _0_1_2_3_4_5_6_7_8_9");
 
         for (int x=0; x < seaBattle.getSizeY(); x++){
             String str = x + "|";
@@ -85,7 +85,7 @@ public class SeaBattleAlg {
     //метка убил или мимо при поиске (test переопределить на основной потом
     void markFireTest(int x, int y, FireResult result){
         if (result != FireResult.MISS){
-            field[x][y] = 'X';
+            field[x][y] = 'Z';
             hitsPlusPlus();//счетчик попаданий
 
             hits2++;
@@ -114,11 +114,11 @@ public class SeaBattleAlg {
             field[x][y] = '.';
         }
     }
-
+    //цикл обводки убитого корабля
     void markDestroyed(){
         for (int y = 0; y < seaBattle.getSizeX(); y++){
             for (int x = 0; x < seaBattle.getSizeY(); x++){
-                if (field[x][y] == 'X'){
+                if (field[x][y] == 'Z'){
                     markHit(x,y);
                     //field[x][y] = '.';
                 }
@@ -132,6 +132,11 @@ public class SeaBattleAlg {
     //усли не промахнулись то
     void noMiss(int x, int y, FireResult result) {
         if (result == FireResult.DESTROYED){
+
+                //обработать обводку убитого
+                //markDestroyed();//точки которые нет смысла стрелять
+                //nz++;
+                //System.out.println("DESTROYED 2 - " + nz);
 
         } else {
 
@@ -147,6 +152,8 @@ public class SeaBattleAlg {
     //если ранил то добиваем
 
 
+
+
     void hits(int x, int y, FireResult result, Enum direction) {
 
         int xX = x;//оригинал координат
@@ -155,70 +162,90 @@ public class SeaBattleAlg {
         int edge = 0;//x / y -координата границы поля
         int edgeZ = 0;//0 / 9 -координата границы поля
 
-
-
-        if (direction == RIGHT){ edge = y; edgeZ = 9; }
-        if (direction == LEFT){ edge = y; edgeZ = 0; }
-        if (direction == TOP){ edge = x; edgeZ = 0; }
-        if (direction == BOTTOM){ edge = x; edgeZ = 9; }
-
-
         if (direction == RIGHT){x = x; y = y + 1;}
         if (direction == LEFT){x = x; y = y - 1;}
         if (direction == TOP){x = x - 1; y = y;}
         if (direction == BOTTOM){x = x + 1; y = y;}
 
+        if (direction == RIGHT){ edge = y; edgeZ = 9; }//edge < edgeZ --- y <= 9
+        if (direction == LEFT){ edge = 0; edgeZ = y; }//edge < edgeZ --- 0 < y
+        if (direction == TOP){ edge = 0; edgeZ = x; }//edge < edgeZ --- 0 < x
+        if (direction == BOTTOM){ edge = x; edgeZ = 9; }//edge < edgeZ --- x < 10
+
         //стреляю сперва в право
-        if (edge != edgeZ && field[x][y] == ' ') {//стреляю по второй палубе
+        if (edge <= edgeZ && field[x][y] == ' ') {//стреляю по второй палубе
+
 
             result = seaBattle.fire(x, y);
             //если попал но не убит
             markFireTest(x, y, result);//визуализация-- заполняет массив результатами стрельбы
+//        if (x>0 || y>0 || x<9 || y<9){
+//            if (field[x][y] == ' '){
+//                result = seaBattle.fire(x, y);
+//                markFireTest(x, y, result);//визуализация-- заполняет массив результатами стрельбы
+//        }
             if (result == FireResult.HIT) {//на 3 палубу если н попал но не убил
 
                 if (direction == RIGHT){x = x; y = y + 1;}
                 if (direction == LEFT){x = x; y = y - 1;}
                 if (direction == TOP){x = x - 1; y = y;}
                 if (direction == BOTTOM){x = x + 1; y = y;}
-                if (edge != edgeZ && field[x][y] == ' ') {//стреляю по третьей палубе
+
+                //edge < edgeZ
+
+                if (direction == RIGHT){ edge = y; edgeZ = 9; }//edge < edgeZ --- y < 10
+                if (direction == LEFT){ edge = 0; edgeZ = y; }//edge < edgeZ --- 0 < y
+                if (direction == TOP){ edge = 0; edgeZ = x; }//edge < edgeZ --- 0 < x
+                if (direction == BOTTOM){ edge = x; edgeZ = 9; }//edge < edgeZ --- x < 10
+
+                if (edge <= edgeZ && field[x][y] == ' ') {//стреляю по третьей палубе
+
+//                if (x>0 || y>0 || x<9 || y<9){
+//                    if (field[x][y] == ' '){}
+                        result = seaBattle.fire(x, y);
+                        markFireTest(x, y, result);//визуализация-- заполняет массив результатами стрельбы
 
 
-                    result = seaBattle.fire(x, y);
-                    markFireTest(x, y, result);//визуализация-- заполняет массив результатами стрельбы
 
-                    if (result == FireResult.HIT) {//на 4 палубу если н попал но не убил
+
+                   /**/ if (result == FireResult.HIT) {//на 4 палубу если н попал но не убил
+
 
                         if (direction == RIGHT){x = x; y = y + 1;}
                         if (direction == LEFT){x = x; y = y - 1;}
                         if (direction == TOP){x = x - 1; y = y;}
                         if (direction == BOTTOM){x = x + 1; y = y;}
-                        if (edge != edgeZ && field[x][y] == ' ') {//стреляю по четвертой палубе
+
+                        //edge < edgeZ
+
+                        if (direction == RIGHT){ edge = y; edgeZ = 9; }//edge < edgeZ --- y < 10
+                        if (direction == LEFT){ edge = 0; edgeZ = y; }//edge < edgeZ --- 0 < y
+                        if (direction == TOP){ edge = 0; edgeZ = x; }//edge < edgeZ --- 0 < x
+                        if (direction == BOTTOM){ edge = x; edgeZ = 9; }//edge < edgeZ --- x < 10
+
+                        if (edge <= edgeZ && field[x][y] == ' ') {//стреляю по четвертой палубе
 
                             result = seaBattle.fire(x, y);
                             markFireTest(x, y, result);//визуализация-- заполняет массив результатами стрельбы
+//                        if (x>0 || y>0 || x<9 || y<9){
+//                            if (field[x][y] == ' '){
+//                                result = seaBattle.fire(x, y);
+//                                markFireTest(x, y, result);//визуализация-- заполняет массив результатами стрельбы
+//                            }
 
-                            if (result == FireResult.DESTROYED) {//если ПОПАЛ И УБИТ
-                                //обработать обводку убитого
-                            }
                         }//палуба 4
-                    }//на 4 палубу если н попал но не убил
-                    if (result == FireResult.DESTROYED) {//если ПОПАЛ И УБИТ
-                        //обработать обводку убитого
-                    }
+                    }//на 4 палубу если н попал но не убил  */
+
                 }//стреляю по третьей палубе
             }//на 3 палубу если н попал но не убил
 
-            if (result == FireResult.DESTROYED) {//если ПОПАЛ И УБИТ
-                //обработать обводку убитого
-
-            }
 
             if (result == FireResult.MISS) {//если промахнулся и не убит
 
                 //выходим и начинам левый проход
                 //команда на левый старт
                 //System.out.println(direction + " x - " + x + " y - " + y + " xX - " + xX + " yY - " + yY);
-                if (direction == RIGHT ){direction = LEFT; hits(xX, yY, result, direction);}
+                if (direction == RIGHT){direction = LEFT; hits(xX, yY, result, direction);}
                 if (direction == LEFT){direction = TOP; hits(xX, yY, result, direction);}
                 if (direction == TOP){direction = BOTTOM; hits(xX, yY, result, direction);}
 
@@ -227,8 +254,15 @@ public class SeaBattleAlg {
 
         }
 
-
+        if (result == FireResult.DESTROYED ) {//если ПОПАЛ И УБИТ
+            //обработать обводку убитого
+            markDestroyed();//точки которые нет смысла стрелять
+            nz++;
+            System.out.println("DESTROYED- " + nz + " x- " + x + " y- " + y);
+        }
 }
+
+
 
     //алгоритм вывода
     public void battleAlgorithm(SeaBattle seaBattle) {
@@ -262,18 +296,18 @@ public class SeaBattleAlg {
 
 
                     FireResult fireResult = seaBattle.fire(x, y);//выстрел
-
+                    //System.out.println("DESTROYED - " + FireResult.DESTROYED);
+                    markFire(x, y, fireResult);//визуализация-- заполняет мое поле результатами стрельбы
                     if (fireResult != FireResult.MISS) {//если не промахнулись
 
                         noMiss(x, y, fireResult);// обрабатываем обводку, поиск палубы еще
                                                     // если ранен ++ считаем выстрелы попаданий
-                        //markFire(x, y, fireResult);//визуализация-- заполняет мое поле результатами стрельбы
-                        //field[x][y] = 'O';
-                    }
 
-                    markFire(x, y, fireResult);//визуализация-- заполняет мое поле результатами стрельбы
-                    markDestroyed();
-                    System.out.println("tutttt");
+                    }
+                    //markDestroyed();//точки которые нет смысла стрелять
+
+
+
                  }
 
                 x = x + 4;//для перебора
@@ -302,6 +336,11 @@ public class SeaBattleAlg {
         System.out.println("hits- попал сразу - " + hits1);
         System.out.println("hits2- попал при дальнейшем поиске - " + hits2);
 
+        if(hits > 20){
+          nz++;
+        }
+
+
 
 
     }
@@ -311,16 +350,29 @@ public class SeaBattleAlg {
 
     // функция для отладки
     public static void main(String[] args) {
-
+/*
         System.out.println("Sea battle");
         SeaBattle seaBattle = new SeaBattle(true);
         new SeaBattleAlg().battleAlgorithm(seaBattle);
 
         System.out.println(seaBattle.getResult());
+        System.out.println(" сколько раз пришло убит " + nz);
+*/
+        int nzz = 0;
+        double res = 0;
+        for (int i=0;  i<1000; i++){
+            SeaBattle seaBattle = new SeaBattle();
+            new SeaBattleAlg().battleAlgorithm(seaBattle);
+            res += seaBattle.getResult();
+            if (seaBattle.getResult() == 0){
+                nzz++;
+            }
+
+        }
 
 
-
-
+        System.out.println(res/1000);
+        System.out.println("меньше 20 - " + nzz);
 
     }
 
