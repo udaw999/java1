@@ -1,6 +1,6 @@
 package ru.progwards.java1.lessons.queues;
 
-import javax.validation.constraints.NotNull;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class Order implements Comparable<Order> {
         }
     }
 
-    @Override   public int compareTo(@NotNull Order o) {
+    @Override   public int compareTo( Order o) {
         return Integer.compare(priority, o.priority);
     }
 
