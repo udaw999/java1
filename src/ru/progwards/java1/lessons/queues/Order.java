@@ -21,11 +21,11 @@ public class Order implements Comparable<Order> {
 
 
         if (sum < 10000){
-            this.priority = 1;
+            this.priority = 3;
         } else if (sum < 20000 && sum > 10000){
             this.priority = 2;
         } else {
-            this.priority = 3;
+            this.priority = 1;
         }
     }
 
