@@ -5,10 +5,12 @@ import java.util.*;
 public class OrderQueue {
 
     public static PriorityQueue<Order> orderQueue = new PriorityQueue<>();
+    public  static  LinkedHashSet<Integer> linkedHashSet = new LinkedHashSet<>();
 
     public static void add(Order order){
 
         orderQueue.offer(order);
+        linkedHashSet.add(order.getNum()+1);
 
 
     }
@@ -29,13 +31,16 @@ public class OrderQueue {
         Order order6 = new Order(18000);
         Order order7 = new Order(9000);
 
-        System.out.println(order.getNum());
-        System.out.println(order1.getNum());
+//        System.out.println(order.getNum());
+//        System.out.println(order1.getNum());
         add(order);
         add(order1);
         add(order2);
         add(order3);
-
+        add(order4);
+        add(order5);
+        add(order6);
+        add(order7);
 
         while (!orderQueue.isEmpty()) {
             System.out.println(get());
