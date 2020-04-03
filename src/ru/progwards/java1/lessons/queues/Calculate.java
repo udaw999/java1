@@ -17,7 +17,9 @@ public class Calculate{
         StackCalc.mul();
         return StackCalc.arrayDeque.pop();
     }// возвращающую результат вычисления следующей формулы:
-
+    public static double calculation2(){
+        return 5.5;
+    }
     public static void main(String[] args) {
 
         System.out.println(calculation1());
