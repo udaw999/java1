@@ -37,7 +37,7 @@ public  class StackCalc {
     }
     //
     //    // поделить на верхнее значение на стеке, следующее по глубине, результат положить на стек. В итоге в стеке должно быть на один элемент меньше
-    public void div(){
+    public static void div(){
         double dobEnd = arrayDeque.pollLast();
         arrayDeque.offerLast( arrayDeque.pollLast() / dobEnd);
     }
