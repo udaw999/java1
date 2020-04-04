@@ -23,7 +23,10 @@ public class IntRegister extends Register {
         }
         return valueStr;
     }
-
+/*Если старший (знаковый) разряд числа, записанного в прямом коде, равен 0, то число положительное
+ и никаких преобразований не делается;
+Если старший (знаковый) разряд числа, записанного в прямом коде, равен 1, то число отрицательное,
+все разряды числа, кроме знакового, инвертируются, а к результату прибавляется 1.*/
     public String toDecString(){
         int valueDes = 0;
         if(value[0] == 0){
@@ -53,7 +56,11 @@ public class IntRegister extends Register {
         System.out.println(intRegister.toDecString());//значением параметра = -451502843 ожидался: -451502843
 
         for (byte values : intRegister.value) {           System.out.print(", " + values);       }
+
+
     }
+
+
 }
 /*
 00011010111010010110001011111011  451502843
