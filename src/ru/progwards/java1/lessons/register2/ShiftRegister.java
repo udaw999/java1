@@ -16,7 +16,8 @@ public class ShiftRegister {
     public static void right(Register value){
         for (int i = 0; i < 31; i++) {
 
-            ((IntRegister) value).value[((IntRegister) value).value.length-i-1]=((IntRegister) value).value[((IntRegister) value).value.length-i-2];
+            ((IntRegister) value).value[((IntRegister) value).value.length-i-1]=
+                    ((IntRegister) value).value[((IntRegister) value).value.length-i-2];
 
         }
         ((IntRegister) value).value[0] = 0;
