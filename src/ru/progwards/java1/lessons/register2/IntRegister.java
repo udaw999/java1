@@ -1,6 +1,6 @@
 package ru.progwards.java1.lessons.register2;
 
-public class IntRegister {
+public class IntRegister extends Register {
     byte[] value = new byte [32];
 
     public IntRegister(){
