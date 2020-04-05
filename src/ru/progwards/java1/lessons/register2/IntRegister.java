@@ -37,7 +37,7 @@ public class IntRegister extends Register {
             }
         } else {
             for (int i = 0; i < 32; i++) {
-                // System.out.println(valueDes + " = " +  this.value[i] + " умножить на 2 в степени " + (this.value.length - i - 1 ));
+
                 valueDes += (this.value[i] ^ 1) * Math.pow(2, this.value.length - i - 1);
             }
             valueDes += 1;
