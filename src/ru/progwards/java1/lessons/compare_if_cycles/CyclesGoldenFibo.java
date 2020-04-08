@@ -57,6 +57,9 @@ public class CyclesGoldenFibo {
     }
 
     public static void main(String[] args){
+
+
+        System.out.println("fiboNumber " + fiboNumber(6));
         System.out.println(containsDigit(3000,1));
 
 
