@@ -41,7 +41,7 @@ public class SalesInfo {
     }
 
     public static Map<String, Double> getGoods(){
-        Map<String, Double> map = new HashMap<>();
+        Map<String, Double> map = new TreeMap<>();
         for (int i = 0; i<lines.size(); i++){
             String[] arrayStr = lines.get(i).trim().split(",");
                 if (map.containsKey(arrayStr[1].trim())){
