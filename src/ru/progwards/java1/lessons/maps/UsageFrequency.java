@@ -21,7 +21,7 @@ public class UsageFrequency {
         }
         reader.close();//закрываем
     }
-    public static Map<Character, Integer> getLetters(){
+   /* public static Map<Character, Integer> getLetters(){
         Map<Character, Integer> map = new HashMap<>();
 
         for (int i = 0; i<lines.size(); i++){
@@ -49,20 +49,21 @@ public class UsageFrequency {
 
             for (String c : arrayStr){
 
+                    if (map.containsKey(c)){
+                        map.put(c,map.get(c)+1);
+                    } else {
+                        map.put(c,1);
+                    }
 
-                if (map.containsKey(c)){
-                    map.put(c,map.get(c)+1);
-                } else {
-                    map.put(c,1);
-                }
+
             }
         }
         return map;
     }
 
     public static void main(String[] args) throws IOException {
-        UsageFrequency.processFile("wiki.test.tokens");
+        UsageFrequency.processFile("wiki.train.tokens");
         System.out.println(getLetters());
         System.out.println(getWords());
-    }
+    }*/
 }
