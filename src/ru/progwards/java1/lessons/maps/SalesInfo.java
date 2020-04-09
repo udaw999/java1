@@ -17,7 +17,7 @@ public class SalesInfo {
                 while ((line =  reader.readLine()) != null) {
                     String[] arrayStr = line.trim().split(",");
 
-                    if (arrayStr.length == 4 && isNumber(arrayStr[3].trim()) && isNumber(arrayStr[3].trim())){
+                    if (arrayStr.length == 4 && isNumber(arrayStr[3].trim()) && isNumber(arrayStr[2].trim())){
                         lines.add(line.trim());//читаем построчно
                         coynter++;
                     }

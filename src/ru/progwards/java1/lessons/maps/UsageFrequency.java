@@ -53,17 +53,17 @@ public class UsageFrequency {
     }
 
     public static Map<String, Integer> getWords(){
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map2 = new HashMap<>();
 
         for (int i = 0; i<lines.size(); i++){
             String[] arrayStr = lines.get(i).trim().split("[^0-9a-zA-Z_]");
 
             for (String c : arrayStr){
                     if(c.trim().length() != 0){
-                        if (map.containsKey(c)){
-                            map.put(c,map.get(c)+1);
+                        if (map2.containsKey(c)){
+                            map2.put(c,map2.get(c)+1);
                         } else {
-                            map.put(c,1);
+                            map2.put(c,1);
                         }
                     }
 
@@ -71,11 +71,12 @@ public class UsageFrequency {
 
             }
         }
-        return map;
+        return map2;
     }
 
     public static void main(String[] args) {
-        UsageFrequency.processFile("wiki.train.tokens");
+        UsageFrequency.processFile("wiki.test.tokens");
+        //UsageFrequency.processFile("file1.txt");
         System.out.println(getLetters());
         System.out.println(getWords());
 
