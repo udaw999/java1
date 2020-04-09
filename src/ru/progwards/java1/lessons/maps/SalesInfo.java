@@ -34,6 +34,14 @@ public class SalesInfo {
         return true;
     }
 
+    public Map<String, Double> getGoods(){
+        return null;
+    }
+
+    public Map<String, AbstractMap.SimpleEntry<Double, Integer>> getCustomers(){
+        return null;
+    }
+
     public static void main(String[] args) throws IOException {
        // System.out.println(loadOrders("file.csv"));
     }
