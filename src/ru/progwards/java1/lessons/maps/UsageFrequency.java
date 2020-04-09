@@ -59,12 +59,14 @@ public class UsageFrequency {
             String[] arrayStr = lines.get(i).trim().split("[^0-9a-zA-Z_]");
 
             for (String c : arrayStr){
-
-                    if (map.containsKey(c)){
-                        map.put(c,map.get(c)+1);
-                    } else {
-                        map.put(c,1);
+                    if(c.trim().length() != 0){
+                        if (map.containsKey(c)){
+                            map.put(c,map.get(c)+1);
+                        } else {
+                            map.put(c,1);
+                        }
                     }
+
 
 
             }
@@ -76,5 +78,6 @@ public class UsageFrequency {
         UsageFrequency.processFile("wiki.train.tokens");
         System.out.println(getLetters());
         System.out.println(getWords());
+
     }
 }
