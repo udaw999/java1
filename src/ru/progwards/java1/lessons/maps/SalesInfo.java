@@ -40,8 +40,20 @@ public class SalesInfo {
         return true;
     }
 
-    public Map<String, Double> getGoods(){
-        return null;
+    public static Map<String, Double> getGoods(){
+        Map<String, Double> map = new HashMap<>();
+        for (int i = 0; i<lines.size(); i++){
+            String[] arrayStr = lines.get(i).trim().split(",");
+                if (map.containsKey(arrayStr[1].trim())){
+                    map.put(arrayStr[1].trim(),map.get(arrayStr[1].trim()) + Double.valueOf(arrayStr[3].trim()));
+                }  else {
+                    map.put(arrayStr[1].trim(),Double.valueOf(arrayStr[3].trim()));
+                }
+
+
+            }
+
+        return map;
     }
 
     public Map<String, AbstractMap.SimpleEntry<Double, Integer>> getCustomers(){
@@ -50,5 +62,6 @@ public class SalesInfo {
 
     public static void main(String[] args) {
         System.out.println(loadOrders("file.csv"));
+        System.out.println(getGoods());
     }
 }
