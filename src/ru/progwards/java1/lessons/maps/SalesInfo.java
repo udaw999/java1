@@ -56,12 +56,43 @@ public class SalesInfo {
         return map;
     }
 
-    public Map<String, AbstractMap.SimpleEntry<Double, Integer>> getCustomers(){
-        return null;
+    public static Map<String, AbstractMap.SimpleEntry<Double, Integer>> getCustomers(){
+        Map<String, AbstractMap.SimpleEntry<Double, Integer>> map = new TreeMap<>();
+        for (int i = 0; i<lines.size(); i++){
+            String[] arrayStr = lines.get(i).trim().split(",");
+            double gKey = 0;
+            int gValue = 0;
+            if (map.containsKey(arrayStr[0].trim())){
+
+                gKey = map.get(arrayStr[0].trim()).getKey() + Double.valueOf(arrayStr[3].trim());
+                gValue = map.get(arrayStr[0].trim()).getValue() + Integer.parseInt(arrayStr[2].trim());
+
+                AbstractMap.SimpleEntry<Double, Integer> abstracSimpl
+                        = new AbstractMap.SimpleEntry<Double, Integer>(gKey,gValue);
+
+                map.put(arrayStr[0].trim(), abstracSimpl);
+
+            }  else {
+                gKey = Double.valueOf(arrayStr[3].trim());
+                gValue = Integer.parseInt(arrayStr[2].trim());
+
+                AbstractMap.SimpleEntry<Double, Integer> abstracSimpl
+                        = new AbstractMap.SimpleEntry<Double, Integer>(gKey,gValue);
+
+                map.put(arrayStr[0].trim(), abstracSimpl);
+            }
+
+
+
+        }
+
+        return map;
     }
 
     public static void main(String[] args) {
         System.out.println(loadOrders("file.csv"));
         System.out.println(getGoods());
+        System.out.println();
+        System.out.println(getCustomers());
     }
 }
