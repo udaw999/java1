@@ -9,22 +9,28 @@ public class SalesInfo {
 
     public static List<String> lines = new ArrayList<>();
     public static String line;
-    public static int loadOrders(String fileName) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(fileName));//открываем файл
+    public static int loadOrders(String fileName) throws Exception {
         int coynter = 0;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));//открываем файл
+            try {
+                while ((line =  reader.readLine()) != null) {
+                    String[] arrayStr = line.trim().split(",");
 
+                    if (arrayStr.length == 4 && isNumber(arrayStr[3].trim()) && isNumber(arrayStr[3].trim())){
+                        lines.add(line.trim());//читаем построчно
+                        coynter++;
+                    }
 
-        while ((line =  reader.readLine()) != null) {
-            String[] arrayStr = line.trim().split(",");
-
-            if (arrayStr.length == 4 && isNumber(arrayStr[3].trim()) && isNumber(arrayStr[3].trim())){
-                    lines.add(line.trim());//читаем построчно
-                    coynter++;
+                }
+            } finally {
+                reader.close();//закрываем
             }
-
+        } catch (Exception e){
+            throw new Exception();
         }
-        reader.close();//закрываем
-        //System.out.println(lines);
+
+        System.out.println(lines);
         return coynter;
     }
     private static boolean isNumber(String str) {//проверяет является ли строка числом
@@ -42,7 +48,7 @@ public class SalesInfo {
         return null;
     }
 
-    public static void main(String[] args) throws IOException {
-       // System.out.println(loadOrders("file.csv"));
+    public static void main(String[] args) throws Exception {
+        System.out.println(loadOrders("file.csv"));
     }
 }

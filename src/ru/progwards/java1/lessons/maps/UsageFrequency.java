@@ -12,14 +12,26 @@ import java.util.Map;
 public class UsageFrequency {
     public static List<String> lines = new ArrayList<>();
     public static String line;
-    public static void processFile(String fileName) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(fileName));//открываем файл
+    public static void processFile(String fileName) throws Exception {
 
-        while ((line =  reader.readLine()) != null) {
-            lines.add(line);//читаем построчно
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));//открываем файл
+            try {
+                while ((line =  reader.readLine()) != null) {
+                    lines.add(line);//читаем построчно
 
+                }
+            } finally {
+                reader.close();//закрываем
+            }
+
+        } catch (Exception e){
+            throw new Exception();
         }
-        reader.close();//закрываем
+
+
+
+
     }
     public static Map<Character, Integer> getLetters(){
         Map<Character, Integer> map = new HashMap<>();
@@ -61,7 +73,7 @@ public class UsageFrequency {
         return map;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         UsageFrequency.processFile("wiki.train.tokens");
         System.out.println(getLetters());
         System.out.println(getWords());
