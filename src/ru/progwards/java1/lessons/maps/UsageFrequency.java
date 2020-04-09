@@ -21,7 +21,7 @@ public class UsageFrequency {
         }
         reader.close();//закрываем
     }
-   /* public static Map<Character, Integer> getLetters(){
+    public static Map<Character, Integer> getLetters(){
         Map<Character, Integer> map = new HashMap<>();
 
         for (int i = 0; i<lines.size(); i++){
@@ -65,5 +65,5 @@ public class UsageFrequency {
         UsageFrequency.processFile("wiki.train.tokens");
         System.out.println(getLetters());
         System.out.println(getWords());
-    }*/
+    }
 }
