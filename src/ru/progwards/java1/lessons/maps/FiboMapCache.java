@@ -16,6 +16,7 @@ public class FiboMapCache {
         if (cacheOn){
             if (fiboCache.containsKey(n)){
                 return fiboCache.get(n);
+
             } else {
                 int i = 1;
 
@@ -56,22 +57,22 @@ public class FiboMapCache {
         fiboCache.clear();
     }
 
-//    public static void test(){
-//
-//        long start = System.currentTimeMillis();
-//        for (int i=1; i<=1000; i++){
-//            new FiboMapCache(true).fiboNumber(i);
-//        }
-//        long rezult1 = System.currentTimeMillis() - start;
-//
-//        long start2 = System.currentTimeMillis();
-//        for (int i=1; i<=1000; i++){
-//            new FiboMapCache(false).fiboNumber(i);
-//        }
-//        long rezult2 = System.currentTimeMillis() - start2;
-//        System.out.println("fiboNumber cacheOn=true время выполнения " + rezult1);
-//        System.out.println("fiboNumber cacheOn=false время выполнения " + rezult2);
-//    }
+    public static void test(){
+
+        long start = System.currentTimeMillis();
+        for (int i=1; i<=1000; i++){
+            new FiboMapCache(true).fiboNumber(i);
+        }
+        long rezult1 = System.currentTimeMillis() - start;
+
+        long start2 = System.currentTimeMillis();
+        for (int i=1; i<=1000; i++){
+            new FiboMapCache(false).fiboNumber(i);
+        }
+        long rezult2 = System.currentTimeMillis() - start2;
+        System.out.println("fiboNumber cacheOn=true время выполнения " + rezult1);
+        System.out.println("fiboNumber cacheOn=false время выполнения " + rezult2);
+    }
 
     public static void main(String[] args) {
         FiboMapCache fiboMapCache = new FiboMapCache(true);
@@ -82,6 +83,6 @@ public class FiboMapCache {
         //fiboMapCache.clearCahe();
         System.out.println(fiboMapCache.fiboCache);
 
-        //test();
+        test();
     }
 }
