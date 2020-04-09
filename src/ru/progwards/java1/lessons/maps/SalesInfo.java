@@ -9,7 +9,7 @@ public class SalesInfo {
 
     public static List<String> lines = new ArrayList<>();
     public static String line;
-    public static int loadOrders(String fileName) throws Exception {
+    public static int loadOrders(String fileName) {
         int coynter = 0;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));//открываем файл
@@ -27,7 +27,7 @@ public class SalesInfo {
                 reader.close();//закрываем
             }
         } catch (Exception e){
-            throw new Exception();
+
         }
 
         System.out.println(lines);
@@ -48,7 +48,7 @@ public class SalesInfo {
         return null;
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         System.out.println(loadOrders("file.csv"));
     }
 }

@@ -12,7 +12,7 @@ import java.util.Map;
 public class UsageFrequency {
     public static List<String> lines = new ArrayList<>();
     public static String line;
-    public static void processFile(String fileName) throws Exception {
+    public static void processFile(String fileName){
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));//открываем файл
@@ -26,7 +26,6 @@ public class UsageFrequency {
             }
 
         } catch (Exception e){
-            throw new Exception();
         }
 
 
@@ -73,7 +72,7 @@ public class UsageFrequency {
         return map;
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         UsageFrequency.processFile("wiki.train.tokens");
         System.out.println(getLetters());
         System.out.println(getWords());
