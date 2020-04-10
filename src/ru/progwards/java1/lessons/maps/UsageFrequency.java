@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 public class UsageFrequency {
-    public static List<String> lines = new ArrayList<>();
-    public static String line;
-    public static void processFile(String fileName){
+    public  List<String> lines = new ArrayList<>();
+    public  String line;
+    public void processFile(String fileName){
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));//открываем файл
@@ -32,7 +32,7 @@ public class UsageFrequency {
 
 
     }
-    public static Map<Character, Integer> getLetters(){
+    public  Map<Character, Integer> getLetters(){
         Map<Character, Integer> map = new HashMap<>();
 
         for (int i = 0; i<lines.size(); i++){
@@ -52,7 +52,7 @@ public class UsageFrequency {
         return map;
     }
 
-    public static Map<String, Integer> getWords(){
+    public  Map<String, Integer> getWords(){
         Map<String, Integer> map2 = new HashMap<>();
 
         for (int i = 0; i<lines.size(); i++){
@@ -75,10 +75,10 @@ public class UsageFrequency {
     }
 
     public static void main(String[] args) {
-        UsageFrequency.processFile("wiki.test.tokens");
-        //UsageFrequency.processFile("file1.txt");
-        System.out.println(getLetters());
-        System.out.println(getWords());
+//        UsageFrequency.processFile("wiki.test.tokens");
+//        //UsageFrequency.processFile("file1.txt");
+//        System.out.println(getLetters());
+//        System.out.println(getWords());
 
     }
 }
