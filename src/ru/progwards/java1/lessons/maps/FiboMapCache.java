@@ -57,7 +57,7 @@ public class FiboMapCache {
         fiboCache.clear();
     }
 
-    public static void test(){
+    public  void test(){
 
         long start = System.currentTimeMillis();
         for (int i=1; i<=1000; i++){
@@ -83,6 +83,6 @@ public class FiboMapCache {
         //fiboMapCache.clearCahe();
         System.out.println(fiboMapCache.fiboCache);
 
-        test();
+        //test();
     }
 }

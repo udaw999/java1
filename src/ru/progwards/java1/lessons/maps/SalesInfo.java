@@ -7,9 +7,9 @@ import java.util.*;
 
 public class SalesInfo {
 
-    public static List<String> lines = new ArrayList<>();
-    public static String line;
-    public static int loadOrders(String fileName) {
+    public  List<String> lines = new ArrayList<>();
+    public  String line;
+    public  int loadOrders(String fileName) {
         int coynter = 0;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));//открываем файл
@@ -33,14 +33,14 @@ public class SalesInfo {
         System.out.println(lines);
         return coynter;
     }
-    private static boolean isNumber(String str) {//проверяет является ли строка числом
+    private  boolean isNumber(String str) {//проверяет является ли строка числом
         for (char c: str.toCharArray()) {
             if (!Character.isDigit(c)) return false;
         }
         return true;
     }
 
-    public static Map<String, Double> getGoods(){
+    public  Map<String, Double> getGoods(){
         Map<String, Double> map = new TreeMap<>();
         for (int i = 0; i<lines.size(); i++){
             String[] arrayStr = lines.get(i).trim().split(",");
@@ -56,7 +56,7 @@ public class SalesInfo {
         return map;
     }
 
-    public static Map<String, AbstractMap.SimpleEntry<Double, Integer>> getCustomers(){
+    public  Map<String, AbstractMap.SimpleEntry<Double, Integer>> getCustomers(){
         Map<String, AbstractMap.SimpleEntry<Double, Integer>> map = new TreeMap<>();
         for (int i = 0; i<lines.size(); i++){
             String[] arrayStr = lines.get(i).trim().split(",");
@@ -90,9 +90,9 @@ public class SalesInfo {
     }
 
     public static void main(String[] args) {
-        System.out.println(loadOrders("file.csv"));
-        System.out.println(getGoods());
-        System.out.println();
-        System.out.println(getCustomers());
+//        System.out.println(loadOrders("file.csv"));
+//        System.out.println(getGoods());
+//        System.out.println();
+//        System.out.println(getCustomers());
     }
 }
