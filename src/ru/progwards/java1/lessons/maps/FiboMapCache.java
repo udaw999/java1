@@ -20,36 +20,36 @@ public class FiboMapCache {
             } else {
                 int i = 1;
 
-                int fib1 = 0;
-                int fib2 = 1;
-                int fib = 1;
+                BigDecimal fib1 = BigDecimal.valueOf(0);
+                BigDecimal fib2 = BigDecimal.valueOf(1);
+                BigDecimal fib = BigDecimal.valueOf(1);
 
                 while (i < n) {
 
-                    fib = fib1 + fib2;
+                    fib = fib1.add(fib2);
                     fib1 = fib2;
                     fib2 = fib;
                     i++;
                 }
-                fiboCache.put(n,BigDecimal.valueOf(fib));
-                return BigDecimal.valueOf(fib);
+                fiboCache.put(n,fib);
+                return fib;
             }
         } else {
             int i = 1;
 
-            int fib1 = 0;
-            int fib2 = 1;
-            int fib = 1;
+            BigDecimal fib1 = BigDecimal.valueOf(0);
+            BigDecimal fib2 = BigDecimal.valueOf(1);
+            BigDecimal fib = BigDecimal.valueOf(1);
 
             while (i < n) {
 
-                fib = fib1 + fib2;
+                fib = fib1.add(fib2);
                 fib1 = fib2;
                 fib2 = fib;
                 i++;
             }
 
-            return BigDecimal.valueOf(fib);
+            return fib;
         }
     }
 
