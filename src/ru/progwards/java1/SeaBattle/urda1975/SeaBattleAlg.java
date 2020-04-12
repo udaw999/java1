@@ -53,14 +53,14 @@ public class SeaBattleAlg {
     }
     //метка убил или мимо
     void markFire(int x, int y, FireResult result){
-        if (result != FireResult.MISS){
-            field[x][y] = 'X';
-            hitsPlusPlus();//счетчик попаданий
-
-            hits1++;
-        } else {
-            field[x][y] = '*';
-        }
+//        if (result != FireResult.MISS){
+//            field[x][y] = 'X';
+//            hitsPlusPlus();//счетчик попаданий
+//
+//            hits1++;
+//        } else {
+//            field[x][y] = '*';
+//        }
     }
     //алгоритм вывода
     public void battleAlgorithm(SeaBattle seaBattle) {
