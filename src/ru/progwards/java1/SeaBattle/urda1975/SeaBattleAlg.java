@@ -360,6 +360,8 @@ public class SeaBattleAlg {
 */
 
     //}
+    //==================
+
     public  void prostrel( int ofset, SeaBattle seaBattle, int dop){
         for (int y = 0; y < seaBattle.getSizeX(); y++) {
             for (int x = ofset - y + dop; x < seaBattle.getSizeY(); x += 4) {
@@ -392,7 +394,7 @@ public class SeaBattleAlg {
         }
     }
 
-
+/*
     public void battleAlgorithm(SeaBattle seaBattle) {
         // пример алгоритма:
         // стрельба по всем квадратам поля полным перебором
@@ -406,7 +408,17 @@ public class SeaBattleAlg {
 
     }
 
+*/
 
+    public void battleAlgorithm(SeaBattle seaBattle) {
+        // пример алгоритма:
+        // стрельба по всем квадратам поля полным перебором
+        for (int y = 0; y < seaBattle.getSizeX(); y++) {
+            for (int x = 0; x < seaBattle.getSizeY(); x++) {
+                SeaBattle.FireResult fireResult = seaBattle.fire(x, y);
+            }
+        }
+    }
     // функция для отладки
     public static void main(String[] args) {
 
