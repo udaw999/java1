@@ -41,7 +41,7 @@ public class SeaBattleAlg {
     int hitses = 0;//счетчик попаданий
     int hits1 = 0;//счетчик попаданий(test delet
     int hits2 = 0;//счетчик попаданий(test delet
-
+    int coynt=0;
 
     public static int nz = 0;
 
@@ -245,7 +245,7 @@ public class SeaBattleAlg {
             //обработать обводку убитого
             markDestroyed();//точки которые нет смысла стрелять
             nz++;//считаю для теста сколько раз пришло УБИЛ
-
+            coynt++;
         }
     }
     //алгоритм вывода
@@ -281,8 +281,14 @@ public class SeaBattleAlg {
                 //System.out.println("hits - " + hits);
                 if (field[x][y] == ' ') {//усли ячейка в моем поле пуста то стреляем
 
-
+                    System.out.println("coynt - "+coynt);
                     FireResult fireResult = seaBattle.fire(x, y);//выстрел
+                    if (fireResult == FireResult.DESTROYED ){
+                        coynt++;
+
+                    }
+                    if (coynt == 10)
+                        break;
                     //System.out.println("DESTROYED - " + FireResult.DESTROYED);
                     markFire(x, y, fireResult);//визуализация-- заполняет мое поле результатами стрельбы
                     if (fireResult == FireResult.DESTROYED ) {//если ПОПАЛ И УБИТ
