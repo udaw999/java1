@@ -56,9 +56,9 @@ public class SeaBattleAlg {
     void markFire(int x, int y, FireResult result){
         if (result != FireResult.MISS){
             field[x][y] = 'X';
-            hitsPlusPlus();//счетчик попаданий
-
-           // hits1++;
+           // hitsPlusPlus();//счетчик попаданий
+            hits++;
+            hits1++;
         } else {
             field[x][y] = '*';
         }
