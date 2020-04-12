@@ -53,14 +53,14 @@ public class SeaBattleAlg {
     }
     //метка убил или мимо
     void markFire(int x, int y, FireResult result){
-//        if (result != FireResult.MISS){
-//            field[x][y] = 'X';
-//            hitsPlusPlus();//счетчик попаданий
-//
-//            hits1++;
-//        } else {
-//            field[x][y] = '*';
-//        }
+        if (result != FireResult.MISS){
+            field[x][y] = 'X';
+            //hitsPlusPlus();//счетчик попаданий
+
+           // hits1++;
+        } else {
+            field[x][y] = '*';
+        }
     }
     //алгоритм вывода
     public void battleAlgorithm(SeaBattle seaBattle) {
@@ -68,11 +68,7 @@ public class SeaBattleAlg {
         // стрельба по всем квадратам поля полным перебором
         init(seaBattle);//заполняемый массив результатами прострела
 
-//        field[3][3] = 'X';
-//        field[3][4] = 'X';
-//        field[3][5] = 'X';
-//        field[3][6] = 'X';
-//        field[3][7] = 'X';
+
         int n = 0;//для перебора
         int z = 1;//для перебора
         int y = 0;
