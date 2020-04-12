@@ -344,15 +344,15 @@ public class SeaBattleAlg {
 
     // функция для отладки
     public static void main(String[] args) {
-/*
+
         System.out.println("Sea battle");
         SeaBattle seaBattle = new SeaBattle(true);
         new SeaBattleAlg().battleAlgorithm(seaBattle);
 
         System.out.println(seaBattle.getResult());
         System.out.println(" сколько раз пришло убит " + nz);
-*/
-        int nzz = 0;
+
+ /*       int nzz = 0;
         double res = 0;
         for (int i=0;  i<1000; i++){
             SeaBattle seaBattle = new SeaBattle();
@@ -363,7 +363,7 @@ public class SeaBattleAlg {
             }
             System.out.println("результат - " + seaBattle.getResult());
         }
-
+*/
 
         System.out.println(res/1000);
         System.out.println("меньше 20 - " + nzz);
