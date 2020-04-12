@@ -250,116 +250,8 @@ public class SeaBattleAlg {
         }
     }
 
-    /*
-    //алгоритм вывода
-    public void battleAlgorithm(SeaBattle seaBattle) {
-        // пример алгоритма:
-        // стрельба по всем квадратам поля полным перебором
-        init(seaBattle);//заполняемый массив результатами прострела
-
-//        field[3][3] = 'X';
-//        field[3][4] = 'X';
-//        field[3][5] = 'X';
-//        field[3][6] = 'X';
-//        field[3][7] = 'X';
-        int n = 0;//для перебора
-        int z = 1;//для перебора
-        int y = 0;
-        int x = 0;
-        while ( y < seaBattle.getSizeY()) {
-            x = 3 - y - n;
-            if( x < 0 && x >= -4){
-                x = x + 4;
-            }
-            if(x < -4 && x >= -8){
-                x = x + 8;
-            }
-            if(x < -8 && x >= -12){
-                x = x + 12;
-            }
-            while (x < seaBattle.getSizeX()) {
-//                if (coynt==10)
-//                    break;
-
-                //System.out.println("hits - " + hits);
-                if (field[x][y] == ' ') {//усли ячейка в моем поле пуста то стреляем
-
-                    System.out.println("coynt - "+coynt);
-                    FireResult fireResult = seaBattle.fire(x, y);//выстрел
-
-                    if (fireResult == FireResult.DESTROYED ){
-                        coynt++;
-
-                    }
-
-                    //System.out.println("DESTROYED - " + FireResult.DESTROYED);
-                    markFire(x, y, fireResult);//визуализация-- заполняет мое поле результатами стрельбы
-
-                    if (fireResult == FireResult.DESTROYED ) {//если ПОПАЛ И УБИТ
-                        //обработать обводку убитого
-                        markDestroyed();//точки которые нет смысла стрелять
-                        //nz++;//считаю для теста сколько раз пришло УБИЛ
-
-                    }
-                    if (fireResult != FireResult.MISS) {//если не промахнулись
-
-                        noMiss(x, y, fireResult);// обрабатываем обводку, поиск палубы еще
-                        // если ранен ++ считаем выстрелы попаданий
-
-                    }
-                    print ();//поле наглядно
-                }
-
-                x = x + 4;//для перебора
-            }
 
 
-            if(y == 9 && z == 1 ) {
-                y = 0;
-                n = 2;
-                z++;
-            } else  if (y == 9 && z == 2 ){
-                y = 0;
-                n = 3;
-                z++;
-            } else  if (y == 9 && z == 3 ){
-                y = 0;
-                n = 1;
-                z++;
-            } else  {
-                y++;
-            }
-
-
-        }
-        */
-/*
-        statistic();
-//        System.out.println("hits- попал сразу - " + hits1);
-//        System.out.println("hits2- попал при дальнейшем поиске - " + hits2);
-        System.out.println("попаданий - " + hitses);
-        System.out.println("X - " + popal);
-        System.out.println("Z - " + nascel);
-        System.out.println("* - " + mimo);
-        System.out.println("- - " + minus);
-        System.out.println("ИТОГО ВЫСТРЕЛОВ - " + (popal + mimo + minus + nascel));
-//        int mimo = 0; //*
-//        int popal = 0; //X
-//        int nascel = 0; //Z
-//        int minus = 0; //-
-//
-
-
-        if(hitses > 20){
-            nz++;
-        }
-
-        if (nascel == popal){
-            sravn++;
-        }
-*/
-
-    //}
     //==================
 
     public  void prostrel( int ofset, SeaBattle seaBattle, int dop){
@@ -398,7 +290,7 @@ public class SeaBattleAlg {
         public void battleAlgorithm(SeaBattle seaBattle) {
             coynt = 0;
             // пример алгоритма:
-            // стрельба по всем квадратам поля полным перебором
+
             init(seaBattle);//заполняемый массив результатами прострела
 
 
