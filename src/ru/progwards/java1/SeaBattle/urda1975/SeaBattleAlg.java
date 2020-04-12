@@ -99,6 +99,8 @@ public class SeaBattleAlg {
                         // если ранен ++ считаем выстрелы попаданий
 
                     }
+                } else {
+                    return;
                 }
 
                 x = x + 4;//для перебора
