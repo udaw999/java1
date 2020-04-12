@@ -42,6 +42,7 @@ public class SeaBattleAlg {
     int hits1 = 0;//счетчик попаданий(test delet
     int hits2 = 0;//счетчик попаданий(test delet
     public int coynt = 0;
+    int dop = 0;
 
     public static int nz = 0;
 
@@ -248,6 +249,8 @@ public class SeaBattleAlg {
             coynt++;
         }
     }
+
+    /*
     //алгоритм вывода
     public void battleAlgorithm(SeaBattle seaBattle) {
         // пример алгоритма:
@@ -329,7 +332,8 @@ public class SeaBattleAlg {
 
 
         }
-
+        */
+/*
         statistic();
 //        System.out.println("hits- попал сразу - " + hits1);
 //        System.out.println("hits2- попал при дальнейшем поиске - " + hits2);
@@ -353,11 +357,54 @@ public class SeaBattleAlg {
         if (nascel == popal){
             sravn++;
         }
+*/
+
+    //}
+    public  void prostrel( int ofset, SeaBattle seaBattle, int dop){
+        for (int y = 0; y < seaBattle.getSizeX(); y++) {
+            for (int x = ofset - y + dop; x < seaBattle.getSizeY(); x += 4) {
+                if (x == 0) {dop += 4; }
+                if (coynt==10)
+                    break;
+                if (field[x][y] == ' ') {//усли ячейка в моем поле пуста то стреляем
+                    SeaBattle.FireResult fireResult = seaBattle.fire(x, y);
+                    markFire(x, y, fireResult);//визуализация-- заполняет мое поле результатами стрельбы
+
+                    if (fireResult == FireResult.DESTROYED ) {//если ПОПАЛ И УБИТ
+                        //обработать обводку убитого
+                        markDestroyed();//точки которые нет смысла стрелять
+                        //nz++;//считаю для теста сколько раз пришло УБИЛ
+
+                            coynt++;
+
+                    }
+                    if (fireResult != FireResult.MISS) {//если не промахнулись
+
+                        noMiss(x, y, fireResult);// обрабатываем обводку, поиск палубы еще
+                        // если ранен ++ считаем выстрелы попаданий
+
+                    }
+                }
 
 
+                print();//поле наглядно
+            }
+        }
     }
 
 
+    public void battleAlgorithm(SeaBattle seaBattle) {
+        // пример алгоритма:
+        // стрельба по всем квадратам поля полным перебором
+        init(seaBattle);//заполняемый массив результатами прострела
+
+
+            prostrel(3,seaBattle, 0);
+            prostrel(1,seaBattle, 0);
+            prostrel(0,seaBattle, 0);
+            prostrel(2,seaBattle, 0);
+
+    }
 
 
     // функция для отладки
