@@ -73,7 +73,7 @@ public class SeaBattleAlg {
         int z = 1;//для перебора
         int y = 0;
         int x = 0;
-        while ( y < seaBattle.getSizeY()  && hits != 20) {
+        while ( y < seaBattle.getSizeY()  ) {
             x = 3 - y - n;
             if( x < 0 && x >= -4){
                 x = x + 4;
@@ -84,7 +84,7 @@ public class SeaBattleAlg {
             if(x < -8 && x >= -12){
                 x = x + 12;
             }
-            while (x < seaBattle.getSizeX() && hits != 20) {
+            while (x < seaBattle.getSizeX() ) {
 
                 if (field[x][y] == ' ') {//усли ячейка в моем поле пуста то стреляем
 
