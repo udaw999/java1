@@ -38,7 +38,7 @@ public class SeaBattleAlg {
 
     char[][] field;//создаем поле для видимости работы алгоритма
     SeaBattle seaBattle;
-    int hits = 0;//счетчик попаданий
+    int hitses = 0;//счетчик попаданий
     int hits1 = 0;//счетчик попаданий(test delet
     int hits2 = 0;//счетчик попаданий(test delet
 
@@ -96,7 +96,7 @@ public class SeaBattleAlg {
     }
     //счетчик успешных выстрелов
     void hitsPlusPlus(){
-        hits++;
+        hitses++;
     }
     //метка убил или мимо
     void markFire(int x, int y, FireResult result){
@@ -276,7 +276,7 @@ public class SeaBattleAlg {
             }
             while (x < seaBattle.getSizeX()) {
 
-                if (hits == 20)
+                if (hitses == 20)
                     break;
                 //System.out.println("hits - " + hits);
                 if (field[x][y] == ' ') {//усли ячейка в моем поле пуста то стреляем
@@ -326,7 +326,7 @@ public class SeaBattleAlg {
         statistic();
 //        System.out.println("hits- попал сразу - " + hits1);
 //        System.out.println("hits2- попал при дальнейшем поиске - " + hits2);
-        System.out.println("попаданий - " + hits);
+        System.out.println("попаданий - " + hitses);
         System.out.println("X - " + popal);
         System.out.println("Z - " + nascel);
         System.out.println("* - " + mimo);
@@ -339,7 +339,7 @@ public class SeaBattleAlg {
 //
 
 
-        if(hits > 20){
+        if(hitses > 20){
             nz++;
         }
 
