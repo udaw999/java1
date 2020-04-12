@@ -49,6 +49,7 @@ public class SeaBattleAlg {
     }
     //счетчик успешных выстрелов
     void hitsPlusPlus(){
+
         hits++;
     }
     //метка убил или мимо
@@ -85,9 +86,8 @@ public class SeaBattleAlg {
                 x = x + 12;
             }
             while (x < seaBattle.getSizeX()) {
-                if (hits >=20)
-                    return;
-                if (field[x][y] == ' ') {//усли ячейка в моем поле пуста то стреляем
+
+                if (hits < 20 && field[x][y] == ' ') {//усли ячейка в моем поле пуста то стреляем
 
 
                     FireResult fireResult = seaBattle.fire(x, y);//выстрел
