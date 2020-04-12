@@ -87,7 +87,7 @@ public class SeaBattleAlg {
             }
             while (x < seaBattle.getSizeX()) {
 
-                if (hits < 20 && field[x][y] == ' ') {//усли ячейка в моем поле пуста то стреляем
+                if (field[x][y] == ' ') {//усли ячейка в моем поле пуста то стреляем
 
 
                     FireResult fireResult = seaBattle.fire(x, y);//выстрел
@@ -99,8 +99,6 @@ public class SeaBattleAlg {
                         // если ранен ++ считаем выстрелы попаданий
 
                     }
-                } else {
-                    return;
                 }
 
                 x = x + 4;//для перебора
