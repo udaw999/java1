@@ -3,6 +3,8 @@ package ru.progwards.java1.SeaBattle.urda1975;
 import ru.progwards.java1.SeaBattle.SeaBattle;
 import ru.progwards.java1.SeaBattle.SeaBattle.FireResult;
 
+import java.util.Arrays;
+
 public class SeaBattleAlg {
     // Тестовое поле создаётся конструктором
     //     SeaBattle seaBattle = new SeaBattle(true);
@@ -29,21 +31,42 @@ public class SeaBattleAlg {
     //         7|X|.|X|.|.|.|.|Х|.|X|
     //         8|X|.|.|.|.|.|.|X|.|.|
     //         9|X|.|.|.|X|.|.|.|.|.|
+    char[][] field;//создаем поле для видимости работы алгоритма
+    SeaBattle seaBattle;
+    int hits = 0;//счетчик попаданий
+    int hits1 = 0;//счетчик попаданий(test delet
+    int hits2 = 0;//счетчик попаданий(test delet
 
-  /*  public void battleAlgorithm(SeaBattle seaBattle) {
-        // пример алгоритма:
-        // стрельба по всем квадратам поля полным перебором
-        for (int y = 0; y < seaBattle.getSizeX(); y++) {
-            for (int x = 0; x < seaBattle.getSizeY(); x++) {
-                SeaBattle.FireResult fireResult = seaBattle.fire(x, y);
-            }
+    void init(SeaBattle seaBattle){
+        this.seaBattle = seaBattle;
+        field = new char[seaBattle.getSizeX()][seaBattle.getSizeY()];
+        for(int i=0; i<seaBattle.getSizeX(); i++){
+
+            Arrays.fill(field[i], ' ');
+
+
         }
-    }*/
+    }
+    //счетчик успешных выстрелов
+    void hitsPlusPlus(){
+        hits++;
+    }
+    //метка убил или мимо
+    void markFire(int x, int y, FireResult result){
+        if (result != FireResult.MISS){
+            field[x][y] = 'X';
+            hitsPlusPlus();//счетчик попаданий
+
+            hits1++;
+        } else {
+            field[x][y] = '*';
+        }
+    }
     //алгоритм вывода
     public void battleAlgorithm(SeaBattle seaBattle) {
         // пример алгоритма:
         // стрельба по всем квадратам поля полным перебором
-        //init(seaBattle);//заполняемый массив результатами прострела
+        init(seaBattle);//заполняемый массив результатами прострела
 
 //        field[3][3] = 'X';
 //        field[3][4] = 'X';
@@ -54,7 +77,7 @@ public class SeaBattleAlg {
         int z = 1;//для перебора
         int y = 0;
         int x = 0;
-        while ( y < seaBattle.getSizeY() ) {
+        while ( y < seaBattle.getSizeY()  && hits != 20) {
             x = 3 - y - n;
             if( x < 0 && x >= -4){
                 x = x + 4;
@@ -65,21 +88,21 @@ public class SeaBattleAlg {
             if(x < -8 && x >= -12){
                 x = x + 12;
             }
-            while (x < seaBattle.getSizeX()) {
+            while (x < seaBattle.getSizeX() && hits != 20) {
 
-                //if (field[x][y] == ' ') {//усли ячейка в моем поле пуста то стреляем
+                if (field[x][y] == ' ') {//усли ячейка в моем поле пуста то стреляем
 
 
                     FireResult fireResult = seaBattle.fire(x, y);//выстрел
                     //System.out.println("DESTROYED - " + FireResult.DESTROYED);
-                    //markFire(x, y, fireResult);//визуализация-- заполняет мое поле результатами стрельбы
+                    markFire(x, y, fireResult);//визуализация-- заполняет мое поле результатами стрельбы
                     if (fireResult != FireResult.MISS) {//если не промахнулись
 
                         //noMiss(x, y, fireResult);// обрабатываем обводку, поиск палубы еще
                         // если ранен ++ считаем выстрелы попаданий
 
                     }
-               // }
+                }
 
                 x = x + 4;//для перебора
             }
