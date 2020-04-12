@@ -275,7 +275,8 @@ public class SeaBattleAlg {
                 x = x + 12;
             }
             while (x < seaBattle.getSizeX()) {
-
+                if (coynt == 10)
+                    return;
 //                if (hitses == 20)
 //                    break;
                 //System.out.println("hits - " + hits);
@@ -287,10 +288,10 @@ public class SeaBattleAlg {
                         coynt++;
 
                     }
-                    if (coynt == 10)
-                        break;
+
                     //System.out.println("DESTROYED - " + FireResult.DESTROYED);
                     markFire(x, y, fireResult);//визуализация-- заполняет мое поле результатами стрельбы
+
                     if (fireResult == FireResult.DESTROYED ) {//если ПОПАЛ И УБИТ
                         //обработать обводку убитого
                         markDestroyed();//точки которые нет смысла стрелять
