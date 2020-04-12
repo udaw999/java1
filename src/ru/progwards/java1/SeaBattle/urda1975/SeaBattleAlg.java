@@ -100,6 +100,7 @@ public class SeaBattleAlg {
     }
     //метка убил или мимо
     void markFire(int x, int y, FireResult result){
+
         if (result != FireResult.MISS){
             field[x][y] = 'X';
             hitsPlusPlus();//счетчик попаданий
@@ -281,12 +282,19 @@ public class SeaBattleAlg {
                     FireResult fireResult = seaBattle.fire(x, y);//выстрел
                     //System.out.println("DESTROYED - " + FireResult.DESTROYED);
                     markFire(x, y, fireResult);//визуализация-- заполняет мое поле результатами стрельбы
+                    if (fireResult == FireResult.DESTROYED ) {//если ПОПАЛ И УБИТ
+                        //обработать обводку убитого
+                        markDestroyed();//точки которые нет смысла стрелять
+                        //nz++;//считаю для теста сколько раз пришло УБИЛ
+
+                    }
                     if (fireResult != FireResult.MISS) {//если не промахнулись
 
                         noMiss(x, y, fireResult);// обрабатываем обводку, поиск палубы еще
                         // если ранен ++ считаем выстрелы попаданий
 
                     }
+                    print ();//поле наглядно
                 }
 
                 x = x + 4;//для перебора
@@ -311,7 +319,7 @@ public class SeaBattleAlg {
 
 
         }
-        print ();//поле наглядно
+
         statistic();
 //        System.out.println("hits- попал сразу - " + hits1);
 //        System.out.println("hits2- попал при дальнейшем поиске - " + hits2);
