@@ -363,7 +363,7 @@ public class SeaBattleAlg {
             }
             System.out.println("результат - " + seaBattle.getResult());
         }
-*/
+
 
         System.out.println(res/1000);
         System.out.println("меньше 20 - " + nzz);
@@ -371,7 +371,7 @@ public class SeaBattleAlg {
 
     }
 
-
+*/
 
 
 }
