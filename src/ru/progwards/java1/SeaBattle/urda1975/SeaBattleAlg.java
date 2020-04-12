@@ -3,11 +3,6 @@ package ru.progwards.java1.SeaBattle.urda1975;
 import ru.progwards.java1.SeaBattle.SeaBattle;
 import ru.progwards.java1.SeaBattle.SeaBattle.FireResult;
 
-import java.util.Arrays;
-
-import static ru.progwards.java1.SeaBattle.SeaBattle.*;
-//import static ru.progwards.java1.SeaBattle.urda1975.SeaBattleAlg.DirectionHits.*;
-
 public class SeaBattleAlg {
     // Тестовое поле создаётся конструктором
     //     SeaBattle seaBattle = new SeaBattle(true);
