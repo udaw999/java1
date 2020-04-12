@@ -41,7 +41,7 @@ public class SeaBattleAlg {
     int hitses = 0;//счетчик попаданий
     int hits1 = 0;//счетчик попаданий(test delet
     int hits2 = 0;//счетчик попаданий(test delet
-    int coynt=0;
+    public int coynt = 0;
 
     public static int nz = 0;
 
@@ -275,7 +275,8 @@ public class SeaBattleAlg {
                 x = x + 12;
             }
             while (x < seaBattle.getSizeX()) {
-
+                if (coynt==10)
+                    break;
 
                 //System.out.println("hits - " + hits);
                 if (field[x][y] == ' ') {//усли ячейка в моем поле пуста то стреляем
