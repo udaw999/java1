@@ -275,14 +275,14 @@ public class SeaBattleAlg {
                 x = x + 12;
             }
             while (x < seaBattle.getSizeX()) {
-                if (coynt == 10)
-                    break;
+
 
                 //System.out.println("hits - " + hits);
                 if (field[x][y] == ' ') {//усли ячейка в моем поле пуста то стреляем
 
                     System.out.println("coynt - "+coynt);
                     FireResult fireResult = seaBattle.fire(x, y);//выстрел
+
                     if (fireResult == FireResult.DESTROYED ){
                         coynt++;
 
