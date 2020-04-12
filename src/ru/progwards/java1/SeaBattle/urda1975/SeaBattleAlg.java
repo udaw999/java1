@@ -29,7 +29,7 @@ public class SeaBattleAlg {
     //         7|X|.|X|.|.|.|.|Х|.|X|
     //         8|X|.|.|.|.|.|.|X|.|.|
     //         9|X|.|.|.|X|.|.|.|.|.|
-
+/*
     public void battleAlgorithm(SeaBattle seaBattle) {
         // пример алгоритма:
         // стрельба по всем квадратам поля полным перебором
@@ -43,6 +43,57 @@ public class SeaBattleAlg {
                     return;
             }
         }
+    }*/
+    int hits = 0;
+    public  void prostrel( int ofset, SeaBattle seaBattle, int dop){
+        for (int y = 0; y < seaBattle.getSizeX(); y++) {
+            for (int x = ofset - y + dop; x < seaBattle.getSizeY(); x += 4) {
+                if (x == 0) {dop += 4; }
+
+  /*              if (coynt==10)
+                    return;
+                if (field[x][y] == ' ') {//усли ячейка в моем поле пуста то стреляем
+                    SeaBattle.FireResult fireResult = seaBattle.fire(x, y);
+                    markFire(x, y, fireResult);//визуализация-- заполняет мое поле результатами стрельбы
+
+                    if (fireResult == FireResult.DESTROYED ) {//если ПОПАЛ И УБИТ
+                        //обработать обводку убитого
+                        markDestroyed();//точки которые нет смысла стрелять
+                        //nz++;//считаю для теста сколько раз пришло УБИЛ
+
+                        coynt++;
+
+                    }
+                    if (fireResult != FireResult.MISS) {//если не промахнулись
+
+                        noMiss(x, y, fireResult);// обрабатываем обводку, поиск палубы еще
+                        // если ранен ++ считаем выстрелы попаданий
+
+                    }
+                }*/
+
+
+               // print();//поле наглядно
+                SeaBattle.FireResult fireResult = seaBattle.fire(x, y);
+                if (fireResult != FireResult.MISS)
+                    hits++;
+                if (hits >= 20)
+                    return;
+            }
+        }
+    }
+    public void battleAlgorithm(SeaBattle seaBattle) {
+
+        // пример алгоритма:
+        // стрельба по всем квадратам поля полным перебором
+        //init(seaBattle);//заполняемый массив результатами прострела
+
+
+        prostrel(3,seaBattle, 0);
+        prostrel(1,seaBattle, 0);
+        prostrel(0,seaBattle, 0);
+        prostrel(2,seaBattle, 0);
+
     }
 
     // функция для отладки
