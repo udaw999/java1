@@ -29,7 +29,7 @@ public class SeaBattleAlg {
     //         7|X|.|X|.|.|.|.|Х|.|X|
     //         8|X|.|.|.|.|.|.|X|.|.|
     //         9|X|.|.|.|X|.|.|.|.|.|
-/*
+
     public void battleAlgorithm(SeaBattle seaBattle) {
         // пример алгоритма:
         // стрельба по всем квадратам поля полным перебором
@@ -43,7 +43,9 @@ public class SeaBattleAlg {
                     return;
             }
         }
-    }*/
+    }
+
+/*====================*//*
     int hits = 0;
     public  void prostrel( int ofset, SeaBattle seaBattle, int dop){
         for (int y = 0; y < seaBattle.getSizeX(); y++) {
@@ -71,7 +73,7 @@ public class SeaBattleAlg {
 
                     }
                 }*/
-
+/*
 
                // print();//поле наглядно
                 SeaBattle.FireResult fireResult = seaBattle.fire(x, y);
@@ -95,7 +97,7 @@ public class SeaBattleAlg {
         prostrel(2,seaBattle, 0);
 
     }
-
+*/
     // функция для отладки
     public static void main(String[] args) {
         System.out.println("Sea battle");
