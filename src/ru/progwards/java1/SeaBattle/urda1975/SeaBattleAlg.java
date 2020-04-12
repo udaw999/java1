@@ -276,8 +276,8 @@ public class SeaBattleAlg {
             }
             while (x < seaBattle.getSizeX()) {
 
-                if (hitses == 20)
-                    break;
+//                if (hitses == 20)
+//                    break;
                 //System.out.println("hits - " + hits);
                 if (field[x][y] == ' ') {//усли ячейка в моем поле пуста то стреляем
 
