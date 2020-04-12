@@ -368,10 +368,10 @@ public class SeaBattleAlg {
         System.out.println(res/1000);
         System.out.println("меньше 20 - " + nzz);
         System.out.println("сколько равных x = z - " + sravn);
-
+*/
     }
 
-*/
+
 
 
 }
