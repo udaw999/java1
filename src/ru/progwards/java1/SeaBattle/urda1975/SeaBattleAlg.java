@@ -296,8 +296,9 @@ public class SeaBattleAlg {
 
                 prostrel(3,seaBattle, 0);
                 prostrel(1,seaBattle, 0);
+            prostrel(2,seaBattle, 0);
                 prostrel(0,seaBattle, 0);
-                prostrel(2,seaBattle, 0);
+
 
         }
 
@@ -313,7 +314,7 @@ public class SeaBattleAlg {
         System.out.println(seaBattle.getResult());
         System.out.println(" сколько раз пришло убит " + nz);
 
- /*       int nzz = 0;
+/*      int nzz = 0;
         double res = 0;
         for (int i=0;  i<1000; i++){
             SeaBattle seaBattle = new SeaBattle();
