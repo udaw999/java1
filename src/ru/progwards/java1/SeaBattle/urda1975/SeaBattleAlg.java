@@ -30,29 +30,43 @@ public class SeaBattleAlg {
     //         8|X|.|.|.|.|.|.|X|.|.|
     //         9|X|.|.|.|X|.|.|.|.|.|
 
-    public void battleAlgorithm(SeaBattle seaBattle) {
-        // пример алгоритма:
-        // стрельба по всем квадратам поля полным перебором
-        int hits = 0;
-        for (int y = 0; y < seaBattle.getSizeX(); y++) {
-            for (int x = 0; x < seaBattle.getSizeY(); x++) {
-                SeaBattle.FireResult fireResult = seaBattle.fire(x, y);
-                if (fireResult != FireResult.MISS)
-                    hits++;
-                if (hits >= 20)
-                    return;
+    /*    public void battleAlgorithm(SeaBattle seaBattle) {
+            // пример алгоритма:
+            // стрельба по всем квадратам поля полным перебором
+            int hits = 0;
+            for (int y = 0; y < seaBattle.getSizeX(); y++) {
+                for (int x = 0; x < seaBattle.getSizeY(); x++) {
+                    SeaBattle.FireResult fireResult = seaBattle.fire(x, y);
+                    if (fireResult != FireResult.MISS)
+                        hits++;
+                    if (hits >= 20)
+                        return;
+                }
             }
         }
+
+    ====================*/
+    int hits;
+    public void battleAlgorithm(SeaBattle seaBattle) {
+        hits = 0;
+        // пример алгоритма:
+        // стрельба по всем квадратам поля полным перебором
+        //init(seaBattle);//заполняемый массив результатами прострела
+
+
+        prostrel(3,seaBattle, 0);
+        prostrel(1,seaBattle, 0);
+        prostrel(0,seaBattle, 0);
+        prostrel(2,seaBattle, 0);
+
     }
 
-/*====================*//*
-    int hits = 0;
     public  void prostrel( int ofset, SeaBattle seaBattle, int dop){
         for (int y = 0; y < seaBattle.getSizeX(); y++) {
             for (int x = ofset - y + dop; x < seaBattle.getSizeY(); x += 4) {
                 if (x == 0) {dop += 4; }
 
-  /*              if (coynt==10)
+ /*             if (coynt==10)
                     return;
                 if (field[x][y] == ' ') {//усли ячейка в моем поле пуста то стреляем
                     SeaBattle.FireResult fireResult = seaBattle.fire(x, y);
@@ -72,8 +86,8 @@ public class SeaBattleAlg {
                         // если ранен ++ считаем выстрелы попаданий
 
                     }
-                }*/
-/*
+        /*          }*/
+
 
                // print();//поле наглядно
                 SeaBattle.FireResult fireResult = seaBattle.fire(x, y);
@@ -84,20 +98,8 @@ public class SeaBattleAlg {
             }
         }
     }
-    public void battleAlgorithm(SeaBattle seaBattle) {
 
-        // пример алгоритма:
-        // стрельба по всем квадратам поля полным перебором
-        //init(seaBattle);//заполняемый массив результатами прострела
-
-
-        prostrel(3,seaBattle, 0);
-        prostrel(1,seaBattle, 0);
-        prostrel(0,seaBattle, 0);
-        prostrel(2,seaBattle, 0);
-
-    }
-*/
+/**/
     // функция для отладки
     public static void main(String[] args) {
         System.out.println("Sea battle");
