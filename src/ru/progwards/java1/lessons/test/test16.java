@@ -1,6 +1,7 @@
 package ru.progwards.java1.lessons.test;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -35,8 +36,21 @@ public class test16 {
         //System.out.println(zdt);
         return i1;
     }
+    /*Напишите метод, с сигнатурой ZonedDateTime parseZDT(String str), который возвращает ZonedDateTime,
+    парся строку вида "01.01.2020 16:27:14.444 +0300 Moscow Standard Time"*/
+    public static ZonedDateTime parseZDT(String str){
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss.SSS Z zzzz", Locale.US);
+        ZonedDateTime dateTime1 = ZonedDateTime.parse(str, formatter1);
+
+        return dateTime1;
+    }
 
     public static void main(String[] args) {
+
+//        System.out.println(parseZDT("01.01.2020"));
+//        System.out.println("--------");
+//        //2020-01-01T16:27:14.444+03:00[Europe/Moscow]
+        System.out.println(parseZDT("01.01.2020 16:27:14.444 +0300 Moscow Standard Time"));
         System.out.println(createInstant());
         System.out.println(createDate());
 

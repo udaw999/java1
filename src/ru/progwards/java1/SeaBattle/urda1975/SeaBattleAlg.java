@@ -281,9 +281,10 @@ public class SeaBattleAlg {
                 }
 
 
-                print();//поле наглядно
+                //print();//поле наглядно
             }
         }
+
     }
 
     /**/
@@ -296,25 +297,49 @@ public class SeaBattleAlg {
 
                 prostrel(3,seaBattle, 0);
                 prostrel(1,seaBattle, 0);
-            prostrel(2,seaBattle, 0);
+                prostrel(2,seaBattle, 0);
                 prostrel(0,seaBattle, 0);
 
+            print();//поле наглядно
 
+
+/**/
+        statistic();
+//        System.out.println("hits- попал сразу - " + hits1);
+//        System.out.println("hits2- попал при дальнейшем поиске - " + hits2);
+        System.out.println("попаданий - " + hitses);
+        System.out.println("X - " + popal);
+        System.out.println("Z - " + nascel);
+        System.out.println("* - " + mimo);
+        System.out.println("- - " + minus);
+        System.out.println("ИТОГО ВЫСТРЕЛОВ - " + (popal + mimo + minus + nascel));
+//        int mimo = 0; //*
+//        int popal = 0; //X
+//        int nascel = 0; //Z
+//        int minus = 0; //-
+//
+
+
+        if(hitses > 20){
+            nz++;
         }
 
-
+        if (nascel == popal){
+            sravn++;
+        }
+}
 
     // функция для отладки
     public static void main(String[] args) {
 
-        System.out.println("Sea battle");
+ /*        System.out.println("Sea battle");
         SeaBattle seaBattle = new SeaBattle(true);
         new SeaBattleAlg().battleAlgorithm(seaBattle);
 
         System.out.println(seaBattle.getResult());
         System.out.println(" сколько раз пришло убит " + nz);
 
-/*      int nzz = 0;
+*/     int nzz = 0;
         double res = 0;
         for (int i=0;  i<1000; i++){
             SeaBattle seaBattle = new SeaBattle();
@@ -330,7 +355,7 @@ public class SeaBattleAlg {
         System.out.println(res/1000);
         System.out.println("меньше 20 - " + nzz);
         System.out.println("сколько равных x = z - " + sravn);
-*/
+
     }
 
 
