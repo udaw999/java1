@@ -11,7 +11,7 @@ public class Insurance {
     private ZonedDateTime start; //- дата-время начала действия страховки.
     private Duration duration; //- продолжительность действия.
     ZoneId zoneId = ZoneId.systemDefault();//зонна по умолчанию
-    private String validStr;
+    private String validStr = " is valid";
     public Insurance(ZonedDateTime start){
         this.start = start;
     }
@@ -91,7 +91,6 @@ public class Insurance {
 
     @Override
     public String toString() {
-
         return "Insurance issued on " + start + validStr;
     }
 
