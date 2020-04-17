@@ -12,6 +12,8 @@ public class Insurance {
     private Duration duration; //- продолжительность действия.
     ZoneId zoneId = ZoneId.systemDefault();//зонна по умолчанию
     private String validStr = " is valid";
+    private ZonedDateTime dateTime =  ZonedDateTime.now(zoneId);//текущее время
+
     public Insurance(ZonedDateTime start){
         this.start = start;
     }
@@ -71,7 +73,7 @@ public class Insurance {
 
     }
     public boolean checkValid(ZonedDateTime dateTime){
-
+        this.dateTime = dateTime;
         if (duration != null){
 
             int n = dateTime.compareTo(start.plus(duration));
@@ -83,8 +85,15 @@ public class Insurance {
 
             return n > 0;
         } else {
-            validStr = " is valid";
-            return true;
+
+            int n = dateTime.compareTo(start);
+            if (n > 0){
+                validStr = " is valid";
+            } else {
+                validStr = " is not valid";
+            }
+
+            return n > 0;
 
         }
 
@@ -93,19 +102,20 @@ public class Insurance {
 
     @Override
     public String toString() {
+        checkValid( dateTime);
         return "Insurance issued on " + start + validStr;
     }
 
     public static void main(String[] args) {
         ZonedDateTime start = ZonedDateTime.of(2011, 03, 05, 8, 0, 0, 0, ZoneId.of("Europe/Moscow"));
         String full = "2013-01-01T00:00:00-05:00";
-        String longg = "2020-04-16T00:00:00";
+        String longg = "2020-04-18T10:06:15";
         String shortt = "2011-02-03";
 
-
+        //2020-04-18T10:06:15.077556+03:00[Europe/Moscow]
 
         String longgD = "0000-01-01T10:00:00";
-        ZonedDateTime proverca = ZonedDateTime.of(2011, 04, 04, 0, 0, 0, 0, ZoneId.of("Europe/Moscow"));
+        ZonedDateTime proverca = ZonedDateTime.of(2021, 04, 9, 0, 0, 0, 0, ZoneId.of("Europe/Moscow"));
 
         Insurance insurance0 = new Insurance(start);
 //        System.out.println("1 конструктор" + insurance0.toString());
@@ -114,8 +124,8 @@ public class Insurance {
         //insurance.setDuration(start);
         //insurance.setDuration(2,0,20);
         //insurance.setDuration(longgD,FormatStyle.LONG);
-        System.out.println(insurance.checkValid(proverca));
-
+        //System.out.println(insurance.checkValid(proverca));
+        System.out.println(insurance.dateTime);
         System.out.println("2k longg - " + insurance.toString());
 
     }
