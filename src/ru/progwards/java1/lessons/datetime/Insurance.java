@@ -17,21 +17,21 @@ public class Insurance {
     }
 
     public Insurance(String strStart, FormatStyle style){
+    if (style == FormatStyle.FULL){
+        this.start = ZonedDateTime.parse(strStart, DateTimeFormatter.ISO_ZONED_DATE_TIME);
+    }
+    if (style == FormatStyle.LONG){
+        DateTimeFormatter dtf = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+        this.start = ZonedDateTime.of( LocalDateTime.parse(strStart, dtf), zoneId);
+    }
+    if (style == FormatStyle.SHORT){
+        //LocalDate.parse(strStart,dtf) парсим дату из строки по формату.
+        //.atStartOfDay() добавляем время нули
+        //zoneId и добавляем зону по умолчанию
+        DateTimeFormatter dtf1 = DateTimeFormatter.ISO_LOCAL_DATE;
+        this.start = ZonedDateTime.of( LocalDate.parse(strStart,dtf1).atStartOfDay(), zoneId);
+    }
 
-        DateTimeFormatter dtf;
-        switch (style){
-            case FULL:
-                this.start = ZonedDateTime.parse(strStart, DateTimeFormatter.ISO_ZONED_DATE_TIME);
-            case LONG:
-                 dtf = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-                this.start = ZonedDateTime.of( LocalDateTime.parse(strStart, dtf), zoneId);
-            case SHORT:
-                //LocalDate.parse(strStart,dtf) парсим дату из строки по формату.
-                //.atStartOfDay() добавляем время нули
-                //zoneId и добавляем зону по умолчанию
-                 dtf = DateTimeFormatter.ISO_LOCAL_DATE;
-                this.start = ZonedDateTime.of( LocalDate.parse(strStart,dtf).atStartOfDay(), zoneId);
-        }
     }
 
     public void setDuration(Duration duration){
@@ -48,25 +48,27 @@ public class Insurance {
     }
 
     public void setDuration(String strDuration, FormatStyle style){
-        switch (style){
-            case SHORT:
-                duration = Duration.ofMillis(Long.parseLong(strDuration));
-            case FULL:
-                duration = Duration.parse(strDuration);
-            case LONG:
-                DateTimeFormatter dtf = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-                LocalDateTime localDateTimeTime = LocalDateTime.parse(strDuration, dtf);
-                LocalDate localDate = localDateTimeTime.toLocalDate();
-                LocalTime localTime = localDateTimeTime.toLocalTime();
-                ZonedDateTime end = start.plusYears(localDate.getYear());
-                end = end.plusMonths(localDate.getMonthValue());
-                end = end.plusDays(localDate.getDayOfMonth());
-                end = end.plusHours(localTime.getHour());
-                end = end.plusMinutes(localTime.getMinute());
-                end = end.plusSeconds(localTime.getSecond());
-
-                duration  = Duration.between(start,end);
+        if (style == FormatStyle.SHORT){
+            duration = Duration.ofMillis(Long.parseLong(strDuration));
         }
+        if (style == FormatStyle.FULL){
+            duration = Duration.parse(strDuration);
+        }
+        if (style == FormatStyle.LONG){
+            DateTimeFormatter dtf = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+            LocalDateTime localDateTimeTime = LocalDateTime.parse(strDuration, dtf);
+            LocalDate localDate = localDateTimeTime.toLocalDate();
+            LocalTime localTime = localDateTimeTime.toLocalTime();
+            ZonedDateTime end = start.plusYears(localDate.getYear());
+            end = end.plusMonths(localDate.getMonthValue());
+            end = end.plusDays(localDate.getDayOfMonth());
+            end = end.plusHours(localTime.getHour());
+            end = end.plusMinutes(localTime.getMinute());
+            end = end.plusSeconds(localTime.getSecond());
+
+            duration  = Duration.between(start,end);
+        }
+
     }
     public boolean checkValid(ZonedDateTime dateTime){
 
@@ -97,8 +99,10 @@ public class Insurance {
     public static void main(String[] args) {
         ZonedDateTime start = ZonedDateTime.of(2011, 03, 05, 8, 0, 0, 0, ZoneId.of("Europe/Moscow"));
         String full = "2013-01-01T00:00:00-05:00";
-        String longg = "2011-12-03T10:15:30";
+        String longg = "2020-04-16T00:00:00";
         String shortt = "2011-02-03";
+
+
 
         String longgD = "0000-01-01T10:00:00";
         ZonedDateTime proverca = ZonedDateTime.of(2011, 04, 04, 0, 0, 0, 0, ZoneId.of("Europe/Moscow"));
@@ -106,7 +110,7 @@ public class Insurance {
         Insurance insurance0 = new Insurance(start);
 //        System.out.println("1 конструктор" + insurance0.toString());
 
-        Insurance insurance = new Insurance(shortt,FormatStyle.SHORT);
+        Insurance insurance = new Insurance(longg,FormatStyle.LONG);
         //insurance.setDuration(start);
         //insurance.setDuration(2,0,20);
         //insurance.setDuration(longgD,FormatStyle.LONG);
