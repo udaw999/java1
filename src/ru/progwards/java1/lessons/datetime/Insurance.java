@@ -76,7 +76,7 @@ public class Insurance {
         this.dateTime = dateTime;
         if (duration != null){
 
-            int n = dateTime.compareTo(start.plus(duration));
+            int n = start.plus(duration).compareTo(dateTime);
             if (n > 0){
                 validStr = " is valid";
             } else {
