@@ -77,7 +77,15 @@ public class Insurance {
         if (duration != null){
 
             int n = start.plus(duration).compareTo(dateTime);
-            if (n > 0){
+
+            //если дата страховки + период > даты проверки n = +1
+            int nStart = dateTime.compareTo(start);
+//            System.out.println("dateTime- "+dateTime);
+//            System.out.println("start- "+start);
+//            System.out.println("duration- "+duration);
+//            System.out.println("n- "+n);
+//            System.out.println("nStart- "+nStart);
+            if (n > 0 && nStart > 0 ){
                 validStr = " is valid";
             } else {
                 validStr = " is not valid";
@@ -107,26 +115,28 @@ public class Insurance {
     }
 
     public static void main(String[] args) {
-        ZonedDateTime start = ZonedDateTime.of(2011, 03, 05, 8, 0, 0, 0, ZoneId.of("Europe/Moscow"));
+        ZonedDateTime start = ZonedDateTime.of(2020, 04, 15, 12, 48, 14, 461924, ZoneId.of("Europe/Moscow"));
         String full = "2013-01-01T00:00:00-05:00";
         String longg = "2020-04-18T10:06:15";
         String shortt = "2011-02-03";
 
-        //2020-04-18T10:06:15.077556+03:00[Europe/Moscow]
+        //2020-04-18T10:48:14.461924+03:00[Europe/Moscow]
 
         String longgD = "0000-01-01T10:00:00";
         ZonedDateTime proverca = ZonedDateTime.of(2021, 04, 9, 0, 0, 0, 0, ZoneId.of("Europe/Moscow"));
 
         Insurance insurance0 = new Insurance(start);
-//        System.out.println("1 конструктор" + insurance0.toString());
-
-        Insurance insurance = new Insurance(longg,FormatStyle.LONG);
+        insurance0.setDuration(Duration.ofDays(1));
+        System.out.println("1 конструктор" + insurance0.toString());
+        // 1 конструкторInsurance issued on 2020-04-18T10:48:14.000461924+03:00[Europe/Moscow] is not valid
+        // 1 конструкторInsurance issued on 2020-04-18T10:48:14.000461924+03:00[Europe/Moscow] is valid
+       // Insurance insurance = new Insurance(longg,FormatStyle.LONG);
         //insurance.setDuration(start);
         //insurance.setDuration(2,0,20);
         //insurance.setDuration(longgD,FormatStyle.LONG);
         //System.out.println(insurance.checkValid(proverca));
-        System.out.println(insurance.dateTime);
-        System.out.println("2k longg - " + insurance.toString());
+//        System.out.println(insurance.dateTime);
+//        System.out.println("2k longg - " + insurance.toString());
 
     }
 }
