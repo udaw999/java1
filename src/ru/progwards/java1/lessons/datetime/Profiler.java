@@ -8,7 +8,8 @@ import java.util.List;
 public class Profiler {
     public static long start;
     public static long stop;
-    public static long rezult;
+    public static int selfTimeMemory = 0;
+    public static int selfTimeMemoryDuble = 0;
     public static List<StatisticInfo> statisticInfos = new ArrayList<>();
 
     public static void enterSection(String name){
@@ -19,9 +20,13 @@ public class Profiler {
         StatisticInfo sect = doesSectionExist(name,statisticInfos);//существует ли секция, если есть то получаем ее
         if(sect == null){
             statisticInfos.add(new StatisticInfo(name,start));
+
+            selfTimeMemoryDuble = selfTimeMemory;
+            selfTimeMemory =0;
+
         } else {
             sect.start = start;
-
+            selfTimeMemory =0;
         }
 
 
@@ -38,15 +43,13 @@ public class Profiler {
             } else {
                 sect.fullTime += (int)(stop - sect.start);
                 sect.count += 1;
+
             }
 
+            sect.selfTime = sect.fullTime - selfTimeMemory;
+            selfTimeMemory = sect.selfTime;
+            System.out.println(selfTimeMemoryDuble);
         }
-
-
-       // System.out.println("stop (" + name + ") - " + stop);
-
-        /*System.out.println("contains -" + statisticInfos.contains(name));*/
-
 
     }
 
