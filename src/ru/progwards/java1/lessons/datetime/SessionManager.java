@@ -18,8 +18,9 @@ public class SessionManager {
     }
 
     public UserSession find(String userName){
-        for (UserSession session : sessions) {
-            if (session.getUserName().equals(userName)) {
+        if (sessions != null){
+            for (UserSession session : sessions) {
+                if (session.getUserName().equals(userName)) {
                /* LocalDateTime dateTimeUser = session.getLastAccess().plusSeconds(sessionValid);
                 LocalDateTime dateTimeNow = LocalDateTime.now();
                 if (dateTimeUser.compareTo(dateTimeNow) > 0) {
@@ -32,49 +33,60 @@ public class SessionManager {
                 //System.out.println(session);
                 //System.out.println("dateTimeUser- " + dateTimeUser);
 */                  session.updateLastAccess();
-                return session;
+                    return session;
+                }
             }
         }
+
         return null;
     }
 
     public UserSession get(int sessionHandle){
-        for (UserSession session : sessions) {
-            if (session.getSessionHandle() == sessionHandle) {
-                session.updateLastAccess();
-              return session;
+        if (sessions != null){
+            for (UserSession session : sessions) {
+                if (session.getSessionHandle() == sessionHandle) {
+                    session.updateLastAccess();
+                    return session;
+                }
             }
         }
+
         return null;
     }
 
     public void delete(int sessionHandle){
-        for (UserSession session : sessions) {
-            if (session.getSessionHandle() == sessionHandle) {
-                sessions.remove(session);
+        if (sessions != null){
+            for (UserSession session : sessions) {
+                if (session.getSessionHandle() == sessionHandle) {
+                    sessions.remove(session);
 
+                }
             }
         }
+
     }
 
     public void deleteExpired(){
-
-        for (UserSession session : sessions) {
-            LocalDateTime dateTimeUser = session.getLastAccess().plusSeconds(sessionValid);
+        if (sessions != null){
+            for (UserSession session : sessions) {
+                LocalDateTime dateTimeUser = session.getLastAccess().plusSeconds(sessionValid);
                 LocalDateTime dateTimeNow = LocalDateTime.now();
                 if (dateTimeUser.compareTo(dateTimeNow) < 0) {
 
                     sessions.remove(session);
                 }
+            }
         }
+
     }
 
     public static void main(String[] args) {
         SessionManager session1 = new SessionManager(300);
-        session1.add(new UserSession("VOVA"));
-        System.out.println(session1.find("VOVA"));
+       // session1.add(new UserSession("VOVA"));
+        System.out.println(session1.find(null));
         //session1.delete(6207);
-        System.out.println(session1.sessions);
+        //System.out.println(session1.sessions);
+
 
     }
 }
