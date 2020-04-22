@@ -10,7 +10,7 @@ public class Profiler {
     public static long stop;
     public static int selfTimeMemory = 0;
     public static int selfTimeMemoryDuble = 0;
-    public static int selfTimeMemoryDubleFlag = 3;
+
     public static List<StatisticInfo> statisticInfos = new ArrayList<>();
 
 
@@ -25,8 +25,7 @@ public class Profiler {
 
             selfTimeMemoryDuble = selfTimeMemory;
             selfTimeMemory =0;
-            if (selfTimeMemoryDuble > 0)
-                selfTimeMemoryDubleFlag = 1;
+
         } else {
             sect.start = start;
             selfTimeMemory =0;
@@ -48,15 +47,10 @@ public class Profiler {
                 sect.count += 1;
 
             }
-            if (selfTimeMemoryDubleFlag == 2){
-                sect.selfTime = sect.fullTime - selfTimeMemory - selfTimeMemoryDuble;
 
-            } else {
-                sect.selfTime = sect.fullTime - selfTimeMemory;
-            }
 
+            sect.selfTime = sect.fullTime - selfTimeMemory;
             selfTimeMemory = sect.selfTime;
-            selfTimeMemoryDubleFlag++;
 
 
             System.out.println(selfTimeMemoryDuble);
