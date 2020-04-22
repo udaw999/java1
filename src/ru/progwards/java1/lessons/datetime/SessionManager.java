@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SessionManager {
-    private List<UserSession> sessions;
+    private List<UserSession> sessions = new ArrayList<>();
     private int sessionValid;
 
     public SessionManager(int sessionValid){
@@ -13,8 +13,12 @@ public class SessionManager {
     }
 
     public void add(UserSession userSession){
-        sessions = new ArrayList<>();
-        sessions.add(userSession);
+
+        if (sessions.contains(userSession) == false){
+            sessions.add(userSession);
+            System.out.println(sessions.contains(userSession));
+        }
+
     }
 
     public UserSession find(String userName){
@@ -44,10 +48,15 @@ public class SessionManager {
     public UserSession get(int sessionHandle){
         if (sessions != null){
             for (UserSession session : sessions) {
-                if (session.getSessionHandle() == sessionHandle) {
-                    session.updateLastAccess();
-                    return session;
+                LocalDateTime dateTimeUser = session.getLastAccess().plusSeconds(sessionValid);
+                LocalDateTime dateTimeNow = LocalDateTime.now();
+                if (dateTimeUser.compareTo(dateTimeNow) > 0) {
+                    if (session.getSessionHandle() == sessionHandle) {
+                        session.updateLastAccess();
+                        return session;
+                    }
                 }
+
             }
         }
 
@@ -82,10 +91,13 @@ public class SessionManager {
 
     public static void main(String[] args) {
         SessionManager session1 = new SessionManager(300);
-       // session1.add(new UserSession("VOVA"));
-        System.out.println(session1.find(null));
+        //session1.add(new UserSession("VOVA"));
+        //session1.add(new UserSession("KOLY"));
+       // System.out.println(session1.find("v"));
         //session1.delete(6207);
-        //System.out.println(session1.sessions);
+        System.out.println("get - " + session1.get(8063));
+
+        System.out.println(session1.sessions);
 
 
     }
