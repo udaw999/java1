@@ -10,6 +10,7 @@ public class Profiler {
     public static long stop;
     public static int selfTimeMemory = 0;
     public static int selfTimeMemoryDuble = 0;
+    public static  String dubleName;
 
     public static List<StatisticInfo> statisticInfos = new ArrayList<>();
 
@@ -24,8 +25,9 @@ public class Profiler {
             statisticInfos.add(new StatisticInfo(name,start));
 
             selfTimeMemoryDuble = selfTimeMemory;
+            dubleName = name;
             selfTimeMemory =0;
-
+            System.out.println("name- " + name);
         } else {
             sect.start = start;
             selfTimeMemory =0;
@@ -48,9 +50,16 @@ public class Profiler {
 
             }
 
+            if (name.equals(dubleName)){
+                sect.selfTime = sect.fullTime - selfTimeMemory;
+                selfTimeMemory = sect.selfTime;
+            } else {
+                sect.selfTime = sect.fullTime - selfTimeMemory - selfTimeMemoryDuble;
+                selfTimeMemory = sect.selfTime;
+                System.out.println("tyt" + name);
+            }
 
-            sect.selfTime = sect.fullTime - selfTimeMemory;
-            selfTimeMemory = sect.selfTime;
+
 
 
             System.out.println(selfTimeMemoryDuble);

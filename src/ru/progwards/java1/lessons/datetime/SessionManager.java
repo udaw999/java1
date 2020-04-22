@@ -95,14 +95,7 @@ public class SessionManager {
                 }
 
             }
-//            for (UserSession session : sessions) {
-//                LocalDateTime dateTimeUser = session.getLastAccess().plusSeconds(sessionValid);
-//                LocalDateTime dateTimeNow = LocalDateTime.now();
-//                if (dateTimeUser.compareTo(dateTimeNow) < 0) {
-//
-//                    sessions.remove(session);
-//                }
-//            }
+
         }
 
     }
