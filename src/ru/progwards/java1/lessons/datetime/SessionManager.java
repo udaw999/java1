@@ -83,14 +83,26 @@ public class SessionManager {
 
     public void deleteExpired(){
         if (sessions != null){
-            for (UserSession session : sessions) {
-                LocalDateTime dateTimeUser = session.getLastAccess().plusSeconds(sessionValid);
+
+            Iterator<UserSession> iteratorSesions = sessions.iterator();
+            while (iteratorSesions.hasNext()) {
+                UserSession sesion = iteratorSesions.next();
+                LocalDateTime dateTimeUser = sesion.getLastAccess().plusSeconds(sessionValid);
                 LocalDateTime dateTimeNow = LocalDateTime.now();
                 if (dateTimeUser.compareTo(dateTimeNow) < 0) {
+                    iteratorSesions.remove();
 
-                    sessions.remove(session);
                 }
+
             }
+//            for (UserSession session : sessions) {
+//                LocalDateTime dateTimeUser = session.getLastAccess().plusSeconds(sessionValid);
+//                LocalDateTime dateTimeNow = LocalDateTime.now();
+//                if (dateTimeUser.compareTo(dateTimeNow) < 0) {
+//
+//                    sessions.remove(session);
+//                }
+//            }
         }
 
     }
