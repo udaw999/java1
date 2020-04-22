@@ -2,6 +2,7 @@ package ru.progwards.java1.lessons.datetime;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class SessionManager {
@@ -65,12 +66,17 @@ public class SessionManager {
 
     public void delete(int sessionHandle){
         if (sessions != null){
-            for (UserSession session : sessions) {
-                if (session.getSessionHandle() == sessionHandle) {
-                    sessions.remove(session);
+
+            Iterator<UserSession> iteratorSesions = sessions.iterator();
+            while (iteratorSesions.hasNext()) {
+                UserSession sesion = iteratorSesions.next();
+                if (sesion.getSessionHandle() == sessionHandle) {
+                    iteratorSesions.remove();
 
                 }
+
             }
+
         }
 
     }
