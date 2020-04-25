@@ -7,10 +7,12 @@ public class StatisticInfo {
     public int selfTime; //- чистое время выполнения секции в миллисекундах.
     public int count = 1; //- количество вызовов.
     public long start;
+    public String sectionNameParent;
 
-    public StatisticInfo(String sectionName,long start){
+    public StatisticInfo(String sectionName,long start,String sectionNameParent){
         this.sectionName = sectionName;
         this.start = start;
+        this.sectionNameParent = sectionNameParent;
     }
 
     public String getSectionName() {
@@ -27,6 +29,7 @@ public class StatisticInfo {
                 ", selfTime=" + selfTime +
                 ", count=" + count +
                 ", start=" + start +
+                ", sectionNameParent=" + sectionNameParent +
                 '}';
     }
 
