@@ -53,7 +53,7 @@ public class FindDuplicates {
                         if (pathMatcher2.matches(path))
                             // fileHashSet.add(path.getFileName());
                             //System. out.println(path.getFileName());
-                            listFile.add(path.getFileName() + " " + path);
+                            listFile.add(" " + path);
                         //System. out.println(path);
                         return FileVisitResult.CONTINUE;
                     }
