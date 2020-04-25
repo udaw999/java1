@@ -10,46 +10,21 @@ public class FindDuplicates {
     final static String HOME_DIR = "C:\\Users\\admin\\IdeaProjects\\MyTest\\proect_zadanie";
 
 
-    public List<List<String>> findDuplicates(String startPath) throws IOException {
+    public List<List<String>> findDuplicates(String startPath)  {
         List<List<String>> lists = new ArrayList<>();
-
-        //получаем весь список файлов в 1 экземпляре
         HashSet<Path> fileHashSet = new HashSet<>();
-    /**/   PathMatcher pathMatcher = FileSystems.getDefault().getPathMatcher("glob:**");
-        Files.walkFileTree(Paths.get(startPath), new SimpleFileVisitor<>() {
-            @Override
-            public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) throws IOException {
+        try {
+            //получаем весь список файлов в 1 экземпляре
 
-                if (pathMatcher.matches(path))
-                    fileHashSet.add(path.getFileName());
-                    //System. out.println(path.getFileName());
-                   // System. out.println(path);
-                return FileVisitResult.CONTINUE;
-            }
-            @Override
-            public FileVisitResult visitFileFailed(Path file, IOException e) {
-                return FileVisitResult.CONTINUE;
-            }
-        });
-
-        //проходимся по списку и ищем совпадения
-        Iterator<Path> iterator = fileHashSet.iterator();
-        Path file;
-        while (iterator.hasNext()) {
-
-            file =  iterator.next();
-            List<String> listFile = new LinkedList<>();
-
-            PathMatcher pathMatcher2 = FileSystems.getDefault().getPathMatcher("glob:**/*" + file);
+            /**/   PathMatcher pathMatcher = FileSystems.getDefault().getPathMatcher("glob:**");
             Files.walkFileTree(Paths.get(startPath), new SimpleFileVisitor<>() {
                 @Override
                 public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) throws IOException {
 
-                    if (pathMatcher2.matches(path))
-                       // fileHashSet.add(path.getFileName());
-                        //System. out.println(path.getFileName());
-                        listFile.add(path.getFileName() + " " + path);
-                        //System. out.println(path);
+                    if (pathMatcher.matches(path))
+                        fileHashSet.add(path.getFileName());
+                    //System. out.println(path.getFileName());
+                    // System. out.println(path);
                     return FileVisitResult.CONTINUE;
                 }
                 @Override
@@ -57,11 +32,45 @@ public class FindDuplicates {
                     return FileVisitResult.CONTINUE;
                 }
             });
-            if (listFile.size()>1){
-                lists.add(listFile);
-            }
+        } catch (Exception e){
 
         }
+
+        try {
+            //проходимся по списку и ищем совпадения
+            Iterator<Path> iterator = fileHashSet.iterator();
+            Path file;
+            while (iterator.hasNext()) {
+
+                file =  iterator.next();
+                List<String> listFile = new LinkedList<>();
+
+                PathMatcher pathMatcher2 = FileSystems.getDefault().getPathMatcher("glob:**/*" + file);
+                Files.walkFileTree(Paths.get(startPath), new SimpleFileVisitor<>() {
+                    @Override
+                    public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) throws IOException {
+
+                        if (pathMatcher2.matches(path))
+                            // fileHashSet.add(path.getFileName());
+                            //System. out.println(path.getFileName());
+                            listFile.add(path.getFileName() + " " + path);
+                        //System. out.println(path);
+                        return FileVisitResult.CONTINUE;
+                    }
+                    @Override
+                    public FileVisitResult visitFileFailed(Path file, IOException e) {
+                        return FileVisitResult.CONTINUE;
+                    }
+                });
+                if (listFile.size()>1){
+                    lists.add(listFile);
+                }
+
+            }
+        } catch (Exception e){
+
+        }
+
 
 
         for (List<String> section : lists) {
