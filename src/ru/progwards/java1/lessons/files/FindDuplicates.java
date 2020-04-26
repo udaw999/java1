@@ -65,10 +65,7 @@ public class FindDuplicates {
                     }
                 });
 
-               
-
-
-                //System.out.println(Files.getAttribute(path,"lastModifiedTime"));
+                attributeEqualityChecking(listFile);//проверка равенства атрибутов
 
                 if (listFile.size()>1){
                     lists.add(listFile);
@@ -86,7 +83,37 @@ public class FindDuplicates {
         }
         return lists;
     }
+//проверка равенства атрибутов
+    private void attributeEqualityChecking(List<String> listFile) {
+        try {
 
+            for (int i=0; i<listFile.size(); i++){
+
+                Path pathI = Paths.get(listFile.get(i).trim());//было исключение пришлось убрать пробелы из ссылки с помощью .trim()
+
+                int count = 0;
+                for (int j=i; j<listFile.size(); j++){
+                    Path pathJ = Paths.get(listFile.get(j).trim());
+
+                    if (Files.getAttribute(pathI,"size").equals(Files.getAttribute(pathJ,"size"))){
+                        count = 1;
+                    } else if (Files.getAttribute(pathI,"lastModifiedTime").equals(Files.getAttribute(pathJ,"lastModifiedTime"))){
+                        count = 1;
+                    }else {
+                        count = 0;
+                    }
+
+                }
+                if (count == 0){
+                    listFile.remove(i);
+                }
+
+                count = 0;
+            }
+        } catch (Exception e){
+            System.out.println(e);
+        }
+    }
 
 
     public static void main(String[] args) throws IOException {
