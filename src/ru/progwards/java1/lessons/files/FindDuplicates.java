@@ -90,13 +90,14 @@ public class FindDuplicates {
             for (int i=0; i<listFile.size(); i++){
 
                 Path pathI = Paths.get(listFile.get(i).trim());//было исключение пришлось убрать пробелы из ссылки с помощью .trim()
-
+                //System.out.println(listFile.get(i).length());
                 int count = 0;
                 for (int j=i; j<listFile.size(); j++){
                     Path pathJ = Paths.get(listFile.get(j).trim());
 
                     if (Files.getAttribute(pathI,"size").equals(Files.getAttribute(pathJ,"size")) &&
-                            Files.getAttribute(pathI,"lastModifiedTime").equals(Files.getAttribute(pathJ,"lastModifiedTime"))){
+                            Files.getAttribute(pathI,"lastModifiedTime").equals(Files.getAttribute(pathJ,"lastModifiedTime")) &&
+                            listFile.get(i).length() == listFile.get(j).length()){
                         count = 1;
                     } else {
                         count = 0;
