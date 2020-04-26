@@ -97,9 +97,12 @@ public class FindDuplicates {
                     byte[] allBytesJ = Files.readAllBytes(pathJ);
                     Files.lines(pathJ, Charset.forName("windows-1251"));
                     String fileAsStringJ = Files.readString(pathJ);
-                    if (Files.getAttribute(pathI,"size").equals(Files.getAttribute(pathJ,"size")) &&
-                            Files.getAttribute(pathI,"lastModifiedTime").equals(Files.getAttribute(pathJ,"lastModifiedTime"))
-                    //        && allBytesI.length == allBytesJ.length && fileAsStringI.equals(fileAsStringJ)
+                    if (
+//                            Files.getAttribute(pathI,"size").equals(Files.getAttribute(pathJ,"size")) &&
+//                            Files.getAttribute(pathI,"lastModifiedTime").equals(Files.getAttribute(pathJ,"lastModifiedTime"))
+//                            &&
+//                                    allBytesI.length == allBytesJ.length &&
+                                            fileAsStringI.equals(fileAsStringJ)
                    ){
                         count = 1;
                     } else {
