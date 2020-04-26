@@ -51,12 +51,7 @@ public class FindDuplicates {
                     public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) throws IOException {
 
                         if (pathMatcher2.matches(path))
-                            // fileHashSet.add(path.getFileName());
-                            //System. out.println(path.getFileName());
-                            //System.out.println(Files.getAttribute(path,"lastModifiedTime"));
-                            //System.out.println(Files.getAttribute(path,"size"));
                             listFile.add(" " + path);
-                        //System. out.println(path);
                         return FileVisitResult.CONTINUE;
                     }
                     @Override
@@ -66,7 +61,7 @@ public class FindDuplicates {
                 });
 
                 attributeEqualityChecking(listFile);//проверка равенства атрибутов
-
+                //если нашли совпадающие файлы добавляем в список
                 if (listFile.size()>1){
                     lists.add(listFile);
                 }
@@ -83,26 +78,29 @@ public class FindDuplicates {
         }
         return lists;
     }
-//проверка равенства атрибутов
+//проверка равенства атрибутов(размер и время изменения) и содержания файла
     private void attributeEqualityChecking(List<String> listFile) {
         try {
 
             for (int i=0; i<listFile.size(); i++){
 
                 Path pathI = Paths.get(listFile.get(i).trim());//было исключение пришлось убрать пробелы из ссылки с помощью .trim()
-                //System.out.println(listFile.get(i).length());
+                byte[] allBytesI = Files.readAllBytes(pathI);
+                //System.out.println(allBytesI.length);
                 int count = 0;
                 for (int j=i; j<listFile.size(); j++){
                     Path pathJ = Paths.get(listFile.get(j).trim());
+                    byte[] allBytesJ = Files.readAllBytes(pathJ);
 
                     if (Files.getAttribute(pathI,"size").equals(Files.getAttribute(pathJ,"size")) &&
                             Files.getAttribute(pathI,"lastModifiedTime").equals(Files.getAttribute(pathJ,"lastModifiedTime")) &&
-                            listFile.get(i).length() == listFile.get(j).length()){
+                    allBytesI.length == allBytesJ.length){
                         count = 1;
                     } else {
                         count = 0;
                     }
-
+// &&
+//                            listFile.get(i).length() == listFile.get(j).length()
                 }
                 if (count == 0){
                     listFile.remove(i);
