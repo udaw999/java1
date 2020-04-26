@@ -52,7 +52,7 @@ public class FindDuplicates {
                     public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) throws IOException {
 
                         if (pathMatcher2.matches(path))
-                            listFile.add(" " + path);
+                            listFile.add("" + path);
                         return FileVisitResult.CONTINUE;
                     }
                     @Override
