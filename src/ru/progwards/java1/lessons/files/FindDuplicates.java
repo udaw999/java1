@@ -2,6 +2,7 @@ package ru.progwards.java1.lessons.files;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
@@ -86,15 +87,18 @@ public class FindDuplicates {
 
                 Path pathI = Paths.get(listFile.get(i).trim());//было исключение пришлось убрать пробелы из ссылки с помощью .trim()
                 byte[] allBytesI = Files.readAllBytes(pathI);
+                Files.lines(pathI, Charset.forName("windows-1251"));
+                String fileAsStringI = Files.readString(pathI);
                 //System.out.println(allBytesI.length);
                 int count = 0;
                 for (int j=i; j<listFile.size(); j++){
                     Path pathJ = Paths.get(listFile.get(j).trim());
                     byte[] allBytesJ = Files.readAllBytes(pathJ);
-
+                    Files.lines(pathJ, Charset.forName("windows-1251"));
+                    String fileAsStringJ = Files.readString(pathJ);
                     if (Files.getAttribute(pathI,"size").equals(Files.getAttribute(pathJ,"size")) &&
                             Files.getAttribute(pathI,"lastModifiedTime").equals(Files.getAttribute(pathJ,"lastModifiedTime")) &&
-                    allBytesI.length == allBytesJ.length){
+                    allBytesI.length == allBytesJ.length && fileAsStringI.equals(fileAsStringJ)){
                         count = 1;
                     } else {
                         count = 0;
