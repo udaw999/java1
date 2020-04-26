@@ -91,16 +91,18 @@ public class FindDuplicates {
                 Files.lines(pathI, Charset.forName("windows-1251"));
                 String fileAsStringI = Files.readString(pathI);
                 //System.out.println(allBytesI.length);
+                File fileHechI = new File(listFile.get(i));
                 int count = 0;
                 for (int j=i; j<listFile.size(); j++){
                     Path pathJ = Paths.get(listFile.get(j).trim());
                     byte[] allBytesJ = Files.readAllBytes(pathJ);
                     Files.lines(pathJ, Charset.forName("windows-1251"));
                     String fileAsStringJ = Files.readString(pathJ);
+                    File fileHechJ = new File(listFile.get(j));
                     if (
                             Files.getAttribute(pathI,"size").equals(Files.getAttribute(pathJ,"size")) &&
                             Files.getAttribute(pathI,"lastModifiedTime").equals(Files.getAttribute(pathJ,"lastModifiedTime"))
-//                            &&
+                            && fileHechI.hashCode() == fileHechJ.hashCode()
 //                                    allBytesI.length == allBytesJ.length &&
 //                                            fileAsStringI.equals(fileAsStringJ)
                    ){
