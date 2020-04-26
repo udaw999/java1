@@ -14,6 +14,8 @@ public class FindDuplicates {
     public List<List<String>> findDuplicates(String startPath)  {
         List<List<String>> lists = new ArrayList<>();
         TreeSet<Path> fileTreeSet = new TreeSet<>();
+//        TreeSet<Path> fileTreeSetDes = new TreeSet<>();
+//        fileTreeSetDes = (TreeSet)fileTreeSet.descendingSet();
         try {
             //получаем весь список файлов в 1 экземпляре
 
@@ -61,7 +63,7 @@ public class FindDuplicates {
                     }
                 });
 
-             //   attributeEqualityChecking(listFile);//проверка равенства атрибутов
+                attributeEqualityChecking(listFile);//проверка равенства атрибутов
                 //если нашли совпадающие файлы добавляем в список
                 if (listFile.size()>1){
                     lists.add(listFile);
@@ -77,7 +79,7 @@ public class FindDuplicates {
         for (List<String> section : lists) {
             System.out.println(section);
         }
-
+//        Collections.sort(lists,Collections.reverseOrder());
         return lists;
     }
 //проверка равенства атрибутов(размер и время изменения) и содержания файла
@@ -101,18 +103,15 @@ public class FindDuplicates {
                    // String fileAsStringJ = Files.readAllBytes(pathJ);
 
                     if (
-//                            Files.getAttribute(pathI,"size").equals(Files.getAttribute(pathJ,"size")) &&
-//                            Files.getAttribute(pathI,"lastModifiedTime").equals(Files.getAttribute(pathJ,"lastModifiedTime"))
-//                            &&
+                            Files.getAttribute(pathI,"size").equals(Files.getAttribute(pathJ,"size")) &&
+                            Files.getAttribute(pathI,"lastModifiedTime").equals(Files.getAttribute(pathJ,"lastModifiedTime"))
+                            &&
                                     Arrays.equals(allBytesI,allBytesJ)
 //                                    allBytesI.length == allBytesJ.length &&
  //                                           fileAsStringI.equals(fileAsStringJ)
                    ){
 
                         count = 1;
-                    } else {
-
-                        count = 0;
                     }
 // &&
 //                            listFile.get(i).length() == listFile.get(j).length()
