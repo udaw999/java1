@@ -88,25 +88,29 @@ public class FindDuplicates {
 
                 Path pathI = Paths.get(listFile.get(i).trim());//было исключение пришлось убрать пробелы из ссылки с помощью .trim()
                 byte[] allBytesI = Files.readAllBytes(pathI);
-                Files.lines(pathI, Charset.forName("windows-1251"));
-                String fileAsStringI = Files.readString(pathI);
-                //System.out.println(allBytesI.length);
+
+                //String fileAsStringI = Files.readString(pathI);
+                //System.out.println(fileAsStringI);
                 int count = 0;
                 for (int j=i; j<listFile.size(); j++){
                     Path pathJ = Paths.get(listFile.get(j).trim());
                     byte[] allBytesJ = Files.readAllBytes(pathJ);
-                    Files.lines(pathJ, Charset.forName("windows-1251"));
-                    String fileAsStringJ = Files.readString(pathJ);
+
+                    //сравним два массива
+                    //if (Arrays.equals(allBytesI,allBytesJ))
+                   // String fileAsStringJ = Files.readAllBytes(pathJ);
 
                     if (
                             Files.getAttribute(pathI,"size").equals(Files.getAttribute(pathJ,"size")) &&
                             Files.getAttribute(pathI,"lastModifiedTime").equals(Files.getAttribute(pathJ,"lastModifiedTime"))
-                            &&
+                            && Arrays.equals(allBytesI,allBytesJ)
 //                                    allBytesI.length == allBytesJ.length &&
-                                            fileAsStringI.equals(fileAsStringJ)
+ //                                           fileAsStringI.equals(fileAsStringJ)
                    ){
+
                         count = 1;
                     } else {
+
                         count = 0;
                     }
 // &&
