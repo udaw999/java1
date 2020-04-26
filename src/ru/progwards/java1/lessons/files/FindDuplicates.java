@@ -53,6 +53,8 @@ public class FindDuplicates {
                         if (pathMatcher2.matches(path))
                             // fileHashSet.add(path.getFileName());
                             //System. out.println(path.getFileName());
+                            //System.out.println(Files.getAttribute(path,"lastModifiedTime"));
+                            //System.out.println(Files.getAttribute(path,"size"));
                             listFile.add(" " + path);
                         //System. out.println(path);
                         return FileVisitResult.CONTINUE;
@@ -62,6 +64,12 @@ public class FindDuplicates {
                         return FileVisitResult.CONTINUE;
                     }
                 });
+
+               
+
+
+                //System.out.println(Files.getAttribute(path,"lastModifiedTime"));
+
                 if (listFile.size()>1){
                     lists.add(listFile);
                 }

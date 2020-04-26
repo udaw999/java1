@@ -6,16 +6,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Profiler {
-    public static long start;
-    public static long stop;
-//    public static int selfTimeMemory = 0;
- //   public static int selfTimeMemoryDuble = 0;
-    public static String nameParent = null;
+    public long start;
+    public  long stop;
+    public  String nameParent = null;
 
-    public static List<StatisticInfo> statisticInfos = new ArrayList<>();
+    public  List<StatisticInfo> statisticInfos = new ArrayList<>();
 
 
-    public static void enterSection(String name){
+    public  void enterSection(String name){
         //StatisticInfo.sectionName = name;
         start = System.currentTimeMillis();//время входа
 
@@ -36,15 +34,17 @@ public class Profiler {
 
     }
 
-    public static void exitSection(String name){
+    public  void exitSection(String name){
         stop = System.currentTimeMillis();//время выхода
 
         StatisticInfo sect = doesSectionExist(name,statisticInfos);//существует ли секция, если есть то получаем ее
         if(sect != null){
             if (sect.fullTime == 0){
                 sect.fullTime = (int)(stop - sect.start);
+                sect.selfTime = sect.fullTime;
             } else {
                 sect.fullTime += (int)(stop - sect.start);
+                sect.selfTime = sect.fullTime;
                 sect.count += 1;
 
             }
@@ -59,10 +59,21 @@ public class Profiler {
 
     }
 
-    public static List<StatisticInfo> getStatisticInfo(){
-        for (StatisticInfo section : statisticInfos) {
-            System.out.println(section);
+    public  List<StatisticInfo> getStatisticInfo(){
+
+        for (int i=0; i<statisticInfos.size(); i++) {
+            for (int j=i; j<statisticInfos.size(); j++) {
+                if (statisticInfos.get(i).sectionName.equals(statisticInfos.get(j).sectionNameParent)){
+                    statisticInfos.get(i).selfTime = statisticInfos.get(i).selfTime - statisticInfos.get(j).selfTime;
+                }
+            }
+
         }
+
+//        for (StatisticInfo section : statisticInfos) {
+//            System.out.println(section);
+//        }
+//        System.out.println();
 
             //statisticInfos.add();
         return statisticInfos;
@@ -91,11 +102,11 @@ public class Profiler {
     }
 
     public static void main(String[] args) {
-        enterSection("1");
+  /*      enterSection("1");
 
             testCod();
 
-     /**/   for(int i=0;i<5;i++) {
+       for(int i=0;i<5;i++) {
             enterSection("2");
 
 
@@ -121,8 +132,8 @@ public class Profiler {
 
         exitSection("1");
 
-
-        System.out.println(getStatisticInfo());
+*/
+      //  System.out.println(getStatisticInfo());
         //System.out.println(".contains - " + statisticInfos.remove(1));
        // StatisticInfo st = statisticInfos.remove(1);
       //  System.out.println(st.sectionName);
