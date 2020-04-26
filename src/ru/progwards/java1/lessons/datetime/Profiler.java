@@ -6,14 +6,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Profiler {
-    public long start;
-    public  long stop;
-    public  String nameParent = null;
+    public static long start;
+    public static long stop;
+    public static String nameParent = null;
 
-    public  List<StatisticInfo> statisticInfos = new ArrayList<>();
+    public static List<StatisticInfo> statisticInfos = new ArrayList<>();
 
 
-    public  void enterSection(String name){
+    public static void enterSection(String name){
         //StatisticInfo.sectionName = name;
         start = System.currentTimeMillis();//время входа
 
@@ -34,7 +34,7 @@ public class Profiler {
 
     }
 
-    public  void exitSection(String name){
+    public static void exitSection(String name){
         stop = System.currentTimeMillis();//время выхода
 
         StatisticInfo sect = doesSectionExist(name,statisticInfos);//существует ли секция, если есть то получаем ее
@@ -59,7 +59,7 @@ public class Profiler {
 
     }
 
-    public  List<StatisticInfo> getStatisticInfo(){
+    public static List<StatisticInfo> getStatisticInfo(){
 
         for (int i=0; i<statisticInfos.size(); i++) {
             for (int j=i; j<statisticInfos.size(); j++) {
@@ -102,11 +102,11 @@ public class Profiler {
     }
 
     public static void main(String[] args) {
-  /*      enterSection("1");
+        enterSection("1");
 
             testCod();
 
-       for(int i=0;i<5;i++) {
+     /**/   for(int i=0;i<5;i++) {
             enterSection("2");
 
 
@@ -132,8 +132,8 @@ public class Profiler {
 
         exitSection("1");
 
-*/
-      //  System.out.println(getStatisticInfo());
+
+        System.out.println(getStatisticInfo());
         //System.out.println(".contains - " + statisticInfos.remove(1));
        // StatisticInfo st = statisticInfos.remove(1);
       //  System.out.println(st.sectionName);
