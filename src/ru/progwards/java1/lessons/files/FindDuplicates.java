@@ -61,7 +61,7 @@ public class FindDuplicates {
                     }
                 });
 
-                attributeEqualityChecking(listFile);//проверка равенства атрибутов
+             //   attributeEqualityChecking(listFile);//проверка равенства атрибутов
                 //если нашли совпадающие файлы добавляем в список
                 if (listFile.size()>1){
                     lists.add(listFile);
