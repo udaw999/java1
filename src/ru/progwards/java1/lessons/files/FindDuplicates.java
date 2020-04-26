@@ -13,7 +13,7 @@ public class FindDuplicates {
 
     public List<List<String>> findDuplicates(String startPath)  {
         List<List<String>> lists = new ArrayList<>();
-        HashSet<Path> fileHashSet = new HashSet<>();
+        TreeSet<Path> fileTreeSet = new TreeSet<>();
         try {
             //получаем весь список файлов в 1 экземпляре
 
@@ -23,7 +23,7 @@ public class FindDuplicates {
                 public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) throws IOException {
 
                     if (pathMatcher.matches(path))
-                        fileHashSet.add(path.getFileName());
+                        fileTreeSet.add(path.getFileName());
                     //System. out.println(path.getFileName());
                     // System. out.println(path);
                     return FileVisitResult.CONTINUE;
@@ -39,7 +39,7 @@ public class FindDuplicates {
 
         try {
             //проходимся по списку и ищем совпадения
-            Iterator<Path> iterator = fileHashSet.iterator();
+            Iterator<Path> iterator = fileTreeSet.iterator();
             Path file;
             while (iterator.hasNext()) {
 
@@ -77,6 +77,7 @@ public class FindDuplicates {
         for (List<String> section : lists) {
             System.out.println(section);
         }
+
         return lists;
     }
 //проверка равенства атрибутов(размер и время изменения) и содержания файла
