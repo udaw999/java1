@@ -95,11 +95,10 @@ public class FindDuplicates {
                 for (int j=i; j<listFile.size(); j++){
                     Path pathJ = Paths.get(listFile.get(j).trim());
 
-                    if (Files.getAttribute(pathI,"size").equals(Files.getAttribute(pathJ,"size"))){
+                    if (Files.getAttribute(pathI,"size").equals(Files.getAttribute(pathJ,"size")) &&
+                            Files.getAttribute(pathI,"lastModifiedTime").equals(Files.getAttribute(pathJ,"lastModifiedTime"))){
                         count = 1;
-                    } else if (Files.getAttribute(pathI,"lastModifiedTime").equals(Files.getAttribute(pathJ,"lastModifiedTime"))){
-                        count = 1;
-                    }else {
+                    } else {
                         count = 0;
                     }
 
