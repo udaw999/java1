@@ -25,9 +25,11 @@ public class Profiler {
        //     selfTimeMemoryDuble = selfTimeMemory;
       //      selfTimeMemory =0;
             nameParent = name;
+           // System.out.println("tyt- name");
         } else {
             sect.start = start;
       //      selfTimeMemory =0;
+            nameParent = name;
         }
 
 
@@ -70,10 +72,10 @@ public class Profiler {
 
         }
 
-//        for (StatisticInfo section : statisticInfos) {
-//            System.out.println(section);
-//        }
-//        System.out.println();
+        for (StatisticInfo section : statisticInfos) {
+            System.out.println(section);
+        }
+        System.out.println();
 
             //statisticInfos.add();
         return statisticInfos;
@@ -102,11 +104,47 @@ public class Profiler {
     }
 
     public static void main(String[] args) {
-        enterSection("1");
+        enterSection("Process1");
+
+        testCod();
+
+        exitSection("Process1");
+        enterSection("Process1");
+
+        testCod();
+
+        for (int j=0; j<3 ;j++){
+            enterSection("Process2");
 
             testCod();
 
-     /**/   for(int i=0;i<5;i++) {
+                enterSection("Process3");
+
+                    testCod();
+
+                 exitSection("Process3");
+
+            exitSection("Process2");
+
+        }
+
+        exitSection("Process1");
+        enterSection("Process1");
+
+        testCod();
+
+        exitSection("Process1");
+        enterSection("Process1");
+
+        testCod();
+
+        exitSection("Process1");
+        //========================
+      /**/  enterSection("1");
+
+            testCod();
+
+        for(int i=0;i<5;i++) {
             enterSection("2");
 
 
@@ -132,9 +170,9 @@ public class Profiler {
 
         exitSection("1");
 
-
+/**/
         System.out.println(getStatisticInfo());
-        //System.out.println(".contains - " + statisticInfos.remove(1));
+       //System.out.println(".contains - " + statisticInfos.remove(1));
        // StatisticInfo st = statisticInfos.remove(1);
       //  System.out.println(st.sectionName);
    /*     String name = "5";
