@@ -85,7 +85,7 @@ public class FindDuplicates {
 //проверка равенства атрибутов(размер и время изменения) и содержания файла
     private void attributeEqualityChecking(List<String> listFile) {
         try {
-
+            int count = 0;
             for (int i=0; i<listFile.size(); i++){
 
                 Path pathI = Paths.get(listFile.get(i).trim());//было исключение пришлось убрать пробелы из ссылки с помощью .trim()
@@ -93,11 +93,11 @@ public class FindDuplicates {
 
                 //String fileAsStringI = Files.readString(pathI);
                 //System.out.println(fileAsStringI);
-                int count = 0;
+
                 for (int j=i; j<listFile.size(); j++){
                     Path pathJ = Paths.get(listFile.get(j).trim());
                     byte[] allBytesJ = Files.readAllBytes(pathJ);
-
+                    count = 0;
                     //сравним два массива
                     //if (Arrays.equals(allBytesI,allBytesJ))
                    // String fileAsStringJ = Files.readAllBytes(pathJ);
@@ -112,15 +112,17 @@ public class FindDuplicates {
                    ){
 
                         count = 1;
+//                    } else {
+//
+//                        count = 0;
                     }
-// &&
-//                            listFile.get(i).length() == listFile.get(j).length()
+                    //System.out.println("count- " + count);
                 }
                 if (count == 0){
                     listFile.remove(i);
                 }
 
-                count = 0;
+
             }
         } catch (Exception e){
             System.out.println(e);
