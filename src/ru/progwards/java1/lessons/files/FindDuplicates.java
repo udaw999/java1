@@ -92,9 +92,9 @@ public class FindDuplicates {
 //        }
 //        System.out.println("все");
         try {
-            int count = 0;
-            for (int i = listFile.size()-1; i>0; i--){
 
+            for (int i = listFile.size()-1; i>0; i--){
+                int count = 0;
                 Path pathI = Paths.get(listFile.get(i).trim());//было исключение пришлось убрать пробелы из ссылки с помощью .trim()
                 byte[] allBytesI = Files.readAllBytes(pathI);
 //                System.out.println("pathI 1 цыкл - "+pathI);
@@ -105,7 +105,7 @@ public class FindDuplicates {
                     byte[] allBytesJ = Files.readAllBytes(pathJ);
                     //System.out.println("2z- " + pathJ);
 
-                    count = 0;
+
                     //сравним два массива
 
 
@@ -121,7 +121,7 @@ public class FindDuplicates {
                 }
                 //System.out.println("end count - " + count);
                 if (count == 0){
-                    listFile.set(i,""+Files.getLastModifiedTime(pathI));
+                    listFile.remove(i);
                 }
             }
 
