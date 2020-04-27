@@ -87,54 +87,30 @@ public class FindDuplicates {
         try {
             int count = 0;
             for (int i = listFile.size()-1; i>1; i--){
-               // System.out.println("tyt");
+
                 Path pathI = Paths.get(listFile.get(i).trim());//было исключение пришлось убрать пробелы из ссылки с помощью .trim()
                 byte[] allBytesI = Files.readAllBytes(pathI);
-
-                //String fileAsStringI = Files.readString(pathI);
-                //System.out.println(fileAsStringI);
 
                 for (int j=i-1; j>0; j--){
                     Path pathJ = Paths.get(listFile.get(j).trim());
                     byte[] allBytesJ = Files.readAllBytes(pathJ);
                     count = 0;
                     //сравним два массива
-                    //if (Arrays.equals(allBytesI,allBytesJ))
-                   // String fileAsStringJ = Files.readAllBytes(pathJ);
+
 
                     if (
                             Files.getAttribute(pathI,"size").equals(Files.getAttribute(pathJ,"size")) &&
                             Files.getAttribute(pathI,"lastModifiedTime").equals(Files.getAttribute(pathJ,"lastModifiedTime"))
-                            &&
-                                    Arrays.equals(allBytesI,allBytesJ)
-//                                    allBytesI.length == allBytesJ.length &&
- //                                           fileAsStringI.equals(fileAsStringJ)
+                            && Arrays.equals(allBytesI,allBytesJ)
                    ){
-
                         count = 1;
-//                    } else {
-//
-//                        count = 0;
                     }
-
-                    //System.out.println(Arrays.equals(allBytesI,allBytesJ));
                 }
-               // System.out.println("count- " + count);
                 if (count == 0){
                     listFile.remove(i);
                 }
-
-
             }
-//            Iterator<String> iterator = listFile.iterator();
-//
-//            while (iterator.hasNext())
-//            {
-//                String item = iterator.next();
-//                System.out.println(item);
-////                if (item.equals("null"))
-////                    iterator.remove();
-//            }
+
         } catch (Exception e){
             System.out.println(e);
         }
