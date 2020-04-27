@@ -13,9 +13,10 @@ public class FindDuplicates {
 
     public List<List<String>> findDuplicates(String startPath)  {
         List<List<String>> lists = new ArrayList<>();
-        Set<Path> fileHashSet = new HashSet<>();
-//        TreeSet<Path> fileTreeSetDes = new TreeSet<>();
-//        fileTreeSetDes = (TreeSet)fileTreeSet.descendingSet();
+        TreeSet<Path> fileHashSet = new TreeSet<>();
+        TreeSet<Path> fileTreeSetDes = new TreeSet<>();
+        fileTreeSetDes = (TreeSet<Path>) fileHashSet.descendingSet();
+
         try {
             //получаем весь список файлов в 1 экземпляре
 
@@ -41,7 +42,7 @@ public class FindDuplicates {
 
         try {
             //проходимся по списку и ищем совпадения
-            Iterator<Path> iterator = fileHashSet.iterator();
+            Iterator<Path> iterator = fileTreeSetDes.iterator();
             while (iterator.hasNext()) {
 
                 Path file =  iterator.next();
@@ -76,45 +77,39 @@ public class FindDuplicates {
 
         }
 
-
-
+//        for (Path section : fileHashSet) {
+//            System.out.println(section);
+//        }
+//        System.out.println();
+//        for (Path section : fileTreeSetDes) {
+//            System.out.println(section);
+//        }
+//        System.out.println();
         for (List<String> section : lists) {
             System.out.println(section);
         }
-//        Collections.sort(lists,Collections.reverseOrder());
+        //Collections.sort(lists,Collections.reverseOrder());
         return lists;
     }
 //проверка равенства атрибутов(размер и время изменения) и содержания файла
     private void attributeEqualityChecking(List<String> listFile) {
 
-//        for (String sections : listFile) {
-//            System.out.println(sections);
-//        }
-//        System.out.println("все");
         try {
 
             for (int i = listFile.size()-1; i>0; i--){
                 int count = 0;
-                Path pathI = Paths.get(listFile.get(i).trim());//было исключение пришлось убрать пробелы из ссылки с помощью .trim()
+                Path pathI = Paths.get(listFile.get(i));
                 byte[] allBytesI = Files.readAllBytes(pathI);
-//                System.out.println("pathI 1 цыкл - "+pathI);
-//                System.out.println();
              /**/   for (int j=i-1; j>=0; j--){
 
-                    Path pathJ = Paths.get(listFile.get(j).trim());
+                    Path pathJ = Paths.get(listFile.get(j));
                     byte[] allBytesJ = Files.readAllBytes(pathJ);
-                    //System.out.println("2z- " + pathJ);
-
-
-                    //сравним два массива
-
-
                     if (
                             Files.getAttribute(pathI,"size").equals(Files.getAttribute(pathJ,"size"))
                                     &&
                             Files.getLastModifiedTime(pathI).equals(Files.getLastModifiedTime(pathJ))
                                     &&
-                            Arrays.equals(allBytesI,allBytesJ)
+                            Arrays.equals(allBytesI,allBytesJ)//сравним два массива
                     ){
                         count = 1;
                     }
@@ -135,6 +130,8 @@ public class FindDuplicates {
         FindDuplicates findDuplicates = new FindDuplicates();
         String startPath = "C:\\Users\\admin\\IdeaProjects\\MyTest\\proect_zadanie";
         findDuplicates.findDuplicates(startPath);
+
+
 
 
 
