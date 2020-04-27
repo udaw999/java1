@@ -86,12 +86,13 @@ public class FindDuplicates {
 
         try {
             int count = 0;
-            for (int i = listFile.size()-1; i>1; i--){
+            for (int i = listFile.size()-1; i>0; i--){
 
                 Path pathI = Paths.get(listFile.get(i).trim());//было исключение пришлось убрать пробелы из ссылки с помощью .trim()
                 byte[] allBytesI = Files.readAllBytes(pathI);
 
-                for (int j=i-1; j>0; j--){
+             /**/   for (int j=i-1; j>=0; j--){
+
                     Path pathJ = Paths.get(listFile.get(j).trim());
                     byte[] allBytesJ = Files.readAllBytes(pathJ);
                     count = 0;
