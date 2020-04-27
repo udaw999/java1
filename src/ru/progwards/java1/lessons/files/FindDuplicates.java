@@ -103,9 +103,9 @@ public class FindDuplicates {
                    // String fileAsStringJ = Files.readAllBytes(pathJ);
 
                     if (
-//                            Files.getAttribute(pathI,"size").equals(Files.getAttribute(pathJ,"size")) &&
-//                            Files.getAttribute(pathI,"lastModifiedTime").equals(Files.getAttribute(pathJ,"lastModifiedTime"))
-//                            &&
+                            Files.getAttribute(pathI,"size").equals(Files.getAttribute(pathJ,"size")) &&
+                            Files.getAttribute(pathI,"lastModifiedTime").equals(Files.getAttribute(pathJ,"lastModifiedTime"))
+                            &&
                                     Arrays.equals(allBytesI,allBytesJ)
 //                                    allBytesI.length == allBytesJ.length &&
  //                                           fileAsStringI.equals(fileAsStringJ)
@@ -119,7 +119,7 @@ public class FindDuplicates {
 
                     //System.out.println(Arrays.equals(allBytesI,allBytesJ));
                 }
-                System.out.println("count- " + count);
+               // System.out.println("count- " + count);
                 if (count == 0){
                     listFile.remove(i);
                 }
