@@ -121,7 +121,7 @@ public class FindDuplicates {
                 }
                 //System.out.println("end count - " + count);
                 if (count == 0){
-                    listFile.remove(i);
+                    listFile.add(i,""+Files.getLastModifiedTime(pathI));
                 }
             }
 
