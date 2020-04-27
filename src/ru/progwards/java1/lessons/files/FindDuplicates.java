@@ -111,10 +111,10 @@ public class FindDuplicates {
 
                     if (
                             Files.getAttribute(pathI,"size").equals(Files.getAttribute(pathJ,"size"))
-                                    //&&
+                                    &&
   //                          Files.getAttribute(pathI,"lastModifiedTime").equals(Files.getAttribute(pathJ,"lastModifiedTime"))
 //                                    &&
-//                            Arrays.equals(allBytesI,allBytesJ)
+                            Arrays.equals(allBytesI,allBytesJ)
                     ){
                         count = 1;
                     }
