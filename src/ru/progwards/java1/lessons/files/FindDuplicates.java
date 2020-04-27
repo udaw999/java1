@@ -13,7 +13,7 @@ public class FindDuplicates {
 
     public List<List<String>> findDuplicates(String startPath)  {
         List<List<String>> lists = new ArrayList<>();
-        TreeSet<Path> fileTreeSet = new TreeSet<>();
+        Set<Path> fileHashSet = new HashSet<>();
 //        TreeSet<Path> fileTreeSetDes = new TreeSet<>();
 //        fileTreeSetDes = (TreeSet)fileTreeSet.descendingSet();
         try {
@@ -25,7 +25,7 @@ public class FindDuplicates {
                 public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) throws IOException {
 
                     if (pathMatcher.matches(path))
-                        fileTreeSet.add(path.getFileName());
+                        fileHashSet.add(path.getFileName());
                     //System. out.println(path.getFileName());
                     // System. out.println(path);
                     return FileVisitResult.CONTINUE;
@@ -41,14 +41,13 @@ public class FindDuplicates {
 
         try {
             //проходимся по списку и ищем совпадения
-            Iterator<Path> iterator = fileTreeSet.iterator();
-            Path file;
+            Iterator<Path> iterator = fileHashSet.iterator();
             while (iterator.hasNext()) {
 
-                file =  iterator.next();
+                Path file =  iterator.next();
                 List<String> listFile = new LinkedList<>();
 
-                PathMatcher pathMatcher2 = FileSystems.getDefault().getPathMatcher("glob:**/*" + file);
+                PathMatcher pathMatcher2 = FileSystems.getDefault().getPathMatcher("glob:**" + file);
                 Files.walkFileTree(Paths.get(startPath), new SimpleFileVisitor<>() {
                     @Override
                     public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) throws IOException {
@@ -84,17 +83,18 @@ public class FindDuplicates {
     }
 //проверка равенства атрибутов(размер и время изменения) и содержания файла
     private void attributeEqualityChecking(List<String> listFile) {
+
         try {
             int count = 0;
-            for (int i=listFile.size(); i<1; i--){
-
+            for (int i = listFile.size()-1; i>1; i--){
+               // System.out.println("tyt");
                 Path pathI = Paths.get(listFile.get(i).trim());//было исключение пришлось убрать пробелы из ссылки с помощью .trim()
                 byte[] allBytesI = Files.readAllBytes(pathI);
 
                 //String fileAsStringI = Files.readString(pathI);
                 //System.out.println(fileAsStringI);
 
-                for (int j=i-1; j<0; j--){
+                for (int j=i-1; j>0; j--){
                     Path pathJ = Paths.get(listFile.get(j).trim());
                     byte[] allBytesJ = Files.readAllBytes(pathJ);
                     count = 0;
@@ -116,9 +116,10 @@ public class FindDuplicates {
 //
 //                        count = 0;
                     }
-                    //System.out.println("count- " + count);
+
                     //System.out.println(Arrays.equals(allBytesI,allBytesJ));
                 }
+                System.out.println("count- " + count);
                 if (count == 0){
                     listFile.remove(i);
                 }
