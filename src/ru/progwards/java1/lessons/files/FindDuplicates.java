@@ -96,15 +96,16 @@ public class FindDuplicates {
 
         try {
 
-            for (int i = listFile.size()-1; i>0; i--){
+            for (int i = listFile.size()-1; i>=0; i--){
                 int count = 0;
                 Path pathI = Paths.get(listFile.get(i));
                 byte[] allBytesI = Files.readAllBytes(pathI);
-             /**/   for (int j=i-1; j>=0; j--){
+             /**/   for (int j=listFile.size()-1; j>=0; j--){
 
                     Path pathJ = Paths.get(listFile.get(j));
                     byte[] allBytesJ = Files.readAllBytes(pathJ);
-                    if (
+                    if (listFile.indexOf(listFile.get(i)) != listFile.indexOf(listFile.get(j))
+                        &&
                             Files.getAttribute(pathI,"size").equals(Files.getAttribute(pathJ,"size"))
                                     &&
                             Files.getLastModifiedTime(pathI).compareTo(Files.getLastModifiedTime(pathJ)) == 0
@@ -118,6 +119,8 @@ public class FindDuplicates {
                 if (count == 0){
                     listFile.remove(i);
                 }
+               // listFile.set(i,listFile.get(i) + " размер- " + Files.getAttribute(pathI,"size") + " date- " + Files.getLastModifiedTime(pathI));
+
             }
 
         } catch (Exception e){
