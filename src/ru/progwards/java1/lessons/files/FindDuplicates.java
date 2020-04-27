@@ -62,10 +62,13 @@ public class FindDuplicates {
                     }
                 });
 
-                attributeEqualityChecking(listFile);//проверка равенства атрибутов
-                //если нашли совпадающие файлы добавляем в список
+
                 if (listFile.size()>1){
-                    lists.add(listFile);
+                    attributeEqualityChecking(listFile);//проверка равенства атрибутов
+                    //если нашли совпадающие файлы добавляем в список
+                    if (listFile.size()>1) {
+                        lists.add(listFile);
+                    }
                 }
 
             }
@@ -84,29 +87,38 @@ public class FindDuplicates {
 //проверка равенства атрибутов(размер и время изменения) и содержания файла
     private void attributeEqualityChecking(List<String> listFile) {
 
+//        for (String sections : listFile) {
+//            System.out.println(sections);
+//        }
+//        System.out.println("все");
         try {
             int count = 0;
             for (int i = listFile.size()-1; i>0; i--){
 
                 Path pathI = Paths.get(listFile.get(i).trim());//было исключение пришлось убрать пробелы из ссылки с помощью .trim()
                 byte[] allBytesI = Files.readAllBytes(pathI);
-
+//                System.out.println("pathI 1 цыкл - "+pathI);
+//                System.out.println();
              /**/   for (int j=i-1; j>=0; j--){
 
                     Path pathJ = Paths.get(listFile.get(j).trim());
                     byte[] allBytesJ = Files.readAllBytes(pathJ);
+                    //System.out.println("2z- " + pathJ);
+
                     count = 0;
                     //сравним два массива
 
 
                     if (
                             Files.getAttribute(pathI,"size").equals(Files.getAttribute(pathJ,"size")) &&
-                            Files.getAttribute(pathI,"lastModifiedTime").equals(Files.getAttribute(pathJ,"lastModifiedTime"))
-                            && Arrays.equals(allBytesI,allBytesJ)
+                   //         Files.getAttribute(pathI,"lastModifiedTime").equals(Files.getAttribute(pathJ,"lastModifiedTime"))
+                    //        &&
+                    Arrays.equals(allBytesI,allBytesJ)
                    ){
                         count = 1;
                     }
                 }
+                //System.out.println("end count - " + count);
                 if (count == 0){
                     listFile.remove(i);
                 }
