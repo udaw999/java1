@@ -108,11 +108,11 @@ public class FindDuplicates {
                     count = 0;
                     //сравним два массива
 
-
+                   // System.out.println(Files.getAttribute(pathI,"lastModifiedTime").equals(Files.getAttribute(pathJ,"lastModifiedTime")));
                     if (
                             Files.getAttribute(pathI,"size").equals(Files.getAttribute(pathJ,"size")) &&
-                   //         Files.getAttribute(pathI,"lastModifiedTime").equals(Files.getAttribute(pathJ,"lastModifiedTime"))
-                    //        &&
+                            Files.getAttribute(pathI,"lastModifiedTime").equals(Files.getAttribute(pathJ,"lastModifiedTime"))
+                            &&
                     Arrays.equals(allBytesI,allBytesJ)
                    ){
                         count = 1;
