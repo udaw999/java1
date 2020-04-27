@@ -107,7 +107,7 @@ public class FindDuplicates {
                     if (
                             Files.getAttribute(pathI,"size").equals(Files.getAttribute(pathJ,"size"))
                                     &&
-                            Files.getLastModifiedTime(pathI).equals(Files.getLastModifiedTime(pathJ))
+                            Files.getLastModifiedTime(pathI).compareTo(Files.getLastModifiedTime(pathJ)) == 0
                                     &&
                             Arrays.equals(allBytesI,allBytesJ)//сравним два массива
                     ){
