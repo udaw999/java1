@@ -86,7 +86,7 @@ public class FindDuplicates {
     private void attributeEqualityChecking(List<String> listFile) {
         try {
             int count = 0;
-            for (int i=0; i<listFile.size(); i++){
+            for (int i=listFile.size(); i<1; i--){
 
                 Path pathI = Paths.get(listFile.get(i).trim());//было исключение пришлось убрать пробелы из ссылки с помощью .trim()
                 byte[] allBytesI = Files.readAllBytes(pathI);
@@ -94,7 +94,7 @@ public class FindDuplicates {
                 //String fileAsStringI = Files.readString(pathI);
                 //System.out.println(fileAsStringI);
 
-                for (int j=i+1; j<listFile.size(); j++){
+                for (int j=i-1; j<0; j--){
                     Path pathJ = Paths.get(listFile.get(j).trim());
                     byte[] allBytesJ = Files.readAllBytes(pathJ);
                     count = 0;
@@ -117,7 +117,7 @@ public class FindDuplicates {
 //                        count = 0;
                     }
                     //System.out.println("count- " + count);
-                    System.out.println(Arrays.equals(allBytesI,allBytesJ));
+                    //System.out.println(Arrays.equals(allBytesI,allBytesJ));
                 }
                 if (count == 0){
                     listFile.remove(i);
@@ -125,6 +125,15 @@ public class FindDuplicates {
 
 
             }
+//            Iterator<String> iterator = listFile.iterator();
+//
+//            while (iterator.hasNext())
+//            {
+//                String item = iterator.next();
+//                System.out.println(item);
+////                if (item.equals("null"))
+////                    iterator.remove();
+//            }
         } catch (Exception e){
             System.out.println(e);
         }
