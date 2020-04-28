@@ -27,8 +27,6 @@ public class FindDuplicates {
 
                     if (pathMatcher.matches(path))
                         fileHashSet.add(path.getFileName());
-                    //System. out.println(path.getFileName());
-                    // System. out.println(path);
                     return FileVisitResult.CONTINUE;
                 }
                 @Override
@@ -77,18 +75,11 @@ public class FindDuplicates {
 
         }
 
-//        for (Path section : fileHashSet) {
-//            System.out.println(section);
-//        }
-//        System.out.println();
-//        for (Path section : fileTreeSetDes) {
-//            System.out.println(section);
-//        }
-//        System.out.println();
+
         for (List<String> section : lists) {
             System.out.println(section);
         }
-        //Collections.sort(lists,Collections.reverseOrder());
+
         return lists;
     }
 //проверка равенства атрибутов(размер и время изменения) и содержания файла
@@ -98,14 +89,15 @@ public class FindDuplicates {
 
             for (int i = listFile.size()-1; i>=0; i--){
                 int count = 0;
-                Path pathI = Paths.get(listFile.get(i));
-                byte[] allBytesI = Files.readAllBytes(pathI);
+                Path pathI = Paths.get(listFile.get(i));//ссылка пути файла
+                byte[] allBytesI = Files.readAllBytes(pathI);//содержимое файла в байтах
              /**/   for (int j=listFile.size()-1; j>=0; j--){
 
                     Path pathJ = Paths.get(listFile.get(j));
                     byte[] allBytesJ = Files.readAllBytes(pathJ);
-                    if (listFile.indexOf(listFile.get(i)) != listFile.indexOf(listFile.get(j))
-                        &&
+                    /* далее сравниваем файлы между собой 1.это если файл не сам с собой(проверяю по индексу их)
+                     * 2. по размеру 3. по дате изменения 4. по содержимому(в байтах) */
+                    if (listFile.indexOf(listFile.get(i)) != listFile.indexOf(listFile.get(j)) &&
                             Files.getAttribute(pathI,"size").equals(Files.getAttribute(pathJ,"size"))
                                     &&
                             Files.getLastModifiedTime(pathI).compareTo(Files.getLastModifiedTime(pathJ)) == 0
@@ -115,14 +107,10 @@ public class FindDuplicates {
                         count = 1;
                     }
                 }
-                //System.out.println("end count - " + count);
                 if (count == 0){
                     listFile.remove(i);
                 }
-               // listFile.set(i,listFile.get(i) + " размер- " + Files.getAttribute(pathI,"size") + " date- " + Files.getLastModifiedTime(pathI));
-
             }
-
         } catch (Exception e){
             System.out.println(e);
         }
