@@ -55,11 +55,11 @@ public class FilesSelect {
                 //System.out.println(keys.get(i));
                 if (isContain1){//если слово в файле найдено то реализуем задание задачи
 //                    System.out.println(path);
-//                    System.out.println("слово- " + keys.get(i));
+                    System.out.println("слово- " + keys.get(i));
 //                    System.out.println(String.valueOf(path.getFileName()).replace(".txt",""));
 //                    System.out.println(path.getParent());
-                    //получаем название папки из названия файла
-                    String nameFolder = String.valueOf(path.getFileName()).replace(".txt","");
+                    //получаем название папки по слову которое искали в файлах
+                    String nameFolder = keys.get(i);
                     Path paths = Paths.get(outFolder);//путь к папке где надо создать каталог
                     Path newDir = paths.resolve(nameFolder);// путь с новым каталогом
                     if (!Files.exists(newDir))//проверяем существует ли каталог
