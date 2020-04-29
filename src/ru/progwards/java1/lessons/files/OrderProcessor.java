@@ -95,11 +95,7 @@ public class OrderProcessor {
         order.customerId = nameFile[2];
         order.datetime = dateFileTime;
         order.items = new ArrayList<OrderItem>();
-        Collections.sort(order.items, new Comparator<OrderItem>() {
-            public int compare(OrderItem o1, OrderItem o2) {
-                return o1.googsName.compareTo(o2.googsName);
-            }
-        });
+
         order.sum = 0;
         try {
             List<String> allLines = Files.readAllLines(path);
@@ -116,7 +112,9 @@ public class OrderProcessor {
                 order.items.add(orderItem);
                 double sumTovar = orderItem.count * orderItem.price;
                 order.sum += sumTovar;
+
             }
+
             //System.out.println(order.sum);
 //            for (OrderItem lines : order.items){
 //                System.out.println(lines);
@@ -135,13 +133,23 @@ public class OrderProcessor {
             System.out.println(e);
         }
 
+        Collections.sort(order.items, new Comparator<OrderItem>() {
+            public int compare(OrderItem o1, OrderItem o2) {
+                return o1.googsName.compareTo(o2.googsName);
+            }
+        });
+
     }
 
     public List<Order> process(String shopId){
 
         process = new ArrayList<Order>();
         loadOrders(null,null,shopId);
-        Collections.sort(process);
+        Collections.sort(process, new Comparator<Order>() {
+            public int compare(Order o1, Order o2) {
+                return o1.datetime.compareTo(o2.datetime);
+            }
+        });
         return process;
     }
 

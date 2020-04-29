@@ -3,7 +3,7 @@ package ru.progwards.java1.lessons.files;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class Order implements Comparable<Order>{
+public class Order{
     public String shopId;// - идентификатор магазина
     public String orderId;// - идентификатор заказа
     public String customerId;// - идентификатор покупателя
@@ -11,10 +11,10 @@ public class Order implements Comparable<Order>{
     public List<OrderItem> items;// - список позиций в заказе, отсортированный по наименованию товара
     public double sum;// - сумма стоимости всех позиций в заказе
 
-    @Override
-    public int compareTo(Order o) {
-        return datetime.compareTo(o.datetime);
-    }
+//    @Override
+//    public int compareTo(Order o) {
+//        return datetime.compareTo(o.datetime);
+//    }
 
     public LocalDateTime getDatetime() {
         return datetime;
