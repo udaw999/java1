@@ -75,6 +75,7 @@ public class OrderProcessor {
                 }
                 @Override
                 public FileVisitResult visitFileFailed(Path file, IOException e) {
+                    countError++;
                     return FileVisitResult.CONTINUE;
                 }
             });
@@ -126,7 +127,11 @@ public class OrderProcessor {
                 process.add(order);
             }
 
-            } catch (Exception e){
+        } catch (ArrayIndexOutOfBoundsException y){
+            //System.out.println("y- " + y);
+            countError++;
+        }
+        catch (Exception e){
             System.out.println(e);
         }
 
@@ -176,11 +181,12 @@ public class OrderProcessor {
         String shopId = "S02";
 
         OrderProcessor orderProcessor = new OrderProcessor(startPath);
-        orderProcessor.loadOrders(null,null,null);
-        System.out.println("process - " + orderProcessor.process(null));
+        System.out.println(orderProcessor.loadOrders(null,null,null));
+
+        //System.out.println("process - " + orderProcessor.process(null));
         System.out.println("\nprocess\n");
-        for (int i=0;i<orderProcessor.process(shopId).size();i++ ){
-            System.out.println(orderProcessor.process(shopId).get(i));
+        for (int i=0;i<orderProcessor.process(null).size();i++ ){
+            System.out.println(orderProcessor.process(null).get(i));
         }
         System.out.println("\nstatisticsByShop\n");
         System.out.println(orderProcessor.statisticsByShop());
