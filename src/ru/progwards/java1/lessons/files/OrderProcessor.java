@@ -15,7 +15,7 @@ import java.util.*;
 public class OrderProcessor {
     private String startPath;
     private int countError = 0;
-    private List<Order> process;
+    private List<Order> process = new ArrayList<Order>();
     private Map<String, Double> statisticsByShop;
     private Order order;
 
@@ -143,7 +143,7 @@ public class OrderProcessor {
 
     public List<Order> process(String shopId){
 
-        process = new ArrayList<Order>();
+        //process = new ArrayList<Order>();
         loadOrders(null,null,shopId);
         Collections.sort(process, new Comparator<Order>() {
             public int compare(Order o1, Order o2) {
@@ -155,7 +155,7 @@ public class OrderProcessor {
 
     public Map<String, Double> statisticsByShop(){
         statisticsByShop = new TreeMap<>();
-        process(null);
+       // process(null);
         for (int i=0;i<process.size();i++){
 //            System.out.println(process.get(i).sum);
 //            System.out.println(process.get(i).shopId);
@@ -186,13 +186,13 @@ public class OrderProcessor {
         String shopId = "S02";
 
         OrderProcessor orderProcessor = new OrderProcessor(startPath);
-        System.out.println(orderProcessor.loadOrders(null,null,null));
+        System.out.println(orderProcessor.loadOrders(start,finish,null));
 
         //System.out.println("process - " + orderProcessor.process(null));
-        System.out.println("\nprocess\n");
-        for (int i=0;i<orderProcessor.process(null).size();i++ ){
-            System.out.println(orderProcessor.process(null).get(i));
-        }
+//        System.out.println("\nprocess\n");
+//        for (int i=0;i<orderProcessor.process(null).size();i++ ){
+//            System.out.println(orderProcessor.process(null).get(i));
+//        }
         System.out.println("\nstatisticsByShop\n");
         System.out.println(orderProcessor.statisticsByShop());
         System.out.println("\nstatisticsByGoods\n");
