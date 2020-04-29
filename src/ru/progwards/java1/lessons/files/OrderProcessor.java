@@ -138,13 +138,10 @@ public class OrderProcessor {
     }
 
     public List<Order> process(String shopId){
+
         process = new ArrayList<Order>();
-        Collections.sort(process, new Comparator<Order>() {
-            public int compare(Order o1, Order o2) {
-                return o1.datetime.compareTo(o2.datetime);
-            }
-        });
         loadOrders(null,null,shopId);
+        Collections.sort(process);
         return process;
     }
 
