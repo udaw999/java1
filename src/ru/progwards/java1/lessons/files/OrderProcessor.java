@@ -142,7 +142,7 @@ public class OrderProcessor {
     }
 
     public List<Order> process(String shopId){
-
+        process.clear();
         //process = new ArrayList<Order>();
         loadOrders(null,null,shopId);
         Collections.sort(process, new Comparator<Order>() {
@@ -188,7 +188,7 @@ public class OrderProcessor {
         OrderProcessor orderProcessor = new OrderProcessor(startPath);
         System.out.println(orderProcessor.loadOrders(start,finish,null));
 
-        //System.out.println("process - " + orderProcessor.process(null));
+        System.out.println("process - " + orderProcessor.process(null));
 //        System.out.println("\nprocess\n");
 //        for (int i=0;i<orderProcessor.process(null).size();i++ ){
 //            System.out.println(orderProcessor.process(null).get(i));
