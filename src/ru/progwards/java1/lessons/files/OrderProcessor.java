@@ -195,7 +195,22 @@ public class OrderProcessor {
     }
 
     public Map<LocalDate, Double> statisticsByDay(){
-        return null;
+        Map<LocalDate, Double> statisticsByDay = new TreeMap<>();
+
+        for (int i=0;i<process.size();i++){
+
+            LocalDate dateBy = process.get(i).datetime.toLocalDate();
+            if (statisticsByDay.containsKey(dateBy)){
+                double sumSop = statisticsByDay.get(dateBy) + process.get(i).sum;
+
+                statisticsByDay.put(dateBy, sumSop);
+            } else {
+                statisticsByDay.put(dateBy, process.get(i).sum);
+            }
+
+        }
+
+        return statisticsByDay;
     }
 
     public static void main(String[] args) throws ParseException {
@@ -207,7 +222,7 @@ public class OrderProcessor {
         OrderProcessor orderProcessor = new OrderProcessor(startPath);
         System.out.println(orderProcessor.loadOrders(null,null,null));
 
-     //   System.out.println("process - " + orderProcessor.process(null));
+        System.out.println("process - " + orderProcessor.process(null));
 //        System.out.println("\nprocess\n");
 //        for (int i=0;i<orderProcessor.process(null).size();i++ ){
 //            System.out.println(orderProcessor.process(null).get(i));
@@ -216,6 +231,8 @@ public class OrderProcessor {
         System.out.println(orderProcessor.statisticsByShop());
         System.out.println("\nstatisticsByGoods\n");
         System.out.println(orderProcessor.statisticsByGoods());
+        System.out.println("\nstatisticsByDay\n");
+        System.out.println(orderProcessor.statisticsByDay());
 /*
        //меняем дату последнего изменения файла
         File fileInfo1 = new File("C:\\Users\\admin\\IdeaProjects\\MyTest\\proect_zadanie\\OrderProcessor\\1\\S02-P01X12-0012.csv");
