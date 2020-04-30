@@ -17,6 +17,7 @@ public class OrderProcessor {
     private int countError = 0;
     private List<Order> process = new ArrayList<Order>();
     private Map<String, Double> statisticsByShop;
+    private Map<String, Double> statisticsByGoods;
     private Order order;
 
 //- инициализирует класс, с указанием начальной папки для хранения файлов
@@ -172,7 +173,25 @@ public class OrderProcessor {
     }
 
     public Map<String, Double> statisticsByGoods(){
-        return null;
+        statisticsByGoods = new TreeMap<>();
+
+        for (int i=0;i<process.size();i++){
+
+            //System.out.println(process.get(i));
+            for (int j=0; j < process.get(i).items.size(); j++){
+               String googsNameBy = process.get(i).items.get(j).googsName;
+               double priceBy = process.get(i).items.get(j).price;
+               int countBy = process.get(i).items.get(j).count;
+               if (statisticsByGoods.containsKey(googsNameBy)){
+
+                   statisticsByGoods.put(googsNameBy,priceBy * countBy + statisticsByGoods.get(googsNameBy));
+               } else {
+                   statisticsByGoods.put(googsNameBy,priceBy * countBy);
+               }
+            }
+        }
+
+        return statisticsByGoods;
     }
 
     public Map<LocalDate, Double> statisticsByDay(){
@@ -186,9 +205,9 @@ public class OrderProcessor {
         String shopId = "S02";
 
         OrderProcessor orderProcessor = new OrderProcessor(startPath);
-        System.out.println(orderProcessor.loadOrders(start,finish,null));
+        System.out.println(orderProcessor.loadOrders(null,null,null));
 
-        System.out.println("process - " + orderProcessor.process(null));
+     //   System.out.println("process - " + orderProcessor.process(null));
 //        System.out.println("\nprocess\n");
 //        for (int i=0;i<orderProcessor.process(null).size();i++ ){
 //            System.out.println(orderProcessor.process(null).get(i));
