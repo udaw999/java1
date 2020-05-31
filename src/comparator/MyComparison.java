@@ -5,7 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.Vector;
+
+import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
 
 public class MyComparison extends JFrame {
     private JFrame frame;
@@ -13,14 +14,13 @@ public class MyComparison extends JFrame {
     private JPanel panel1;//создаенм панель
     private JPanel panel2;//создаенм панель
     private JButton compare;
+    private JButton btnPatch;
     private JButton btnaAddBlockToFileOne;
     private JButton btnAddBlockToFileTwo;
     private JLabel lbSelectFile_1;
     private JLabel lbSelectFile_2;
     private JScrollPane scrollRight;
     private JScrollPane scrollLeft;
-    private List list1;
-    private List list2;
     private CompareTwoFiles compareTwoFiless;
     private File selectedFile_1 = null;
     private File selectedFile_2 = null;
@@ -28,8 +28,13 @@ public class MyComparison extends JFrame {
     String fileName_2;// = "C:\\Users\\admin\\IdeaProjects\\fileCompare\\file_com_2.txt";
     private int numBlok = 0;
     private ActionListener compareTwoFiles = new CompareActionListener();
-    private JList<StringTwoFiles> listLeft;
-    private JList<StringTwoFiles> listRight;
+    private JList<Object> listLeft;
+    private JList<Object> listRight;
+    private JList<Object> listPatch;
+    private DefaultListModel<Object> listModelLeft;
+    private DefaultListModel<Object> listModelRight;
+    private DefaultBoundedRangeModel scrModelDef;
+    private DefaultListModel<Object> modelPatch;
 
     public static void main(String[] args) {
         new MyComparison();
@@ -48,14 +53,22 @@ public class MyComparison extends JFrame {
         panel2 = new JPanel();
         JButton btnSelectFile_1 = new JButton("Выбрать файл 1");
         JButton btnSelectFile_2 = new JButton("Выбрать файл 2");
+        btnPatch = new JButton("Патч");
         btnaAddBlockToFileOne = new JButton("Добавить блок в файл 1");
         btnAddBlockToFileTwo = new JButton("Добавить блок в файл 2");
         compare = new JButton("Сравнить");
         lbSelectFile_1 = new JLabel("Файл не выбран",JLabel.CENTER);
         lbSelectFile_2 = new JLabel("Файл не выбран",JLabel.CENTER);
-        list1 = new List();
-        list2 = new List();
+        listModelLeft = new DefaultListModel<>();
+        listModelRight = new DefaultListModel<>();
+        modelPatch = new DefaultListModel<>();
+        listLeft = new JList<Object>(listModelLeft);
+        listRight = new JList<Object>(listModelRight);
 
+        scrollLeft = new JScrollPane(listLeft,
+                VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollRight = new JScrollPane(listRight,
+                VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
 
 
@@ -82,13 +95,14 @@ public class MyComparison extends JFrame {
         compare.setEnabled(false);//делаем кнопку неактивной
         btnaAddBlockToFileOne.setEnabled(false);
         btnAddBlockToFileTwo.setEnabled(false);
-
+        btnPatch.setEnabled(false);
 
 
         //виполняем действие для соответствующей кнопке
         btnSelectFile_1.addActionListener(selectFile_1);
         btnSelectFile_2.addActionListener(selectFile_2);
         compare.addActionListener(compareTwoFiles);
+        btnPatch.addActionListener(new Patch());
         btnaAddBlockToFileOne.addActionListener(addBlockToFileOne);
         btnAddBlockToFileTwo.addActionListener(addBlockToFileTwo);
 
@@ -98,47 +112,34 @@ public class MyComparison extends JFrame {
         panel.add(btnaAddBlockToFileOne);
         panel.add(btnSelectFile_1);
         panel.add(compare);
+        panel.add(btnPatch);
         panel.add(btnSelectFile_2);
         panel.add(btnAddBlockToFileTwo);
 
         panel1.add("North",lbSelectFile_1);
-        panel1.add("Center",list1);
 
         panel2.add("North",lbSelectFile_2);
-        panel2.add("Center",list2);
 
+
+
+        //объединяем полосы прокрутки
+        // scrollLeft.getHorizontalScrollBar().setModel(scrollRight.getHorizontalScrollBar().getModel());
+        // scrollLeft.getVerticalScrollBar().setModel(scrollRight.getVerticalScrollBar().getModel());
+
+        panel2.add("Center",scrollRight);//а потом скрол на панель
+        panel1.add("Center",scrollLeft);//а потом скрол на панель
 
         //добавить панель на форму
 
         frame.add(panel1);
         frame.add(panel2);
         frame.add(panel);
+        frame.revalidate();
+//        frame.repaint();//обновить вид
     }
-    private ActionListener addBlockToFileOne = new ActionListener() {
 
-        @Override
-        public void actionPerformed(ActionEvent one) {
-            compareTwoFiless.addBlockToFileOne(numBlok);
-            CompareActionListener compTwo = new CompareActionListener();
-            compTwo.actionPerformed(one);
-            panel1.remove(scrollLeft);
-            frame.revalidate();
-            frame.repaint();//обновить вид
-        }
 
-    };
-    private ActionListener addBlockToFileTwo = new ActionListener() {
 
-        @Override
-        public void actionPerformed(ActionEvent two) {
-            compareTwoFiless.addBlockToFileTwo(numBlok);
-            CompareActionListener compTwo = new CompareActionListener();
-            compTwo.actionPerformed(two);
-            panel2.remove(scrollRight);
-            frame.revalidate();
-            frame.repaint();//обновить вид
-        }
-    };
 //setBorder(BorderFactory.createMatteBorder(0,0,1,0,Color.LIGHT_GRAY));
 
     //фрейм
@@ -159,6 +160,26 @@ public class MyComparison extends JFrame {
 
     }
 
+    private ActionListener addBlockToFileOne = new ActionListener() {
+
+        @Override
+        public void actionPerformed(ActionEvent one) {
+            compareTwoFiless.addBlockToFileOne(numBlok);
+            CompareActionListener compTwo = new CompareActionListener();
+            compTwo.actionPerformed(one);
+        }
+
+    };
+    private ActionListener addBlockToFileTwo = new ActionListener() {
+
+        @Override
+        public void actionPerformed(ActionEvent two) {
+            compareTwoFiless.addBlockToFileTwo(numBlok);
+            CompareActionListener compTwo = new CompareActionListener();
+            compTwo.actionPerformed(two);
+        }
+    };
+
     //выбор файла 1 после клика на кнопке
     private ActionListener selectFile_1 = new ActionListener() {
 
@@ -172,9 +193,8 @@ public class MyComparison extends JFrame {
                 selectedFile_1 = fc.getSelectedFile(); // Ставим указатель на файл который выбрали
                 lbSelectFile_1.setText(selectedFile_1.getAbsolutePath()); // Получаем Path файла который выбрали
                 fileName_1 = selectedFile_1.getAbsolutePath();
-                //panel1.add("Center",list1);//добавляем на панель List()
-                //System.err.println("tttt-" +list1.isDisplayable());
-                listFail(fileName_1, list1,scrollLeft,panel1);//считываем файл
+
+                listFail(fileName_1, listModelLeft);//считываем файл
                 if (fileName_1 != null && fileName_2 != null)
                     compare.setEnabled(true);//делаем кнопку активной
             }
@@ -188,11 +208,7 @@ public class MyComparison extends JFrame {
     private ActionListener selectFile_2 = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-//            if (scrollRight != null){//проверка есть ли уже результат сравнения на панели если есть
-//                list2.removeAll();
-//                panel2.remove(scrollRight);//удаляем его
-//                panel2.add("Center",list2);//добавляем на панель List()
-//            }
+
             JFileChooser fc = new JFileChooser(); // открываем файл выбора.
             int returnValue = fc.showOpenDialog(null);//для проверки открытия окна
             if (returnValue == JFileChooser.APPROVE_OPTION) // проверяем открыто ли диалог окно
@@ -201,7 +217,7 @@ public class MyComparison extends JFrame {
                 lbSelectFile_2.setText(selectedFile_2.getAbsolutePath()); // Получаем Path файла который выбрали
                 fileName_2 = selectedFile_2.getAbsolutePath();
 
-                listFail(fileName_2,list2,scrollRight,panel2 );
+                listFail(fileName_2,listModelRight);
                 if (fileName_1 != null && fileName_2 != null)
                     compare.setEnabled(true);//делаем кнопку активной
             } else {
@@ -210,17 +226,14 @@ public class MyComparison extends JFrame {
         }
     };
 
-    private void listFail(String file, List list, JScrollPane scroll, JPanel paneled) {
-        if (scroll != null && scroll.isDisplayable()){//проверка есть ли уже результат сравнения на панели если есть
-            list.removeAll();
-            paneled.remove(scroll);//удаляем его
-            paneled.add("Center",list);//добавляем на панель List()
-        }
+    private void listFail(String file, DefaultListModel<Object> list) {
+        if (scrModelDef != null)//возвращаем независимый скрол первому файлу
+            scrollLeft.getVerticalScrollBar().setModel(scrModelDef);
         ReadFile readFiles = new ReadFile(file);
         readFiles.readFile();
-        list.removeAll();
+        list.removeAllElements();
         for (String str : readFiles.getList()){
-            list.add(str);
+            list.addElement(str);
         }
 
     }
@@ -230,23 +243,32 @@ public class MyComparison extends JFrame {
     public class CompareActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent z) {
-            System.err.println(fileName_2);
-            System.err.println(fileName_1);
             if (fileName_1 != null && fileName_2 != null) {
                 compareTwoFiless = new CompareTwoFiles(fileName_1, fileName_2);
                 compareTwoFiless.compareTwoFiles();//сравниваем
-                System.err.println("после компаре");
-                deriveComparisonLeft(compareTwoFiless);//выводим сравнение на панели 1(файл 1)
-                deriveComparisonRight(compareTwoFiless);//выводим сравнение на панели 2(файл 2)
 
+                listModelLeft.removeAllElements();
+                listModelRight.removeAllElements();
+                modelPatch.removeAllElements();
+                for (StringTwoFiles str : compareTwoFiless.getArrayAllLines()){
+                    listModelLeft.addElement(str);
+                    listModelRight.addElement(str);
+                    modelPatch.addElement(str);
+                }
+
+                deriveComparisonLeft();//выводим сравнение на панели 1(файл 1)
+                deriveComparisonRight();//выводим сравнение на панели 2(файл 2)
+
+                //запоминаем настройки скрола первого файла перед объединением
+                scrModelDef = (DefaultBoundedRangeModel) scrollLeft.getVerticalScrollBar().getModel();
                 //объединяем полосы прокрутки
-                scrollLeft.getHorizontalScrollBar().setModel(scrollRight.getHorizontalScrollBar().getModel());
+                //scrollLeft.getHorizontalScrollBar().setModel(scrollRight.getHorizontalScrollBar().getModel());
                 scrollLeft.getVerticalScrollBar().setModel(scrollRight.getVerticalScrollBar().getModel());
-//                fileName_1 = null;
-//                fileName_2 = null;
+
                 compare.setEnabled(false);//делаем кнопку не активной
-                frame.revalidate();
-                frame.repaint();//обновить вид
+                btnPatch.setEnabled(true);
+//                frame.revalidate();
+//                frame.repaint();//обновить вид
             } else {
                 System.err.println("Выберите для сравнения файлы");
             }
@@ -254,17 +276,7 @@ public class MyComparison extends JFrame {
         }
 
         //выводим сравнение на панели 1
-        private void deriveComparisonLeft(CompareTwoFiles compareTwoFiless) {
-            panel1.remove(list1);//удаляем с панели
-            listLeft = new JList<>(new Vector<StringTwoFiles>() {
-                {
-
-                    for (StringTwoFiles line : compareTwoFiless.getArrayAllLines()) {
-                        add(line);
-                    }
-                }
-            });
-
+        private void deriveComparisonLeft() {
             listLeft.setCellRenderer(new DefaultListCellRenderer() {
 
                 @Override
@@ -276,11 +288,11 @@ public class MyComparison extends JFrame {
 
                         if (!nextStringTwoFiles.isBelongsFile_1() && nextStringTwoFiles.isBelongsFile_2()) {
                             setText(" ");
-                            setBackground(Color.PINK);
+                            setBackground(Color.LIGHT_GRAY);
                             //setBorder(BorderFactory.createLineBorder(Color.gray));
                         } else if (nextStringTwoFiles.isBelongsFile_1() && !nextStringTwoFiles.isBelongsFile_2()){
                             setText(" " + nextStringTwoFiles.getStr() );
-                            setBackground(Color.PINK);
+                            setBackground(Color.ORANGE);
                         } else {
                             setText(" " + nextStringTwoFiles.getStr() );
                             setBackground(Color.white);
@@ -290,36 +302,15 @@ public class MyComparison extends JFrame {
                             numBlok = nextStringTwoFiles.getNumBlok();
                             enableButtonAddBlok(numBlok, compareTwoFiless);
                         }
-                    } else {
-                        setText("whodat?");
                     }
                     return c;
                 }
 
             });
-
-
-            scrollLeft = new JScrollPane(listLeft,
-                    JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-
-            //scrollLeft = new JScrollPane(listLeft);//добавляем лист
-            //scrollLeft.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-            panel1.add("Center",scrollLeft);//а потом скрол на панель
         }
 
         //выводим сравнение на панели 2
-        private void deriveComparisonRight(CompareTwoFiles compareTwoFiless) {
-            panel2.remove(list2);//удаляем с панели
-            listRight = new JList<>(new Vector<StringTwoFiles>() {
-                {
-
-                    for (StringTwoFiles line : compareTwoFiless.getArrayAllLines()) {
-                        add(line);
-                        System.err.println(line);
-                    }
-                }
-            });
-
+        private void deriveComparisonRight() {
             listRight.setCellRenderer(new DefaultListCellRenderer() {
 
                 @Override
@@ -331,10 +322,10 @@ public class MyComparison extends JFrame {
 
                         if (!nextStringTwoFiles.isBelongsFile_1() && nextStringTwoFiles.isBelongsFile_2()) {
                             setText(" " + nextStringTwoFiles.getStr() );
-                            setBackground(Color.PINK);
+                            setBackground(Color.ORANGE);
                         } else if (nextStringTwoFiles.isBelongsFile_1() && !nextStringTwoFiles.isBelongsFile_2()){
                             setText(" ");
-                            setBackground(Color.PINK);
+                            setBackground(Color.LIGHT_GRAY);
                         } else {
                             setText(" " + nextStringTwoFiles.getStr() );
                             setBackground(Color.white);
@@ -342,21 +333,14 @@ public class MyComparison extends JFrame {
                         if (isSelected) {
                             setBackground(getBackground().darker());
                             numBlok = nextStringTwoFiles.getNumBlok();
-                            //System.err.println("tttt-" +numBlok);
                             enableButtonAddBlok(numBlok, compareTwoFiless);
+
                         }
-                    } else {
-                        setText("whodat?");
                     }
                     return c;
                 }
 
             });
-            scrollRight = new JScrollPane(listRight,
-                    JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-            //scrollRight = new JScrollPane(listRight);//добавляем лист
-            //scrollRight.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-            panel2.add("Center",scrollRight);//а потом скрол на панель
         }
     }
 
@@ -380,5 +364,60 @@ public class MyComparison extends JFrame {
 
 
     }
-}
 
+    //окно патча
+    class Patch implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            JFrame frame2 = new JFrame();
+
+            //frame2.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);// чтоб программа закрылась по клику на х
+            frame2.setTitle("Патч файлов");//заголовок
+            frame2.setResizable(false);//размер окна без изменений false
+            frame2.setPreferredSize(new Dimension(1200,700));
+
+            frame2.setVisible(true);//видимость формы
+
+            frame2.pack();//для размера формы чтоб все поместилось
+            frame2.setLocationRelativeTo(null);//окошко по центру
+            //frame2.setExtendedState(MAXIMIZED_BOTH);//на всю ширину экрана
+
+            listPatch = new JList<Object>(modelPatch);
+            JScrollPane scrollPatch = new JScrollPane(listPatch,
+                    VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+            frame2.add(scrollPatch);
+
+
+            listPatch.setCellRenderer(new DefaultListCellRenderer() {
+
+                @Override
+                public Component getListCellRendererComponent(JList list, Object value, int index,
+                                                              boolean isSelected, boolean cellHasFocus) {
+                    Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    if (value instanceof StringTwoFiles) {
+                        StringTwoFiles nextStringTwoFiles = (StringTwoFiles) value;
+
+                        if (!nextStringTwoFiles.isBelongsFile_1() && nextStringTwoFiles.isBelongsFile_2()) {
+                            setText(" + " + nextStringTwoFiles.getStr());
+                            setBackground(Color.GREEN);
+                            //setBorder(BorderFactory.createLineBorder(Color.gray));
+                        } else if (nextStringTwoFiles.isBelongsFile_1() && !nextStringTwoFiles.isBelongsFile_2()){
+                            setText(" - " + nextStringTwoFiles.getStr() );
+                            setBackground(Color.PINK);
+                        } else {
+                            setText("   " + nextStringTwoFiles.getStr() );
+                            setBackground(Color.white);
+                        }
+                        if (isSelected) {
+                            setBackground(getBackground().darker());
+//                            numBlok = nextStringTwoFiles.getNumBlok();
+//                            enableButtonAddBlok(numBlok, compareTwoFiless);
+                        }
+                    }
+                    return c;
+                }
+
+            });
+        }
+    }
+}

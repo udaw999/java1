@@ -50,23 +50,23 @@ class  CompareTwoFiles {
         boolean doesNotMatch_1 = false;//строка 1ф не совпадает
         boolean doesNotMatch_2 = false; //строка 2ф не совпадает
         //если прошли по всем строкам - конец
+
         while (!file_2End || !file_1End) {
             if (!file_2End && !file_1End) {//если еще есть  строкии в файлах
-                //если стр 1 == стр 2 тогда печатаем их
                 if(file_1.size() == 0 || file_2.size() ==0){
                     System.out.println("pust file");
                     break;
                 }
 
+                //System.out.println("tyt i- " + i + " pop- "+ pop);
+
+                //если стр 1 == стр 2 тогда печатаем их
                 if (file_1.get(i).equals(file_2.get(i + pop))) {
                     file = 0;//это для вычисления номера блока
                     arrayAllLines.add(new StringTwoFiles(file_1.get(i),
                             true, true, 0));
                     file_2End();//проверяем не последняя ли строка файла 2
                     file_1End();//проверяем не последняя ли строка файла 1
-                    //System.out.println("i- " + i);
-                    System.out.print("1-file:  " + file_1.get(i) + "  |   ");
-                    System.out.println("2-file:  " + file_2.get(i + pop));
 
                     //если стр 1 != стр 2  сравниваем в цыкле всех стр файла 2 - поочередно
                 } else {
@@ -75,9 +75,13 @@ class  CompareTwoFiles {
 
                     for (int j = i + pop; j < file_2.size(); j++) {
                         //если не нашли совпадений во всем файле отмечаем true и распечатаем строку за циклом ниже
+
                         if (!file_1.get(i).equals(file_2.get(j))) {
+
                             doesNotMatch_1 = true;
                         } else {//иначе выходим из цыкла
+                            //System.out.println("search right");
+                            //System.out.println("doesNotMatch_2" + doesNotMatch_2);
                             countMismatchFile_1 = j - i - pop;//несовпадение строк
                             doesNotMatch_1 = false;
                             break;
@@ -89,21 +93,38 @@ class  CompareTwoFiles {
                     //если стр 1файла есть в файле 2 то проверяем а есть ли строка второго файла в 1 файле
                     for (int z = i; z < file_1.size(); z++) {
                         //если не нашли совпадений во всем файле отмечаем true и распечатаем строку за циклом ниже
+
                         if (!file_2.get(i + pop).equals(file_1.get(z))) {
+
                             doesNotMatch_2 = true;
                         } else {//иначе выходим из цыкла
+                            //System.out.println("search left");
                             countMismatchFile_2 = z - i;//несовпадение строк
                             doesNotMatch_2 = false;
                             break;
                         }
                     }
+
                     //если не нашли совпадений во всем файле отмеченное  true выше
                     //печатаем эту строку  и начинаем рекурсию этого метода со следующей строки
                     doesNotMatch_2(doesNotMatch_2);
                     //если есть совпадения строки в противоположных файлах
+
                     if (!doesNotMatch_1 && !doesNotMatch_2) {
-                        //смотрим какая из них глубже и которая ближе ту и берем
-                        countMismatchFile(countMismatchFile_1, countMismatchFile_2);
+                        //если одна из строк пустая то первоочередность не пустой
+                        if (file_1.get(i).equals("") || file_2.get(i + pop).equals("")){
+
+                            if(file_1.get(i).equals("")){
+                                doesNotMatch_1(true);
+                            } else {
+                                doesNotMatch_2(true);
+                            }
+                        } else {
+
+                            //смотрим какая из них глубже и которая ближе ту и берем
+                            countMismatchFile(countMismatchFile_1, countMismatchFile_2);
+                        }
+
                     }
                 }
             } else { //если еще в одном из файлов прошли не по всем строка а в другом по всем
@@ -132,9 +153,7 @@ class  CompareTwoFiles {
     //если не нашли совпадений во всем первом файле отмеченное  true выше
     private void doesNotMatch_2(boolean doesNotMatch_2) {
         if (doesNotMatch_2) {
-            //System.out.println("i- " + i);
-            System.out.print("1-file:  -------------------   |   ");
-            System.out.println("2-file:  " + file_2.get(i + pop) );
+
             numBlok(2);//номера блока
             file_2End();//проверяем не последняя ли строка файла 2
             arrayAllLines.add(new StringTwoFiles(file_2.get(i + pop),
@@ -149,9 +168,6 @@ class  CompareTwoFiles {
     //если не нашли совпадений во всем втором файле отмеченное  true выше
     private void doesNotMatch_1(boolean doesNotMatch_1) {
         if (doesNotMatch_1) {
-            //System.out.println("i- " + i);
-            System.out.print("1-file:  " + file_1.get(i) + "  |   ");
-            System.out.println("2-file:  -------------------");
             numBlok(1);//номера блока
             file_1End();//проверяем не последняя ли строка файла 1
             arrayAllLines.add(new StringTwoFiles(file_1.get(i),
@@ -167,19 +183,12 @@ class  CompareTwoFiles {
     //смотрим какая строка глубже и которая ближе ту и берем
     private void countMismatchFile(int countMismatchFile_1, int countMismatchFile_2) {
         if (countMismatchFile_1>=countMismatchFile_2){
-//                            System.out.println("tyt");
-            // System.out.println("i- " + i);
-            System.out.print("1-file:  " + file_1.get(i) + "  |   ");
-            System.out.println("2-file:  -------------------");
             numBlok(1);//номера блока
             file_1End();//проверяем не последняя ли строка файла 1
             arrayAllLines.add(new StringTwoFiles(file_1.get(i),
                     true,false, numBlok));
             pop --;
         } else {
-            //System.out.println("i- " + i);
-            System.out.print("1-file:  -------------------   |   ");
-            System.out.println("2-file:  " + file_2.get(i + pop) );
             numBlok(2);//номера блока
             file_2End();//проверяем не последняя ли строка файла 2
             arrayAllLines.add(new StringTwoFiles(file_2.get(i + pop),
@@ -191,9 +200,6 @@ class  CompareTwoFiles {
     //если в файле 2 последняя строка обработана а в файле 1 еще есть строки
     private void file_2_End_1_No() {
         if (file_2End && !file_1End){
-            // System.out.println("i- " + i);
-            System.out.print("1-file:  " + file_1.get(i) + "  |   ");
-            System.out.println("2-file:  -------------------");
             numBlok(1);//номера блока
             file_1End();//проверяем не последняя ли строка файла 1
             arrayAllLines.add(new StringTwoFiles(file_1.get(i),
@@ -203,9 +209,6 @@ class  CompareTwoFiles {
     //если в файле 1 последняя строка обработана а в файле 2 еще есть строки
     private void file_1_End_2_No() {
         if (file_1End && !file_2End){
-            //System.out.println("i- " + i);
-            System.out.print("1-file:  -------------------   |   ");
-            System.out.println("2-file:  " + file_2.get(i + pop) );
             numBlok(2);//номера блока
             file_2End();//проверяем не последняя ли строка файла 2
             arrayAllLines.add(new StringTwoFiles(file_2.get(i + pop),
