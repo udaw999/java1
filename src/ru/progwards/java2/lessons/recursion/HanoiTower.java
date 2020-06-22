@@ -82,6 +82,7 @@ public class HanoiTower {
     private void hanoiTowers(int quantity, int from, int to, int buf_peg)	{
         if (quantity != 0)
         {
+
             hanoiTowers(quantity-1, from, buf_peg, to);
 
             move(from,to);
@@ -100,7 +101,7 @@ public class HanoiTower {
     }
 
     public static void main(String[] args) {
-        HanoiTower hanoiTower = new HanoiTower(8, 2);
+        HanoiTower hanoiTower = new HanoiTower(10, 0);
         hanoiTower.setTrace(true);
     }
 }
