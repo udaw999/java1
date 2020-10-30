@@ -1,0 +1,12 @@
+C:\Users\admin\IdeaProjects\MyTest\out\production\MyTest\ru\progwards\java1\lessons\abstractnum\Test.class
+C:\Users\admin\IdeaProjects\MyTest\out\production\MyTest\ru\progwards\java1\lessons\interfaces2\Test.class
+C:\Users\admin\IdeaProjects\MyTest\out\production\MyTest\ru\progwards\java1\lessons\test\FileReaders.class
+C:\Users\admin\IdeaProjects\MyTest\out\production\MyTest\ru\progwards\java1\lessons\test\Person.class
+C:\Users\admin\IdeaProjects\MyTest\out\production\MyTest\ru\progwards\java1\lessons\test\Test1.class
+C:\Users\admin\IdeaProjects\MyTest\out\production\MyTest\ru\progwards\java1\lessons\test\test11.class
+C:\Users\admin\IdeaProjects\MyTest\out\production\MyTest\ru\progwards\java1\lessons\test\test12.class
+C:\Users\admin\IdeaProjects\MyTest\out\production\MyTest\ru\progwards\java1\lessons\test\test13.class
+C:\Users\admin\IdeaProjects\MyTest\out\production\MyTest\ru\progwards\java1\lessons\test\test14.class
+C:\Users\admin\IdeaProjects\MyTest\out\production\MyTest\ru\progwards\java1\lessons\test\test15.class
+C:\Users\admin\IdeaProjects\MyTest\out\production\MyTest\ru\progwards\java1\lessons\test\test16.class
+C:\Users\admin\IdeaProjects\MyTest\out\production\MyTest\ru\progwards\java1\lessons\test\test17.class

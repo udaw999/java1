@@ -1,0 +1,10 @@
+file1txt (Не удается найти указанный файл)
+file1txt (Не удается найти указанный файл)
+file1txt (Не удается найти указанный файл)
+String index out of range: 1
+file1txt (Не удается найти указанный файл)
+Index 51 out of bounds for length 51
+Index 51 out of bounds for length 51
+Index 1069 out of bounds for length 81
+Index 1069 out of bounds for length 81
+Index 1069 out of bounds for length 81
