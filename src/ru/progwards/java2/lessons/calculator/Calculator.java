@@ -22,9 +22,9 @@ public class Calculator {
 
     private static void operation(List<String> list, String znak) {
         if(list.contains(znak)){
-            list.lastIndexOf(znak);
-            int raz = Integer.parseInt(String.valueOf(list.get(list.lastIndexOf(znak) - 1)));
-            int dva = Integer.parseInt(String.valueOf(list.get(list.lastIndexOf(znak) + 1)));
+            int index = list.lastIndexOf(znak);
+            int raz = Integer.parseInt(String.valueOf(list.get(index - 1)));
+            int dva = Integer.parseInt(String.valueOf(list.get(index + 1)));
 
             int rez = 0;
             if(znak.equals("*")){rez = raz * dva; }
@@ -32,9 +32,10 @@ public class Calculator {
             if(znak.equals("+")){rez = raz + dva; }
             if(znak.equals("-")){rez = raz - dva; }
 
-            list.remove(list.lastIndexOf(znak) + 1);
-            list.remove(list.lastIndexOf(znak) - 1);
-            list.set(list.lastIndexOf(znak), String.valueOf(rez));
+            list.remove(index + 1);
+            list.set(index, String.valueOf(rez));
+            list.remove(index - 1);
+
 
             if(list.contains(znak)){
                 operation(list, znak);
@@ -46,7 +47,7 @@ public class Calculator {
 
     public static void main(String[] args) {
 
-        System.out.println(calculate("5+3*2/2-6*5"));
+        System.out.println(calculate("2+3*2"));
 
     }
 }
