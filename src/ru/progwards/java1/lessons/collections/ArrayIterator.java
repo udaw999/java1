@@ -15,7 +15,7 @@ public class ArrayIterator<T> implements Iterator<T> {
     @Override
     public boolean hasNext() {
         // TODO Auto-generated method stub
-        return index < array.length;//если длина массива больше 0 то urue;
+        return index < array.length;//если длина массива больше 0 то turue;
     }
 
     @Override
