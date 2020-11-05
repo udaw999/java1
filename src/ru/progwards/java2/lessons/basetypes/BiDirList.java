@@ -1,10 +1,11 @@
 package ru.progwards.java2.lessons.basetypes;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
+import java.util.ListIterator;
 
-public class BiDirList<T> {
+public class BiDirList<T>{
+
+
 
 
     class ListItem<T> {
@@ -219,19 +220,32 @@ public class BiDirList<T> {
     }
 
     public Iterator<BiDirList<T>> getIterator(){
-        BiDirList<T> biDirList = new BiDirList<>();
-        ListItem<T> previous = null;
-        ListItem<T> current = head;
-        List<T> listItem = new ArrayList<>();
-        while (current != null){
-            listItem.add(current.item);
-            System.out.println(current.item);
-            //addLast(current.item);
-            previous = current;
-            current = current.next;
-        }
 
-        return (Iterator<BiDirList<T>>) biDirList;
+        Iterator<BiDirList<T>> it = new Iterator<BiDirList<T>>() {
+            BiDirList<T> biDirList = new BiDirList<>();
+            private int currentIndex = 0;
+
+
+
+            @Override
+            public boolean hasNext() {
+                return  false;
+            }
+
+            @Override
+            public BiDirList<T> next() {
+
+                return biDirList;
+            }
+
+            @Override
+            public void remove() {
+
+            }
+        };
+
+
+        return it;
     }
 
     public static void main(String[] args) {
@@ -247,7 +261,7 @@ public class BiDirList<T> {
         biDirList.at(2);
         System.out.println(biDirList.size());*/
 
-//BiDirList<Integer>.ListItem<Integer> curent = biDirList.getHead();
+BiDirList<Integer>.ListItem<Integer> curent = biDirList.getHead();
    /* Integer[] array = {4,5,6,8};
 
 
@@ -256,7 +270,7 @@ public class BiDirList<T> {
         //BiDirList<Integer>.ListItem<Integer> curent = from(array).getHead();
 
         BiDirList<Integer>.ListItem<Integer> curent = of(3,6,8,10,22,25).getHead();
-        while (curent != null) {
+   */     while (curent != null) {
             if (curent.previous == null){
                 System.out.print(curent.previous);
             } else {
@@ -273,9 +287,12 @@ public class BiDirList<T> {
             curent = curent.getNext();
         }
 
-*/
 
 
+
+   Iterator iterator = biDirList.getIterator();
+   while (iterator.hasNext())
+       System.out.println(iterator.next());
     }
 
 
