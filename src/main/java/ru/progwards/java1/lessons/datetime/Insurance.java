@@ -1,10 +1,7 @@
 package ru.progwards.java1.lessons.datetime;
 
-import java.sql.Time;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAmount;
-import java.util.concurrent.TimeUnit;
 
 public class Insurance {
     public static enum FormatStyle {SHORT, LONG, FULL}

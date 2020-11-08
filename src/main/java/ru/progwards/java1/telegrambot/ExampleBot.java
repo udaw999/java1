@@ -1,12 +1,7 @@
 package ru.progwards.java1.telegrambot;
 
 
-import java.util.Scanner;
-
 import org.telegram.telegrambots.ApiContextInitializer;
-
-import ru.progwards.java1.telegrambot.ProgwardsTelegramBot;
-import ru.progwards.java1.telegrambot.ProgwardsTelegramBot.FoundTags;
 
 public class ExampleBot extends ProgwardsTelegramBot {
 

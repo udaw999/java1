@@ -1,9 +1,5 @@
 package ru.progwards.java2.lessons.generics;
 
-import java.util.AbstractList;
-import java.util.ArrayList;
-import java.util.HashMap;
-
 public class Fruit<T>{
     private FruitBox<T> boxFruit;
 

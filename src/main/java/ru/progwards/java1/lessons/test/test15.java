@@ -1,7 +1,5 @@
 package ru.progwards.java1.lessons.test;
 
-import ru.progwards.java1.lessons.classes.Hamster;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;

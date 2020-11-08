@@ -1,7 +1,6 @@
 package ru.progwards.java2.lessons.basetypes;
 
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 public class DoubleHashTable<K,V>{

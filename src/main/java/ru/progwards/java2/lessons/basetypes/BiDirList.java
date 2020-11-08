@@ -1,7 +1,6 @@
 package ru.progwards.java2.lessons.basetypes;
 
 import java.util.Iterator;
-import java.util.ListIterator;
 
 public class BiDirList<T>{
 

@@ -33,9 +33,6 @@ public class SimpleCalculator implements ISimpleCalculator {
         return val1 / val2;
     }
 
-    public static void main(String[] args) {
-        SimpleCalculator cal = new SimpleCalculator();
-        System.out.println(cal.div(0 , 40));
 
-    }
 }
+

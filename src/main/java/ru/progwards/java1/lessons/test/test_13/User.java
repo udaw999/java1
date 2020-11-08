@@ -1,6 +1,5 @@
 package ru.progwards.java1.lessons.test.test_13;
 
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.TreeSet;
 

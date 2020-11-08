@@ -1,13 +1,9 @@
 package ru.progwards.java1.testlesson;
 
 import org.telegram.telegrambots.ApiContextInitializer;
-import org.telegram.telegrambots.Constants;
 
-import java.util.List;
 import java.util.Scanner;
 
-import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.api.objects.User;
 public class PizaBot extends ProgwardsTelegramBot{
 
     private final String menu = "У нас ты можешь попробовать: автопробег, прыжок с парашутом, подводное погружение";

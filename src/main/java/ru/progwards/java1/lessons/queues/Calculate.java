@@ -1,10 +1,5 @@
 package ru.progwards.java1.lessons.queues;
 
-import java.util.ArrayDeque;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
-
 public class Calculate{
     //2.2*(3+12.1), используя класс StackCalc
 

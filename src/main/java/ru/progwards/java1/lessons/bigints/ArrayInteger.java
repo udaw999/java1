@@ -1,7 +1,6 @@
 package ru.progwards.java1.lessons.bigints;
 
 import java.math.BigInteger;
-import java.sql.Array;
 import java.util.Arrays;
 
 public class ArrayInteger {

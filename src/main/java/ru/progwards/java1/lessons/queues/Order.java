@@ -1,8 +1,6 @@
 package ru.progwards.java1.lessons.queues;
 
 
-import java.util.*;
-
 /*3 - заказы до 10000 руб включительно
 2 - заказы от 10000 до 20000 руб включительно
 1 - заказы от 20000 руб*/
