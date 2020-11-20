@@ -1,9 +1,6 @@
 <component name="libraryTable">
   <library name="progwardsbot.1.0">
-    <CLASSES>
-      <root url="jar://$USER_HOME$/Downloads/bot/progwardsbot.1.0.jar!/" />
-      <root url="jar://$USER_HOME$/Downloads/bot/telegrambots-4.4.0-jar-with-dependencies.jar!/" />
-    </CLASSES>
+    <CLASSES />
     <JAVADOC />
     <SOURCES />
   </library>
