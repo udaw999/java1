@@ -1,3 +1,5 @@
+package ru.progwards.java2.lessons.builders;
+
 import java.util.Scanner;
 
 public class SimpleCalculator  {

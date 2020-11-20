@@ -2,6 +2,7 @@ import org.junit.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.*;
 import org.junit.runners.Parameterized;
+import ru.progwards.java2.lessons.builders.SimpleCalculator;
 
 
 import java.util.*;

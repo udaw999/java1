@@ -34,7 +34,7 @@
 
                     <archive>
                         <manifest>
-                            <mainClass>SimpleCalculator</mainClass>
+                            <mainClass>ru.progwards.java2.lessons.builders.SimpleCalculator</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
