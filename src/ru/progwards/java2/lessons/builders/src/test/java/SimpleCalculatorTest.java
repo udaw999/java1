@@ -1,11 +1,11 @@
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.*;
+import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import ru.progwards.java2.lessons.builders.SimpleCalculator;
 
-
-import java.util.*;
+import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
@@ -136,4 +136,6 @@ public class SimpleCalculatorTest {
     @AfterClass
     public static void end(){calc = null;}
 }
+
+
 

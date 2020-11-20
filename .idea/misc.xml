@@ -5,6 +5,8 @@
       <list>
         <option value="$PROJECT_DIR$/src/pom.xml" />
         <option value="$PROJECT_DIR$/Maven/pom.xml" />
+        <option value="$PROJECT_DIR$/MavenS/pom.xml" />
+        <option value="$PROJECT_DIR$/src/ru/progwards/java2/lessons/builders/pom.xml" />
       </list>
     </option>
   </component>

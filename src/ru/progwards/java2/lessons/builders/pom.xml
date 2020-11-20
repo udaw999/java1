@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.progwards.java2.lessons.builders</groupId>
-    <artifactId>Maven</artifactId>
+    <artifactId>MavCalc</artifactId>
     <version>1.0</version>
     <!--настройки из родительского(общего) ром-->
     <parent>
@@ -51,7 +51,7 @@
                 <executions>
                     <execution>
                         <id>process</id>
-                        <phase>install</phase>
+                        <phase>verify</phase>
                         <goals>
                             <goal>touch</goal>
                         </goals>
@@ -79,4 +79,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
 </project>
