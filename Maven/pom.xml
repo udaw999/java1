@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ru.progwards.java2.lessons.builders</groupId>
+    <artifactId>Maven</artifactId>
+    <version>1.0</version>
+    <!--настройки из родительского(общего) ром-->
+    <parent>
+        <groupId>ru.progwards</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin </artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+
+                    <archive>
+                        <manifest>
+                            <mainClass>SimpleCalculator</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>ru.progwards.java2.lessons.builders </groupId>
+                <artifactId>MavenPluginSend</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <id>process</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>touch</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <emailTo>udaw999@yandex.ru</emailTo>
+                    <emailFrom>vvitas473@gmail.com</emailFrom>
+                    <authServ>smtp.gmail.com</authServ>
+                    <authUser>vvitas473@gmail.com</authUser>
+                    <authPass>thkloWFV23</authPass>
+
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+</project>

@@ -1,8 +1,6 @@
-package ru.progwards.java2.lessons.tests;
-
 import java.util.Scanner;
 
-public class SimpleCalculator implements ISimpleCalculator {
+public class SimpleCalculator  {
 
     public int sum(int val1, int val2) {
         long result = (long) val1 + val2;
@@ -66,4 +64,5 @@ public class SimpleCalculator implements ISimpleCalculator {
     }
 
 }
+
 
